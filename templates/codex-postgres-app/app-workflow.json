@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "name": "__APP_NAME__",
+  "github_owner": "Ryuking1228",
+  "deploy": {"environment": null, "command": null, "health_url": null}
+}

@@ -1,0 +1,25 @@
+name: App verification
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build, PostgreSQL integration and browser tests
+        run: python3 appctl.py verify
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          include-hidden-files: true
+          name: verification
+          path: .app-state/
+      - name: Stop local services
+        if: always()
+        run: python3 appctl.py down

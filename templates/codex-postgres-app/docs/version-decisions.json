@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-22T15:02:20.617275+00:00",
+  "confirmed_by_user": false,
+  "selection_mode": "Routine implementation choice within the authorized starter changes",
+  "entries": [
+    {
+      "name": "react",
+      "ecosystem": "npm",
+      "chosen": "19.3.0",
+      "source": "https://registry.npmjs.org/react",
+      "verified": true,
+      "latest_stable": "19.3.0",
+      "released": "2026-09-09T17:21:30.071Z",
+      "why": "Pinned published release; frontend compilation verified with the complete dependency set."
+    },
+    {
+      "name": "react-dom",
+      "ecosystem": "npm",
+      "chosen": "19.3.0",
+      "source": "https://registry.npmjs.org/react-dom",
+      "verified": true,
+      "latest_stable": "19.3.0",
+      "released": "2026-09-09T17:17:39.744Z",
+      "why": "Pinned published release; frontend compilation verified with the complete dependency set."
+    },
+    {
+      "name": "@types/react",
+      "ecosystem": "npm",
+      "chosen": "19.3.0",
+      "source": "https://registry.npmjs.org/@types/react",
+      "verified": true,
+      "latest_stable": "19.3.0",
+      "released": "2026-09-09T18:08:49.750Z",
+      "why": "Pinned published release; frontend compilation verified with the complete dependency set."
+    },
+    {
+      "name": "@types/react-dom",
+      "ecosystem": "npm",
+      "chosen": "19.3.0",
+      "source": "https://registry.npmjs.org/@types/react-dom",
+      "verified": true,
+      "latest_stable": "19.3.0",
+      "released": "2026-09-09T18:07:51.886Z",
+      "why": "Pinned published release; frontend compilation verified with the complete dependency set."
+    },
+    {
+      "name": "typescript",
+      "ecosystem": "npm",
+      "chosen": "7.0.2",
+      "source": "https://registry.npmjs.org/typescript",
+      "verified": true,
+      "latest_stable": "7.0.2",
+      "released": "2026-07-08T15:55:18.431Z",
+      "why": "Pinned published release; frontend compilation verified with the complete dependency set."
+    },
+    {
+      "name": "vite",
+      "ecosystem": "npm",
+      "chosen": "8.3.0",
+      "source": "https://registry.npmjs.org/vite",
+      "verified": true,
+      "latest_stable": "8.3.0",
+      "released": "2026-09-10T11:30:26.283Z",
+      "why": "Pinned published release; frontend compilation verified with the complete dependency set."
+    },
+    {
+      "name": "@playwright/test",
+      "ecosystem": "npm",
+      "chosen": "1.63.0",
+      "source": "https://registry.npmjs.org/@playwright/test",
+      "verified": true,
+      "latest_stable": "1.63.0",
+      "released": "2026-09-04T22:44:00.304Z",
+      "why": "Pinned published release; frontend compilation verified with the complete dependency set."
+    },
+    {
+      "name": "fastapi",
+      "ecosystem": "pypi",
+      "chosen": "0.141.1",
+      "source": "https://pypi.org/pypi/fastapi/json",
+      "verified": true,
+      "latest_stable": "0.141.1",
+      "released": "2026-07-29T17:18:04.364385Z",
+      "why": "Pinned published release; API tests verified on Python 3.12; container Python 3.13 awaits CI."
+    },
+    {
+      "name": "uvicorn",
+      "ecosystem": "pypi",
+      "chosen": "0.53.0",
+      "source": "https://pypi.org/pypi/uvicorn/json",
+      "verified": true,
+      "latest_stable": "0.53.0",
+      "released": "2026-09-14T07:44:22.179111Z",
+      "why": "Pinned published release; API tests verified on Python 3.12; container Python 3.13 awaits CI."
+    },
+    {
+      "name": "psycopg[binary]",
+      "ecosystem": "pypi",
+      "chosen": "3.3.6",
+      "source": "https://pypi.org/pypi/psycopg/json",
+      "verified": true,
+      "latest_stable": "3.3.6",
+      "released": "2026-09-18T13:15:29.374570Z",
+      "why": "Pinned published release; API tests verified on Python 3.12; container Python 3.13 awaits CI."
+    },
+    {
+      "name": "pytest",
+      "ecosystem": "pypi",
+      "chosen": "9.1.1",
+      "source": "https://pypi.org/pypi/pytest/json",
+      "verified": true,
+      "latest_stable": "9.1.1",
+      "released": "2026-06-19T10:58:31.347074Z",
+      "why": "Pinned published release; API tests verified on Python 3.12; container Python 3.13 awaits CI."
+    },
+    {
+      "name": "httpx",
+      "ecosystem": "pypi",
+      "chosen": "0.28.1",
+      "source": "https://pypi.org/pypi/httpx/json",
+      "verified": true,
+      "latest_stable": "0.28.1",
+      "released": "2024-12-06T15:37:21.509172Z",
+      "why": "Pinned published release; API tests verified on Python 3.12; container Python 3.13 awaits CI."
+    },
+    {
+      "name": "postgres",
+      "ecosystem": "docker",
+      "chosen": "18-alpine",
+      "source": "https://hub.docker.com/v2/repositories/library/postgres/tags/18-alpine",
+      "verified": true,
+      "digest": "sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873",
+      "released": "2026-09-21T01:08:20.384039Z",
+      "why": "Published supported runtime line; image execution awaits Docker-capable CI."
+    },
+    {
+      "name": "python",
+      "ecosystem": "docker",
+      "chosen": "3.13-slim",
+      "source": "https://hub.docker.com/v2/repositories/library/python/tags/3.13-slim",
+      "verified": true,
+      "digest": "sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0",
+      "released": "2026-09-19T08:10:14.093137Z",
+      "why": "Published supported runtime line; image execution awaits Docker-capable CI."
+    },
+    {
+      "name": "node",
+      "ecosystem": "docker",
+      "chosen": "24-alpine",
+      "source": "https://hub.docker.com/v2/repositories/library/node/tags/24-alpine",
+      "verified": true,
+      "digest": "sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1",
+      "released": "2026-09-18T02:39:03.984945Z",
+      "why": "Published supported runtime line; image execution awaits Docker-capable CI."
+    },
+    {
+      "name": "node",
+      "ecosystem": "docker",
+      "chosen": "24-bookworm",
+      "source": "https://hub.docker.com/v2/repositories/library/node/tags/24-bookworm",
+      "verified": true,
+      "digest": "sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
+      "released": "2026-09-19T14:38:58.172788Z",
+      "why": "Published supported runtime line; image execution awaits Docker-capable CI."
+    },
+    {
+      "name": "actions/checkout",
+      "ecosystem": "github",
+      "chosen": "v4",
+      "source": "https://api.github.com/repos/actions/checkout/git/ref/tags/v4",
+      "verified": true,
+      "commit": "11d5960a326750d5838078e36cf38b85af677262",
+      "why": "Published existing major of official GitHub Action."
+    },
+    {
+      "name": "actions/upload-artifact",
+      "ecosystem": "github",
+      "chosen": "v4",
+      "source": "https://api.github.com/repos/actions/upload-artifact/git/ref/tags/v4",
+      "verified": true,
+      "commit": "ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "why": "Published existing major of official GitHub Action."
+    }
+  ]
+}

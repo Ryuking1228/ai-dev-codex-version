@@ -9,6 +9,9 @@ knowledge.ryugraph/
 domain-stories-*.png
 
 # Python
+.env
+.env.*
+!.env.example
 __pycache__/
 *.pyc
 *.pyo
@@ -17,6 +20,11 @@ venv/
 
 # Node
 node_modules/
+dist/
+.app-state/
+test-results/
+playwright-report/
+.pytest_cache/
 
 # OS
 .DS_Store

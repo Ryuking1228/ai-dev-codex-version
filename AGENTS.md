@@ -16,6 +16,12 @@ Codex uses this `AGENTS.md` file plus the `skills/*/SKILL.md` files directly.
 
 ## Codex Command Mapping
 
+For a new small full-stack application using Codex and ordinary PostgreSQL, use
+`/app:start` -> `skills/app/start/SKILL.md`. This optional extension creates a maintained
+project outside `generated/` and connects local startup, UI inspection, executable tests,
+deployment preparation and private GitHub push. It does not require ScalarDB or a
+microservices architecture. Read `docs/codex-postgres-app_ja.md` for its scope and limits.
+
 When the user invokes a Claude-style command in Codex, map it to the matching local skill:
 
 - `/product:<name>` -> read and follow `skills/product/<name>/SKILL.md` (product skills are nested under `skills/product/`; product rules are nested under `rules/product/`)

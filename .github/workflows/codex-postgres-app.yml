@@ -1,0 +1,31 @@
+name: Codex PostgreSQL starter
+on:
+  push:
+    paths: ['templates/codex-postgres-app/**', 'tools/new-app.py', 'tools/new_app.test.py', '.github/workflows/codex-postgres-app.yml']
+  pull_request:
+    paths: ['templates/codex-postgres-app/**', 'tools/new-app.py', 'tools/new_app.test.py', '.github/workflows/codex-postgres-app.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generator and release gate contracts
+        run: python3 tools/new_app.test.py
+      - name: Generate a standalone app
+        run: python3 tools/new-app.py "$RUNNER_TEMP/starter-check" --name starter-check
+      - name: Build and verify against PostgreSQL and Chromium
+        run: python3 "$RUNNER_TEMP/starter-check/appctl.py" verify
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: starter-verification
+          include-hidden-files: true
+          path: ${{ runner.temp }}/starter-check/.app-state/
+      - name: Stop verification services
+        if: always()
+        run: python3 "$RUNNER_TEMP/starter-check/appctl.py" down

@@ -1,0 +1,58 @@
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python3 appctl.py up first}
+    volumes: [postgres_data:/var/lib/postgresql]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U app -d app"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://app:${POSTGRES_PASSWORD}@db:5432/app
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      db: {condition: service_healthy}
+    command: [sh, -c, "python -m app.migrate && exec python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
+      interval: 3s
+      timeout: 5s
+      retries: 30
+  test-db:
+    image: postgres:18-alpine
+    profiles: [test]
+    environment: {POSTGRES_DB: app_test, POSTGRES_USER: app, POSTGRES_PASSWORD: ephemeral-test-only}
+    tmpfs: [/var/lib/postgresql]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U app -d app_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  backend-tests:
+    build: .
+    profiles: [test]
+    user: "0:0"
+    volumes: ["./.app-state:/evidence"]
+    environment:
+      TEST_DATABASE_URL: postgresql://app:ephemeral-test-only@test-db:5432/app_test
+    depends_on:
+      test-db: {condition: service_healthy}
+    command: [python, -m, pytest, -q, /app/backend/tests, -p, no:cacheprovider, --junitxml=/evidence/backend-results.xml]
+  browser-tests:
+    image: node:24-bookworm
+    profiles: [test]
+    working_dir: /tests
+    volumes: ["./frontend:/tests", "./.app-state:/.app-state", "browser_modules:/tests/node_modules"]
+    environment: {APP_URL: "http://app:8000"}
+    depends_on:
+      app: {condition: service_healthy}
+    command: [sh, -c, "npm ci && npx playwright install --with-deps chromium && npm run test:e2e"]
+volumes:
+  postgres_data:
+  browser_modules:

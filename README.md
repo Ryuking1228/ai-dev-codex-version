@@ -1,5 +1,11 @@
 # Nexus Architect
 
+> **Codex + PostgreSQL extension:** This independent adaptation adds `/app:start` for
+> React + FastAPI + PostgreSQL apps, with localhost startup, database/browser tests,
+> verification tied to source content, deployment hooks and private GitHub push checks.
+> Start with [日本語ガイド](docs/codex-postgres-app_ja.md). Original Nexus functionality and
+> the upstream MIT license are retained. The starter is a demonstration, not a finished product.
+
 System architecture toolkit for Claude Code and Codex. Claude Code uses this repository as four plugins with 115 skills; Codex uses the same skill files through `AGENTS.md` compatibility rules.
 
 - **product** (28 skills) — Product direction: validation-driven, dialogue-based pipeline from product vision to SLA/NFR; hands off to architect for system implementation design
