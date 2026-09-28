@@ -72,7 +72,7 @@ For the shortest Japanese workflow covering new apps and existing-app changes, s
 
 ```bash
 # 1. Clone the repository (with the ScalarDB/ScalarDL knowledge bundle submodule)
-git clone --recurse-submodules https://github.com/Ryuking1228/nexus-codex.git
+git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
 cd nexus-codex
 
 # 2. Optional Python dependencies
@@ -142,7 +142,7 @@ GitHub Copilot uses the same canonical workflows through repository-native custo
 - `.github/skills/*/SKILL.md` for automatic workflow discovery
 
 ```bash
-git clone --recurse-submodules https://github.com/Ryuking1228/nexus-codex.git
+git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
 cd nexus-codex
 ```
 

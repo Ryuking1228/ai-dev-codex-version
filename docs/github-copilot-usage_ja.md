@@ -16,7 +16,7 @@ workflowを利用できます。このリポジトリには次の4種類のCopil
 ## 最初の準備
 
 ```bash
-git clone --recurse-submodules https://github.com/Ryuking1228/nexus-codex.git
+git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
 cd nexus-codex
 ```
 

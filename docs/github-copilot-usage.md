@@ -16,7 +16,7 @@ Claude Code, Codex, and Copilot do not drift into separate implementations.
 ## Setup
 
 ```bash
-git clone --recurse-submodules https://github.com/Ryuking1228/nexus-codex.git
+git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
 cd nexus-codex
 ```
 
