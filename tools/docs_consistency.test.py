@@ -455,6 +455,31 @@ rules = sorted(f for f in os.listdir(os.path.join(ROOT, "rules")) if f.endswith(
 missing = [r for r in rules if "rules/" + r not in CLAUDE]
 check("every top-level rules/*.md is listed in CLAUDE.md", not missing, missing)
 
+# ------------------------------------------------------ repository identity
+
+print("Setup docs point to the published adaptation repository")
+
+ADAPTATION_URL = "https://github.com/Ryuking1228/ai-dev-codex-version.git"
+SETUP_DOCS = [
+    "README.md",
+    "docs/codex-simple-guide_ja.md",
+    "docs/codex-usage.md",
+    "docs/codex-usage_ja.md",
+    "docs/getting-started.md",
+    "docs/getting-started_ja.md",
+    "docs/github-copilot-usage.md",
+    "docs/github-copilot-usage_ja.md",
+]
+for path in SETUP_DOCS:
+    setup_doc = read(path)
+    check("%s clones the adaptation" % path, ADAPTATION_URL in setup_doc)
+    check("%s uses the clone directory" % path,
+          "cd ai-dev-codex-version" in setup_doc or
+          "`ai-dev-codex-version`" in setup_doc,
+          "missing ai-dev-codex-version directory instruction")
+    check("%s has no stale renamed checkout" % path,
+          "cd nexus-codex" not in setup_doc and "cd nexus-architect" not in setup_doc)
+
 print()
 print("%d check(s), %d failure(s)" % (checks, failures))
 sys.exit(1 if failures else 0)

@@ -7,8 +7,8 @@ Nexus Architect remains a Claude Code plugin, but it can also be used from Codex
 Clone the repository and install optional dependencies:
 
 ```bash
-git clone https://github.com/wfukatsu/nexus-architect.git
-cd nexus-architect
+git clone https://github.com/Ryuking1228/ai-dev-codex-version.git
+cd ai-dev-codex-version
 pip install -r requirements.txt
 ```
 

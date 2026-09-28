@@ -17,7 +17,7 @@ workflowを利用できます。このリポジトリには次の4種類のCopil
 
 ```bash
 git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
-cd nexus-codex
+cd ai-dev-codex-version
 ```
 
 GitHub Copilotを有効にしたIDEなどで、このリポジトリを開きます。対応環境では

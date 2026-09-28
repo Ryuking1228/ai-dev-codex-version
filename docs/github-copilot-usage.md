@@ -17,7 +17,7 @@ Claude Code, Codex, and Copilot do not drift into separate implementations.
 
 ```bash
 git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
-cd nexus-codex
+cd ai-dev-codex-version
 ```
 
 Open the repository in an environment with GitHub Copilot enabled. Repository instructions are

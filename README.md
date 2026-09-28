@@ -8,6 +8,10 @@
 
 System architecture toolkit for Claude Code, Codex, and GitHub Copilot. Claude Code uses this repository as four plugins with 115 skills; Codex and Copilot use adapters around the same canonical skill files.
 
+This adaptation is published as [`Ryuking1228/ai-dev-codex-version`](https://github.com/Ryuking1228/ai-dev-codex-version).
+`Nexus Architect` remains the toolkit name inherited from the upstream project; it is not the
+GitHub repository name.
+
 - **product** (28 skills) — Product direction: validation-driven, dialogue-based pipeline from product vision to SLA/NFR; hands off to architect for system implementation design
 - **architect** (69 skills) — Legacy refactoring, greenfield design, database investigation and migration, consulting deliverables
 - **scalardb** (11 skills) — ScalarDB application development toolkit
@@ -40,10 +44,10 @@ claude plugin update scalardb@nexus-architect
 
 ```bash
 # 1. Clone the repository (with the ScalarDB/ScalarDL knowledge bundle submodule)
-git clone --recurse-submodules https://github.com/wfukatsu/nexus-architect.git
+git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
 
 # 2. Add as a local marketplace
-claude plugin marketplace add ./nexus-architect
+claude plugin marketplace add ./ai-dev-codex-version
 
 # 3. Install the plugins
 claude plugin install product@nexus-architect --scope user
@@ -73,7 +77,7 @@ For the shortest Japanese workflow covering new apps and existing-app changes, s
 ```bash
 # 1. Clone the repository (with the ScalarDB/ScalarDL knowledge bundle submodule)
 git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
-cd nexus-codex
+cd ai-dev-codex-version
 
 # 2. Optional Python dependencies
 pip install -r requirements.txt
@@ -143,7 +147,7 @@ GitHub Copilot uses the same canonical workflows through repository-native custo
 
 ```bash
 git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
-cd nexus-codex
+cd ai-dev-codex-version
 ```
 
 Open the repository with GitHub Copilot enabled, select a Nexus custom agent, or invoke one of the

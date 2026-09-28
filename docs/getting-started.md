@@ -4,8 +4,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/wfukatsu/nexus-architect.git
-cd nexus-architect
+git clone https://github.com/Ryuking1228/ai-dev-codex-version.git
+cd ai-dev-codex-version
 
 # Python dependencies (optional)
 pip install -r requirements.txt

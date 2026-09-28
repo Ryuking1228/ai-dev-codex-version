@@ -12,10 +12,18 @@ GitHub Copilotを使う場合は、[GitHub Copilot版の簡単な手順](github-
 
 ## 最初にすること（共通）
 
-Codexで次のフォルダーを開きます。
+まだcloneしていない場合は、次のコマンドを実行します。
+
+```bash
+git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-version.git
+cd ai-dev-codex-version
+```
+
+Codexで、cloneした`ai-dev-codex-version`フォルダーを開きます。例えば次のような
+絶対パスになります。
 
 ```text
-/Users/ohshiroryuki/Downloads/ai_dev_loop/nexus-codex
+/Users/あなたのユーザー名/Downloads/ai_dev_loop/ai-dev-codex-version
 ```
 
 作成先・改修対象は、必ず絶対パスで指定してください。

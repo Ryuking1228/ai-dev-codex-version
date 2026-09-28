@@ -9,8 +9,8 @@ Nexus Architect は引き続き Claude Code plugin として利用できます�
 リポジトリをクローンし、必要に応じて依存パッケージを入れます。
 
 ```bash
-git clone https://github.com/wfukatsu/nexus-architect.git
-cd nexus-architect
+git clone https://github.com/Ryuking1228/ai-dev-codex-version.git
+cd ai-dev-codex-version
 pip install -r requirements.txt
 ```
 
