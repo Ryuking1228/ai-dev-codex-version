@@ -1,6 +1,7 @@
 ---
 name: app-start
 description: Build a new full-stack app with Codex, React, FastAPI and PostgreSQL; implement features, run locally, verify with automated tests, prepare deployment and push to a private GitHub repository. Use for /app:start and requests to build a new app end to end using free PostgreSQL.
+model: sonnet
 ---
 
 # Codex full-stack app workflow
@@ -14,7 +15,10 @@ Retain the original Nexus product/architect workflows for complex design; this e
 2. Generate a new sibling project with `python3 tools/new-app.py <target> --name <slug>`.
    Never put maintained code in `generated/`. Never overwrite an existing project.
 3. Write `docs/product.md`: purpose, actor, happy path, exceptions, acceptance examples, auth/access boundary.
-   Use `product/example-map` for unclear business rules. Decide permissions before implementing sensitive data.
+   Use `product/example-map` for unclear business rules. Under Codex, invoke that child with
+   `python3 <NEXUS_ROOT>/tools/codex-model-router.py run product:example-map --target
+   <TARGET_ROOT> -- <skill arguments>` per `@rules/codex-model-routing.md`. Decide permissions
+   before implementing sensitive data.
 4. Extend `backend/app/`, `frontend/src/`, migrations and tests in small vertical slices.
    Update OpenAPI and acceptance examples with behavior changes. Run fast tests during implementation.
 5. Run `python3 appctl.py up`. Inspect localhost:8000 in a real browser, follow acceptance examples,

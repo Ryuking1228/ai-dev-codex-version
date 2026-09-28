@@ -1,12 +1,12 @@
 # Nexus Architect
 
-> **Codex + PostgreSQL extension:** This independent adaptation adds `/app:start` for
+> **Codex / GitHub Copilot + PostgreSQL extension:** This independent adaptation adds `/app:start` for
 > React + FastAPI + PostgreSQL apps, with localhost startup, database/browser tests,
 > verification tied to source content, deployment hooks and private GitHub push checks.
 > Start with [日本語ガイド](docs/codex-postgres-app_ja.md). Original Nexus functionality and
 > the upstream MIT license are retained. The starter is a demonstration, not a finished product.
 
-System architecture toolkit for Claude Code and Codex. Claude Code uses this repository as four plugins with 115 skills; Codex uses the same skill files through `AGENTS.md` compatibility rules.
+System architecture toolkit for Claude Code, Codex, and GitHub Copilot. Claude Code uses this repository as four plugins with 115 skills; Codex and Copilot use adapters around the same canonical skill files.
 
 - **product** (28 skills) — Product direction: validation-driven, dialogue-based pipeline from product vision to SLA/NFR; hands off to architect for system implementation design
 - **architect** (69 skills) — Legacy refactoring, greenfield design, database investigation and migration, consulting deliverables
@@ -67,10 +67,13 @@ If the skills are recognized, the installation is successful.
 
 Codex can use the same skill files without installing Claude Code plugins.
 
+For the shortest Japanese workflow covering new apps and existing-app changes, see
+[CodexでNexusを使う一番簡単な手順](docs/codex-simple-guide_ja.md).
+
 ```bash
 # 1. Clone the repository (with the ScalarDB/ScalarDL knowledge bundle submodule)
-git clone --recurse-submodules https://github.com/wfukatsu/nexus-architect.git
-cd nexus-architect
+git clone --recurse-submodules https://github.com/Ryuking1228/nexus-codex.git
+cd nexus-codex
 
 # 2. Optional Python dependencies
 pip install -r requirements.txt
@@ -96,6 +99,19 @@ Then invoke the same command text in chat:
 /scalardb:review-code ./path/to/app
 ```
 
+Codex orchestrators automatically preserve each skill's `haiku` / `sonnet` / `opus` intent by
+starting child skills with the cost-aware router. The default `balanced` profile maps them to
+Luna/low, Terra/medium, and Sol/xhigh respectively. Select `economy` explicitly to compress work
+onto lower-credit models. Inspect a route without starting a child run:
+
+```bash
+python3 tools/codex-model-router.py resolve architect:design-api --target ./path/to/app
+python3 tools/codex-model-router.py matrix --profile economy
+```
+
+See [Using Nexus Architect with Codex](docs/codex-usage.md#automatic-model-routing) for profile
+selection, dry runs, and the current-turn limitation.
+
 When a skill asks to use Claude tools, Codex follows these mappings:
 
 | Claude Code reference | Codex behavior |
@@ -104,7 +120,7 @@ When a skill asks to use Claude tools, Codex follows these mappings:
 | `Write`, `Edit`, `MultiEdit` | Edit files with `apply_patch` |
 | `Bash` | Run shell commands |
 | `AskUserQuestion` | Present numbered choices in chat, add an "or type your own answer" line, and wait for the reply |
-| `Task`, `Subagent` | Run in the main Codex thread unless the user explicitly asks for sub-agents |
+| `Task`, `Subagent` | Nexus orchestrators route child Nexus skills through `tools/codex-model-router.py`; other sub-agent work stays in the main thread unless explicitly requested |
 | `WebFetch`, `WebSearch` | Use Codex web access, Context7, or approved `curl` |
 
 After editing generated reports or Mermaid diagrams in Codex, run the hooks manually when relevant:
@@ -115,6 +131,28 @@ hooks/validate-mermaid.sh reports/before/example/codebase-structure.md
 ```
 
 Claude Code continues to use the plugin metadata and slash commands unchanged. See [Using Nexus Architect with Codex](docs/codex-usage.md) for the full Codex guide.
+
+### Using with GitHub Copilot
+
+GitHub Copilot uses the same canonical workflows through repository-native customizations:
+
+- `.github/copilot-instructions.md` for always-on repository guidance
+- `.github/agents/*.agent.md` for `nexus-app-builder`, `nexus-product`, `nexus-architect`, and `nexus-delivery`
+- `.github/prompts/*.prompt.md` for `/nexus-new-app`, `/nexus-existing-app`, `/nexus-product-design`, and `/nexus-deliver-backlog`
+- `.github/skills/*/SKILL.md` for automatic workflow discovery
+
+```bash
+git clone --recurse-submodules https://github.com/Ryuking1228/nexus-codex.git
+cd nexus-codex
+```
+
+Open the repository with GitHub Copilot enabled, select a Nexus custom agent, or invoke one of the
+prompt files in a supported IDE. The Copilot adapters read the detailed workflow from `skills/`
+instead of duplicating it.
+
+Copilot inherits the model selected in the active Copilot environment. The Luna/Terra/Sol router is
+Codex-only and is not launched by Copilot. See [Using Nexus Architect with GitHub Copilot](docs/github-copilot-usage.md)
+or the [short Japanese guide](docs/github-copilot-usage_ja.md).
 
 ## Quick Start
 

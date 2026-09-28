@@ -36,6 +36,64 @@ You can also ask directly, for example:
 Use skills/design-microservices/SKILL.md to design the target architecture for ./target-app.
 ```
 
+## Automatic Model Routing
+
+Nexus keeps skill manifests provider-neutral: skills are assigned the abstract `haiku`, `sonnet`,
+or `opus` tier. Under Codex, `tools/codex-model-router.py` maps that tier to a Codex model and
+reasoning effort. Orchestrators such as `/product:start`, `/architect:start`,
+`/architect:pipeline`, `/architect:deliver-backlog`, and `/infra:start` use the router when they
+start each child skill.
+
+A Codex turn keeps the model and reasoning effort with which it started. Therefore, the router
+starts a separate `codex exec` child for each routed skill; it cannot replace the model of the
+already-running chat turn. A leaf skill invoked directly in chat uses the current chat model, while
+its routed descendants use automatic assignment.
+
+The built-in profiles are:
+
+| Profile | Haiku tier | Sonnet tier | Opus tier | Intended use |
+|---|---|---|---|---|
+| `economy` | Luna / low | Luna / medium | Terra / medium | Minimize Codex credit use |
+| `balanced` (default) | Luna / low | Terra / medium | Sol / xhigh | Preserve the original three-tier intent |
+| `quality` | Terra / low | Sol / medium | Sol / xhigh | High-value reviews and architecture |
+
+Inspect the matrix or a resolved skill without starting Codex:
+
+```bash
+python3 tools/codex-model-router.py matrix --profile economy
+python3 tools/codex-model-router.py resolve architect:design-api --target ./target-app
+```
+
+Preview or execute a routed child. Router options go before `--`; skill arguments go after it:
+
+```bash
+python3 tools/codex-model-router.py run architect:design-api \
+  --target ./target-app --dry-run -- --auto
+
+python3 tools/codex-model-router.py run architect:design-api \
+  --target ./target-app -- --auto
+```
+
+Profile precedence is `--profile`, then `NEXUS_CODEX_COST_PROFILE`, then the target project's
+`work/pipeline-progress.json`, then the configured default. To set it per project:
+
+```json
+{
+  "options": {
+    "codex_cost_profile": "economy"
+  }
+}
+```
+
+For a lower-cost shell session, use `NEXUS_CODEX_COST_PROFILE=economy`. One-off overrides are available as
+`--model <model>` and `--reasoning-effort <effort>`. Central defaults and mappings live in
+`config/codex-model-routing.json`; routing behavior is defined in
+`rules/codex-model-routing.md`.
+
+The router reports the selected tier, profile, model, and reasoning effort before launch. A missing
+or misspelled skill is an error, and a failed child launch never silently falls back to the parent
+model.
+
 ## Compatibility Rules
 
 Codex interprets Claude Code tool references as local operations:
@@ -48,7 +106,7 @@ Codex interprets Claude Code tool references as local operations:
 | `Glob`, `Grep`, `LS` | Use `rg --files`, `rg`, `find`, or `ls` |
 | `WebFetch`, `WebSearch` | Use Codex web access, Context7, or approved `curl` |
 | `AskUserQuestion` | Show numbered choices in chat and wait for a reply |
-| `Task`, `Subagent` | Run in the main Codex thread unless the user explicitly asks for sub-agents |
+| `Task`, `Subagent` | Nexus orchestrators route child Nexus skills through `tools/codex-model-router.py`; other sub-agent work stays in the main thread unless explicitly requested |
 | `Skill` | Open the referenced `SKILL.md` and follow it |
 
 ## Runtime Paths

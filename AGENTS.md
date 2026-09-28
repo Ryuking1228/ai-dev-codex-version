@@ -1,6 +1,7 @@
 # AGENTS.md
 
-Instructions for using this repository with Codex while preserving Claude Code plugin compatibility.
+Instructions for using this repository with Codex while preserving Claude Code plugin and GitHub
+Copilot compatibility.
 
 ## What This Repository Is
 
@@ -13,6 +14,12 @@ This repository is a four-plugin architecture toolkit originally packaged for Cl
 
 Claude Code continues to use `CLAUDE.md`, `.claude-plugin/`, and slash commands such as `/architect:start` or `/product:start`.
 Codex uses this `AGENTS.md` file plus the `skills/*/SKILL.md` files directly.
+GitHub Copilot uses `.github/copilot-instructions.md`, `.github/agents/`, `.github/prompts/`, and
+thin discovery adapters under `.github/skills/`; `skills/**/SKILL.md` remains canonical.
+
+If GitHub Copilot loads this `AGENTS.md`, its runtime-specific instructions in
+`.github/copilot-instructions.md` take precedence. In particular, Copilot must not launch the
+Codex-only model router or `codex exec`.
 
 ## Codex Command Mapping
 
@@ -119,10 +126,21 @@ artifact (`docs/design.md` §7.5).
 
 ## Model Recommendations
 
-Claude Code switches models automatically based on each skill's assignment. Codex ignores the
-`model:` setting and uses the session model throughout, so choose an equivalent tier when possible:
-Opus for architecture decisions, strategy, tradeoff analysis, and risk; Sonnet for standard analysis,
-structured generation, and most reviews; Haiku for template generation and simple transforms.
+Claude Code switches models automatically based on each skill's assignment. A running Codex turn
+cannot replace its own model, so a Codex **orchestrator** MUST launch each child Nexus skill through
+the `tools/codex-model-router.py run` command described in `rules/codex-model-routing.md`. The
+router starts a child `codex exec` with the configured model and reasoning effort. Directly invoked
+leaf skills remain on the current session model because there is no child boundary. The rule also
+defines precedence, profiles, dry runs, and failure behavior.
+
+The default `balanced` profile preserves the original three intent tiers: Opus maps to Sol/xhigh
+for architecture decisions, strategy, tradeoff analysis, and risk; Sonnet maps to Terra/medium for
+standard analysis, structured generation, and most reviews; Haiku maps to Luna/low for template
+generation and simple transforms. Select `economy` explicitly when lower credit use matters more
+than preserving one Codex model family per tier.
+
+GitHub Copilot does not use these Luna/Terra/Sol mappings. Its custom agents inherit the model
+selected in the active Copilot environment; the abstract tier remains a complexity signal only.
 
 The dependency YAML files are authoritative for pipeline skills; standalone skills use their
 `SKILL.md` frontmatter. Product skill names are prefixed below to distinguish them from architect
@@ -130,8 +148,9 @@ skills with the same name.
 
 `implement-backlog` is a thin sonnet orchestrator that delegates heavy steps to model-tiered
 sub-agents (haiku digests, sonnet implementation, opus only for planning and consistency verdicts —
-see its Sub-Agent Execution table). On runtimes without model switching, run the whole skill at the
-session model and preserve the delegation structure (sub-agents return digests, not full sources).
+see its Sub-Agent Execution table). Under Codex, use the router for Nexus child skills and preserve
+the declared delegation structure for its internal agents (sub-agents return digests, not full
+sources). Never silently fall back to the parent model when a routed child cannot start.
 
 | Plugin | Opus equivalent | Sonnet equivalent | Haiku equivalent sufficient |
 |---|---|---|---|

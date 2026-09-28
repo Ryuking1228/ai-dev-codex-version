@@ -1,0 +1,25 @@
+{
+  "$schema": "codex-model-routing-v1",
+  "default_profile": "balanced",
+  "default_tier": "sonnet",
+  "profiles": {
+    "economy": {
+      "description": "Minimize Codex credit usage while retaining balanced reasoning for architecture work.",
+      "haiku": { "model": "gpt-5.6-luna", "reasoning_effort": "low" },
+      "sonnet": { "model": "gpt-5.6-luna", "reasoning_effort": "medium" },
+      "opus": { "model": "gpt-5.6-terra", "reasoning_effort": "medium" }
+    },
+    "balanced": {
+      "description": "Preserve the original three-tier intent with stronger reasoning for Opus-class work.",
+      "haiku": { "model": "gpt-5.6-luna", "reasoning_effort": "low" },
+      "sonnet": { "model": "gpt-5.6-terra", "reasoning_effort": "medium" },
+      "opus": { "model": "gpt-5.6-sol", "reasoning_effort": "xhigh" }
+    },
+    "quality": {
+      "description": "Prefer stronger models for high-value reviews and architecture decisions.",
+      "haiku": { "model": "gpt-5.6-terra", "reasoning_effort": "low" },
+      "sonnet": { "model": "gpt-5.6-sol", "reasoning_effort": "medium" },
+      "opus": { "model": "gpt-5.6-sol", "reasoning_effort": "xhigh" }
+    }
+  }
+}

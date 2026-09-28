@@ -80,6 +80,11 @@ confirm before starting, unless `--auto`. With `--issue`, the working set is tha
 ### Step 2 — Per-Issue delivery loop
 For each Issue in order (determine its current stage from `impl.status`/labels, or `--from`):
 
+Under Codex, run every child stage through `python3 <NEXUS_ROOT>/tools/codex-model-router.py run
+architect:<skill> --target <TARGET_ROOT> -- <skill arguments>` per
+`@rules/codex-model-routing.md`. The current turn owns only orchestration and the human gates.
+Claude Code continues to use its native Skill/Task invocation.
+
 - **(a) implement** — If not yet implemented (`todo`/`doing`), run
   `/architect:implement-backlog <issue> [--auto]` (the first Issue builds the shared-context pack;
   its Step 5b runs `/architect:generate-docs`, so the README/docs updates are committed to the same

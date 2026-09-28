@@ -61,6 +61,10 @@ before pinning them (see @rules/dependency-versions.md), and record it as
    attributes its tokens to it; `plugin` is what keeps that attribution off the architect
    pipeline's phase of the same name, since both pipelines write this one file — add to it,
    never re-register it. Append key decisions to `work/context.md` after each phase.
+   Under Codex, invoke each child phase through `python3 <NEXUS_ROOT>/tools/codex-model-router.py
+   run product:<phase> --target <TARGET_ROOT> -- <phase arguments>` per
+   `@rules/codex-model-routing.md`; the current turn remains the product orchestrator. Claude Code
+   continues to use its native Skill/Task invocation.
 4. **Validation gate** — after Phase 1 (`define-vision`, `define-scope`), run
    `/product:validate-assumptions`. Read its verdict from `pipeline-progress.json` → `gates`:
    - `no-go`: stop forward progress and help the user revise Phase 1 artifacts (a forward

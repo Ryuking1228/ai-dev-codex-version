@@ -40,8 +40,10 @@ build it") splits into design → user confirmation → implement; never proceed
 without agreement on the design.
 
 **Route by invoking the mode skill with the Skill tool**, passing the four settled facts as
-arguments. This skill does triage only — design and review carry a higher reasoning tier
-(see Model Policy).
+arguments. Under Codex, use `python3 <NEXUS_ROOT>/tools/codex-model-router.py run
+infra:<mode> --target <TARGET_ROOT> -- <mode arguments>` per
+`@rules/codex-model-routing.md`. This skill does triage only — design and review carry a higher
+reasoning tier (see Model Policy).
 
 The exception is a single factual lookup ("what does the bundle say about Vault HA?") or a
 request whose whole point is the triage itself. Answer those here.
@@ -97,7 +99,8 @@ must not be left implicit.
 ## Step 5 — Route
 
 Pick the mode from Decision Criteria and invoke the corresponding skill, passing environment,
-cloud, target path and `$OKF`.
+cloud, target path and `$OKF`. Keep this turn as the router/orchestrator; do not execute the mode
+skill inline under Codex.
 
 ## Non-Negotiable Rules
 

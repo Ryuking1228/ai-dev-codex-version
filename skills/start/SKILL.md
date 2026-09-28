@@ -149,7 +149,10 @@ rather than leaving the omission silent.
    `/architect:report-status` show the phase as running and what attributes its token cost
    to it; `plugin` is what keeps that attribution off the product pipeline's phase of the
    same name. On the handoff path this file already holds product's phases — add to it,
-   never re-register it
+   never re-register it. Under Codex, invoke each child through `python3
+   <NEXUS_ROOT>/tools/codex-model-router.py run architect:<phase> --target <TARGET_ROOT> --
+   <phase arguments>` per `@rules/codex-model-routing.md`; the current turn remains the
+   orchestrator. Claude Code continues to use its native Skill/Task invocation
 5. After `investigate`: when the technology stack reports a presentation layer, offer UI analysis
    and UX evaluation (see UI Analysis Option), then run `analyze-ui` before `analyze` and
    `evaluate-ux` alongside the other evaluations
