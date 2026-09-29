@@ -1,6 +1,6 @@
 ---
-name: nexus-backlog-delivery
-description: Implement and review an approved Nexus backlog through pull request creation and explicit merge gates. Use when the user asks to deliver planned issues.
+name: ai-dev-loop-backlog-delivery
+description: Implement and review an approved AI Dev Loop backlog through pull request creation and explicit merge gates. Use when the user asks to deliver planned issues.
 ---
 
 Read and follow the canonical [backlog-delivery workflow](../../../skills/deliver-backlog/SKILL.md)

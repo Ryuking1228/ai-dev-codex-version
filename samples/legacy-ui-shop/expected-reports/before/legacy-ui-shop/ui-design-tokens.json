@@ -6,7 +6,7 @@
         "$type": "dimension",
         "$value": "1px",
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/admin.css:7",
               "src/main/webapp/css/admin.css:22",
@@ -33,7 +33,7 @@
         "$type": "dimension",
         "$value": "2px",
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/common.css:22",
               "src/main/webapp/css/common.css:113"
@@ -47,7 +47,7 @@
         "$type": "dimension",
         "$value": "5px",
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/admin.css:13"
             ],
@@ -63,7 +63,7 @@
       "$type": "color",
       "$value": "#0052a3",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:61"
           ],
@@ -76,7 +76,7 @@
       "$type": "color",
       "$value": "#006600",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:93"
           ],
@@ -89,7 +89,7 @@
       "$type": "color",
       "$value": "#0066cc",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:14",
             "src/main/webapp/css/common.css:22",
@@ -107,7 +107,7 @@
       "$type": "color",
       "$value": "#0a66c2",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/admin.css:13",
             "src/main/webapp/css/admin.css:26"
@@ -121,7 +121,7 @@
       "$type": "color",
       "$value": "#1a73e8",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/WEB-INF/jsp/admin/product-edit.jsp:54"
           ],
@@ -134,7 +134,7 @@
       "$type": "color",
       "$value": "#333333",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:9",
             "src/main/webapp/css/common.css:21",
@@ -150,7 +150,7 @@
       "$type": "color",
       "$value": "#444444",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:27",
             "src/main/webapp/css/common.css:100"
@@ -164,7 +164,7 @@
       "$type": "color",
       "$value": "#666666",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:45",
             "src/main/webapp/css/common.css:50",
@@ -182,7 +182,7 @@
       "$type": "color",
       "$value": "#aaaaaa",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:125"
           ],
@@ -195,7 +195,7 @@
       "$type": "color",
       "$value": "#cc0000",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:83",
             "src/main/webapp/css/common.css:90",
@@ -211,7 +211,7 @@
       "$type": "color",
       "$value": "#cccccc",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:62",
             "src/main/webapp/css/common.css:73"
@@ -225,7 +225,7 @@
       "$type": "color",
       "$value": "#d9d9d9",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/admin.css:22"
           ],
@@ -238,7 +238,7 @@
       "$type": "color",
       "$value": "#dddddd",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:44",
             "src/main/webapp/css/common.css:100",
@@ -256,7 +256,7 @@
       "$type": "color",
       "$value": "#e0e0e0",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:107",
             "src/main/webapp/css/common.css:108",
@@ -272,7 +272,7 @@
       "$type": "color",
       "$value": "#e5e5e5",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/admin.css:7"
           ],
@@ -285,7 +285,7 @@
       "$type": "color",
       "$value": "#e8e8e8",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:63"
           ],
@@ -298,7 +298,7 @@
       "$type": "color",
       "$value": "#eeeeee",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:100",
             "src/main/webapp/css/common.css:130"
@@ -312,7 +312,7 @@
       "$type": "color",
       "$value": "#efefef",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:102"
           ],
@@ -325,7 +325,7 @@
       "$type": "color",
       "$value": "#f2f2f2",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/admin.css:6"
           ],
@@ -338,7 +338,7 @@
       "$type": "color",
       "$value": "#f4f4f4",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:107",
             "src/main/webapp/css/common.css:127"
@@ -352,7 +352,7 @@
       "$type": "color",
       "$value": "#f5f5f5",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:62",
             "src/main/webapp/css/common.css:144"
@@ -366,7 +366,7 @@
       "$type": "color",
       "$value": "#fff0f0",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:92"
           ],
@@ -379,7 +379,7 @@
       "$type": "color",
       "$value": "#ffffff",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:10",
             "src/main/webapp/css/common.css:33",
@@ -407,7 +407,7 @@
           "sans-serif"
         ],
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/common.css:7"
             ],
@@ -422,7 +422,7 @@
         "$type": "dimension",
         "$value": "11px",
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/common.css:85"
             ],
@@ -435,7 +435,7 @@
         "$type": "dimension",
         "$value": "12px",
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/common.css:46",
               "src/main/webapp/css/common.css:50",
@@ -453,7 +453,7 @@
         "$type": "dimension",
         "$value": "13px",
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/WEB-INF/jsp/admin/product-edit.jsp:54"
             ],
@@ -466,7 +466,7 @@
         "$type": "dimension",
         "$value": "14px",
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/common.css:8",
               "src/main/webapp/css/common.css:54"
@@ -480,7 +480,7 @@
         "$type": "dimension",
         "$value": "16px",
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/common.css:26",
               "src/main/webapp/css/common.css:37",
@@ -495,7 +495,7 @@
         "$type": "dimension",
         "$value": "20px",
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/common.css:18"
             ],
@@ -510,7 +510,7 @@
         "$type": "fontWeight",
         "$value": 700,
         "$extensions": {
-          "nexus-architect": {
+          "ai-dev-loop": {
             "sources": [
               "src/main/webapp/css/common.css:37",
               "src/main/webapp/css/common.css:68",
@@ -532,7 +532,7 @@
       "$type": "dimension",
       "$value": "3px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:57"
           ],
@@ -545,7 +545,7 @@
       "$type": "dimension",
       "$value": "12px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/WEB-INF/jsp/admin/product-edit.jsp:54"
           ],
@@ -560,7 +560,7 @@
       "$type": "dimension",
       "$value": "1px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:86"
           ],
@@ -573,7 +573,7 @@
       "$type": "dimension",
       "$value": "2px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:136"
           ],
@@ -586,7 +586,7 @@
       "$type": "dimension",
       "$value": "4px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:20",
             "src/main/webapp/css/common.css:73",
@@ -605,7 +605,7 @@
       "$type": "dimension",
       "$value": "6px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:55",
             "src/main/webapp/css/common.css:73",
@@ -624,7 +624,7 @@
       "$type": "dimension",
       "$value": "8px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/admin.css:14",
             "src/main/webapp/css/common.css:34",
@@ -652,7 +652,7 @@
       "$type": "dimension",
       "$value": "12px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/admin.css:21",
             "src/main/webapp/css/common.css:66",
@@ -675,7 +675,7 @@
       "$type": "dimension",
       "$value": "16px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/admin.css:8",
             "src/main/webapp/css/admin.css:27",
@@ -705,7 +705,7 @@
       "$type": "dimension",
       "$value": "20px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/admin.css:20",
             "src/main/webapp/css/common.css:78",
@@ -720,7 +720,7 @@
       "$type": "dimension",
       "$value": "24px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/admin.css:8",
             "src/main/webapp/css/common.css:41",
@@ -739,7 +739,7 @@
       "$type": "dimension",
       "$value": "32px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:41",
             "src/main/webapp/css/common.css:145"
@@ -753,7 +753,7 @@
       "$type": "dimension",
       "$value": "80px",
       "$extensions": {
-        "nexus-architect": {
+        "ai-dev-loop": {
           "sources": [
             "src/main/webapp/css/common.css:145"
           ],

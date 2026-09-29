@@ -6,7 +6,7 @@ skill: app-start
 
 # Verification record — 2026-09-22
 
-Scope: a reusable starter extending Nexus, not a completed business product.
+Scope: a reusable starter extending AI Dev Loop, not a completed business product.
 
 | Check | Result |
 |---|---|
@@ -22,13 +22,13 @@ Scope: a reusable starter extending Nexus, not a completed business product.
 | Deployment | Not executed; provider, account and environment unspecified |
 
 The API suite emits two dependency deprecation warnings from Starlette/httpx and AnyIO.
-They did not fail the suite. The starter's test gate is narrower than Nexus's full quality gate.
+They did not fail the suite. The starter's test gate is narrower than AI Dev Loop's full quality gate.
 Its API test is a smoke/behavior check, not complete verification against an independently authored OpenAPI contract.
 
 ## Test provenance
 
 The initial starter and tests were authored together (`test-after`), without a per-unit
-Red/Green/Refactor commit series. Do not report this work as compliant with the full Nexus TDD workflow.
+Red/Green/Refactor commit series. Do not report this work as compliant with the full AI Dev Loop TDD workflow.
 Tests detected a credential-file creation error; the production build detected missing Vite CSS types.
 Both were corrected. A further test reproduced an OpenAPI error-media mismatch before the fix.
 No passing DB, browser, UI-inspection or deployment record was manufactured.

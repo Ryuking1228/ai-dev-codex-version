@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Resolve and run Nexus skills with a cost-aware Codex model."""
+"""Resolve and run AI Dev Loop skills with a cost-aware Codex model."""
 
 from __future__ import annotations
 

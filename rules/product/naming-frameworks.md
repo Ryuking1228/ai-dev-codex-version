@@ -9,7 +9,7 @@ states the product's value.
 For a name `L1 L2 … Ln`, there must exist English words `W1 W2 … Wn` such that `initial(Wi) == Li`
 and `W1 … Wn` reads as a coherent phrase describing the product. Two acceptable readings:
 
-- **Acronym** — the name is pronounced as a word (NEXUS, SCALAR, RADAR). Preferred: most brandable.
+- **Acronym** — the name is pronounced as a word (ORBIT, SCALAR, RADAR). Preferred: most brandable.
 - **Initialism** — the name is pronounced letter-by-letter (SDK, ATM). Allowed when short and apt.
 
 A "backronym" is the same object built backward — pick the string first, then fit the words. Both
@@ -59,7 +59,7 @@ Each candidate and the final recommendation gets a `NAM-xxx` ID with an Upstream
 ## Worked shape (illustrative, not a template to copy)
 
 ```
-Candidate: NEXUS  (acronym, 2 syllables)
+Candidate: ORBIT  (acronym, 2 syllables)
   N — Next-generation     (theme: innovation      ← VIS-003)
   E — Extensible          (theme: platform growth ← VIS-005)
   X — eXchange            (theme: interoperability← POS-002)

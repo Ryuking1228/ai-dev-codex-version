@@ -27,7 +27,7 @@ tracks progress:
   source of truth.
 
 Runs against the **target project** holding `reports/backlog/backlog-manifest.json` and the tracked
-repository. It never edits nexus-architect itself.
+repository. It never edits ai-dev-loop itself.
 
 ## Decision Criteria
 

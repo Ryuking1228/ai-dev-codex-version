@@ -1,6 +1,6 @@
-# Using Nexus Architect with GitHub Copilot
+# Using AI Dev Loop with GitHub Copilot
 
-GitHub Copilot can use the canonical Nexus workflows without installing the Claude Code plugins or
+GitHub Copilot can use the canonical AI Dev Loop workflows without installing the Claude Code plugins or
 the Codex CLI. The repository ships four Copilot customization layers:
 
 | Layer | Location | Purpose |
@@ -27,7 +27,7 @@ from the agent picker in supported IDEs, GitHub Copilot cloud agent, or Copilot 
 
 ## New application
 
-Select the `nexus-app-builder` custom agent, or run `/nexus-new-app` and append:
+Select the `ai-dev-loop-app-builder` custom agent, or run `/ai-dev-loop-new-app` and append:
 
 ```text
 Target: /absolute/path/to/new-app
@@ -48,7 +48,7 @@ separate actions and require an explicit request.
 
 ## Existing application
 
-Select the `nexus-architect` agent, or run `/nexus-existing-app` and append:
+Select the `ai-dev-loop-architect` agent, or run `/ai-dev-loop-existing-app` and append:
 
 ```text
 Target: /absolute/path/to/existing-app
@@ -60,18 +60,18 @@ Output language: Japanese
 ```
 
 This starts with investigation and design. If implementation is also wanted, say so in the same
-request. For an already approved Nexus backlog, select `nexus-delivery` or run
-`/nexus-deliver-backlog`; that route preserves pull-request approval and merge gates.
+request. For an already approved AI Dev Loop backlog, select `ai-dev-loop-delivery` or run
+`/ai-dev-loop-deliver-backlog`; that route preserves pull-request approval and merge gates.
 
 ## Product direction
 
-Select `nexus-product` or run `/nexus-product-design` for product vision, scope, journeys, features,
+Select `ai-dev-loop-product` or run `/ai-dev-loop-product-design` for product vision, scope, journeys, features,
 domain mapping, and quality requirements. Its artifacts feed the architecture workflow without
 asking the same questions again.
 
 ## Models and cost
 
-The `haiku`, `sonnet`, and `opus` values in canonical Nexus skills are provider-neutral complexity
+The `haiku`, `sonnet`, and `opus` values in canonical AI Dev Loop skills are provider-neutral complexity
 tiers. Copilot custom agents inherit the model selected in the current Copilot environment. The
 Luna/Terra/Sol automatic router is for Codex only and is never launched by Copilot.
 

@@ -303,8 +303,8 @@ def main():
     # A misspelled --phase used to render an empty tree and exit 0, which reads like
     # "this phase has nothing" rather than "no such phase".
     if PHASE_FILTER and PHASE_FILTER not in state["phases"]:
-        print("nexus-status: %s" % (T["unknown_phase"] % PHASE_FILTER), file=sys.stderr)
-        print("nexus-status: %s" % (T["known_phases"] % (
+        print("ai-dev-loop-status: %s" % (T["unknown_phase"] % PHASE_FILTER), file=sys.stderr)
+        print("ai-dev-loop-status: %s" % (T["known_phases"] % (
             state["plugin"], ", ".join(state["phases"]))), file=sys.stderr)
         return 2
     if JSON_OUT:
@@ -320,7 +320,7 @@ def main():
         COLOR = color
         with open(path, "w", encoding="utf-8") as f:
             f.write(render_md(state, plain_text))
-        print("nexus-status: wrote %s" % path, file=sys.stderr)
+        print("ai-dev-loop-status: wrote %s" % path, file=sys.stderr)
     print(text)
     return 0
 

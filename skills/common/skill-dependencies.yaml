@@ -1,4 +1,4 @@
-# Nexus Architect Skill Dependency Graph
+# AI Dev Loop Skill Dependency Graph
 # Single source of truth for pipeline execution order
 # Orchestrators read this to determine phase sequencing
 

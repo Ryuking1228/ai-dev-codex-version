@@ -147,7 +147,7 @@ def test(product, runtime, initialize):
     profile={"product":product,"expected_version":version,"schema":schema,"target_id":product,"allow_local_plaintext":True}
     for key,value in config.items():
         if key!="plaintext":
-            env="NEXUS_INV_"+key.upper()
+            env="AI_DEV_LOOP_INV_"+key.upper()
             os.environ[env]=str(value)
             profile[key+"_env"]=env
     profile_path=runtime/(product+"-profile.json")

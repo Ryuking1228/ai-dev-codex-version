@@ -1,6 +1,6 @@
-# Using Nexus Architect with Codex
+# Using AI Dev Loop with Codex
 
-Nexus Architect remains a Claude Code plugin, but it can also be used from Codex through the repository's `AGENTS.md` compatibility rules.
+AI Dev Loop remains a Claude Code plugin, but it can also be used from Codex through the repository's `AGENTS.md` compatibility rules.
 
 ## Setup
 
@@ -38,7 +38,7 @@ Use skills/design-microservices/SKILL.md to design the target architecture for .
 
 ## Automatic Model Routing
 
-Nexus keeps skill manifests provider-neutral: skills are assigned the abstract `haiku`, `sonnet`,
+AI Dev Loop keeps skill manifests provider-neutral: skills are assigned the abstract `haiku`, `sonnet`,
 or `opus` tier. Under Codex, `tools/codex-model-router.py` maps that tier to a Codex model and
 reasoning effort. Orchestrators such as `/product:start`, `/architect:start`,
 `/architect:pipeline`, `/architect:deliver-backlog`, and `/infra:start` use the router when they
@@ -74,7 +74,7 @@ python3 tools/codex-model-router.py run architect:design-api \
   --target ./target-app -- --auto
 ```
 
-Profile precedence is `--profile`, then `NEXUS_CODEX_COST_PROFILE`, then the target project's
+Profile precedence is `--profile`, then `AI_DEV_LOOP_CODEX_COST_PROFILE`, then the target project's
 `work/pipeline-progress.json`, then the configured default. To set it per project:
 
 ```json
@@ -85,7 +85,7 @@ Profile precedence is `--profile`, then `NEXUS_CODEX_COST_PROFILE`, then the tar
 }
 ```
 
-For a lower-cost shell session, use `NEXUS_CODEX_COST_PROFILE=economy`. One-off overrides are available as
+For a lower-cost shell session, use `AI_DEV_LOOP_CODEX_COST_PROFILE=economy`. One-off overrides are available as
 `--model <model>` and `--reasoning-effort <effort>`. Central defaults and mappings live in
 `config/codex-model-routing.json`; routing behavior is defined in
 `rules/codex-model-routing.md`.
@@ -106,7 +106,7 @@ Codex interprets Claude Code tool references as local operations:
 | `Glob`, `Grep`, `LS` | Use `rg --files`, `rg`, `find`, or `ls` |
 | `WebFetch`, `WebSearch` | Use Codex web access, Context7, or approved `curl` |
 | `AskUserQuestion` | Show numbered choices in chat and wait for a reply |
-| `Task`, `Subagent` | Nexus orchestrators route child Nexus skills through `tools/codex-model-router.py`; other sub-agent work stays in the main thread unless explicitly requested |
+| `Task`, `Subagent` | AI Dev Loop orchestrators route child AI Dev Loop skills through `tools/codex-model-router.py`; other sub-agent work stays in the main thread unless explicitly requested |
 | `Skill` | Open the referenced `SKILL.md` and follow it |
 
 ## Runtime Paths
@@ -143,10 +143,10 @@ Both hooks still accept Claude Code hook JSON on stdin, so Claude Code compatibi
 The Claude Code path is unchanged:
 
 ```bash
-claude plugin marketplace add wfukatsu/nexus-architect
-claude plugin install product@nexus-architect --scope user
-claude plugin install architect@nexus-architect --scope user
-claude plugin install scalardb@nexus-architect --scope user
+claude plugin marketplace add Ryuking1228/ai-dev-codex-version
+claude plugin install product@ai-dev-loop --scope user
+claude plugin install architect@ai-dev-loop --scope user
+claude plugin install scalardb@ai-dev-loop --scope user
 ```
 
 After installation, use `/product:*`, `/architect:*`, and `/scalardb:*` commands as documented in `README.md`.

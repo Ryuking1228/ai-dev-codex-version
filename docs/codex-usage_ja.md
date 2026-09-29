@@ -1,6 +1,6 @@
-# Codex で Nexus Architect を使う
+# Codex で AI Dev Loop を使う
 
-Nexus Architect は引き続き Claude Code plugin として利用できます。同時に、リポジトリ直下の `AGENTS.md` により Codex からも利用できます。
+AI Dev Loop は引き続き Claude Code plugin として利用できます。同時に、リポジトリ直下の `AGENTS.md` により Codex からも利用できます。
 
 新規アプリ作成と既存アプリ改修だけの短い手順は、[一番簡単な手順書](codex-simple-guide_ja.md)を参照してください。
 
@@ -40,7 +40,7 @@ skills/design-microservices/SKILL.md を使って ./target-app の目標アー�
 
 ## モデルの自動割り振り
 
-Nexus の skill manifest では、モデルを `haiku` / `sonnet` / `opus` という抽象 tier で
+AI Dev Loop の skill manifest では、モデルを `haiku` / `sonnet` / `opus` という抽象 tier で
 指定します。Codex では `tools/codex-model-router.py` が、この tier を Codex のモデルと
 reasoning effort に変換します。`/product:start`、`/architect:start`、
 `/architect:pipeline`、`/architect:deliver-backlog`、`/infra:start` などの orchestrator は、
@@ -77,7 +77,7 @@ python3 tools/codex-model-router.py run architect:design-api \
   --target ./target-app -- --auto
 ```
 
-Profile は `--profile`、`NEXUS_CODEX_COST_PROFILE`、対象 project の
+Profile は `--profile`、`AI_DEV_LOOP_CODEX_COST_PROFILE`、対象 project の
 `work/pipeline-progress.json`、設定ファイルの既定値、の順で決まります。Project 単位の
 設定例です。
 
@@ -89,7 +89,7 @@ Profile は `--profile`、`NEXUS_CODEX_COST_PROFILE`、対象 project の
 }
 ```
 
-Shell session を節約モードにするには `NEXUS_CODEX_COST_PROFILE=economy` を使えます。一度だけ上書き
+Shell session を節約モードにするには `AI_DEV_LOOP_CODEX_COST_PROFILE=economy` を使えます。一度だけ上書き
 する場合は `--model <model>` と `--reasoning-effort <effort>` を指定できます。共通の
 mapping は `config/codex-model-routing.json`、動作規約は
 `rules/codex-model-routing.md` にあります。
@@ -110,7 +110,7 @@ Codex では Claude Code の tool 参照を次のように読み替えます。
 | `Glob`, `Grep`, `LS` | `rg --files`, `rg`, `find`, `ls` を使う |
 | `WebFetch`, `WebSearch` | Codex の web access、Context7、または承認済み `curl` を使う |
 | `AskUserQuestion` | 番号付き選択肢をチャットで提示し、回答を待つ |
-| `Task`, `Subagent` | Nexus orchestrator が子 Nexus skill を呼ぶ場合は `tools/codex-model-router.py` で route し、それ以外は明示依頼がない限りメインスレッドで実行する |
+| `Task`, `Subagent` | AI Dev Loop orchestrator が子 AI Dev Loop skill を呼ぶ場合は `tools/codex-model-router.py` で route し、それ以外は明示依頼がない限りメインスレッドで実行する |
 | `Skill` | 参照された `SKILL.md` を開いて従う |
 
 ## 実行時パス
@@ -147,10 +147,10 @@ hooks/validate-mermaid.sh reports/before/example/codebase-structure.md
 Claude Code での使い方はこれまで通りです。
 
 ```bash
-claude plugin marketplace add wfukatsu/nexus-architect
-claude plugin install product@nexus-architect --scope user
-claude plugin install architect@nexus-architect --scope user
-claude plugin install scalardb@nexus-architect --scope user
+claude plugin marketplace add Ryuking1228/ai-dev-codex-version
+claude plugin install product@ai-dev-loop --scope user
+claude plugin install architect@ai-dev-loop --scope user
+claude plugin install scalardb@ai-dev-loop --scope user
 ```
 
 インストール後は、`README.md` に記載された `/product:*`、`/architect:*`、`/scalardb:*` のコマンドを利用できます。

@@ -41,41 +41,41 @@ def _stable_from_skill():
 
 STABLE = _stable_from_skill()
 
-BEGIN = "<!-- nexus:begin:{k} -->"
-END = "<!-- nexus:end:{k} -->"
+BEGIN = "<!-- ai-dev-loop:begin:{k} -->"
+END = "<!-- ai-dev-loop:end:{k} -->"
 
 FIXTURE = """# Example Service
 
 Hand-written intro that the skill must never touch.
 
-<!-- nexus:begin:overview -->
+<!-- ai-dev-loop:begin:overview -->
 ## Overview
 
 Generated overview body.
-<!-- nexus:end:overview -->
+<!-- ai-dev-loop:end:overview -->
 
 ## Hand-written section
 
 - a human bullet
 - another human bullet
 
-<!-- nexus:begin:layout -->
+<!-- ai-dev-loop:begin:layout -->
 ## Layout
 
 | Path | Content |
 |------|---------|
 | `src/` | source |
-<!-- nexus:end:layout -->
+<!-- ai-dev-loop:end:layout -->
 
 ## Notes
 
 Closing hand-written prose.
 
-<!-- nexus:begin:findings -->
+<!-- ai-dev-loop:begin:findings -->
 ## Findings
 
 1. drift recorded, not resolved in prose
-<!-- nexus:end:findings -->
+<!-- ai-dev-loop:end:findings -->
 """
 
 
@@ -84,7 +84,7 @@ Closing hand-written prose.
 def regions(text):
     """key -> (start, end) spanning the markers inclusive."""
     out = {}
-    for m in re.finditer(r"<!-- nexus:begin:([a-z-]+) -->", text):
+    for m in re.finditer(r"<!-- ai-dev-loop:begin:([a-z-]+) -->", text):
         key = m.group(1)
         e = text.find(END.format(k=key), m.end())
         if e == -1:
@@ -190,8 +190,8 @@ def main(argv):
 
     print("\nC. removal")
     rm = remove_region(orig, last)
-    check("region gone", f"nexus:begin:{last}" not in rm)
-    check("no orphan end marker", f"nexus:end:{last}" not in rm)
+    check("region gone", f"ai-dev-loop:begin:{last}" not in rm)
+    check("no orphan end marker", f"ai-dev-loop:end:{last}" not in rm)
     # Whitespace byte-identity cannot hold: removing an EOF-adjacent region also
     # removes its separator blank line, by design. Content is the invariant here;
     # byte-level stability is proven by the round-trip in E.
@@ -204,7 +204,7 @@ def main(argv):
     print("\nD. unknown-key protection")
     injected = orig.replace(
         BEGIN.format(k=first),
-        "<!-- nexus:begin:handwritten -->\nHUMAN BLOCK\n<!-- nexus:end:handwritten -->\n\n"
+        "<!-- ai-dev-loop:begin:handwritten -->\nHUMAN BLOCK\n<!-- ai-dev-loop:end:handwritten -->\n\n"
         + BEGIN.format(k=first), 1)
     for op, fn in (("update", update_region), ("removal", remove_region)):
         try:

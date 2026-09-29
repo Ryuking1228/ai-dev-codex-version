@@ -28,8 +28,8 @@ Manually, resolve in this order and use the first hit:
 1. `${CLAUDE_PLUGIN_ROOT}/knowledge/okf-scalardb-scalardl/okf/` — the git submodule. If the
    directory exists but is empty, initialize it:
    `git -C ${CLAUDE_PLUGIN_ROOT} submodule update --init knowledge/okf-scalardb-scalardl`
-2. `~/.cache/nexus-architect/okf-scalardb-scalardl/okf/` — local cache. If absent, create it:
-   `git clone --depth 1 https://github.com/wfukatsu/OKF-ScalarDB-ScalarDL.git ~/.cache/nexus-architect/okf-scalardb-scalardl`
+2. `~/.cache/ai-dev-loop/okf-scalardb-scalardl/okf/` — local cache. If absent, create it:
+   `git clone --depth 1 https://github.com/wfukatsu/OKF-ScalarDB-ScalarDL.git ~/.cache/ai-dev-loop/okf-scalardb-scalardl`
 
 If neither is obtainable (offline, no git), fall back to Context7 MCP / WebFetch as before, and
 say explicitly that the answer is **not version-pinned**.
@@ -62,7 +62,7 @@ state through ScalarDB, so pin its ScalarDB version too and check both.
 Enter through `products/<product>/<version>/index.md` (concepts listed by lifecycle phase) and
 open only what the task needs. Filter by frontmatter `lifecycle_phase`:
 
-| nexus-architect skills | `lifecycle_phase` | Typical entry concepts |
+| ai-dev-loop skills | `lifecycle_phase` | Typical entry concepts |
 |------------------------|-------------------|------------------------|
 | define-requirements, select-scalardb-edition, design-scalardb, design-scalardb-analytics, scalardb:model | `design` | `design.md`, `data-modeling.md`, `consensus-commit.md`, `requirements.md` |
 | generate-scalardb-code, implement-backlog, scalardb:build-app / config / crud-ops / jdbc-ops / error-handler / scaffold | `implement` | `api-guide.md`, `configurations.md`, `two-phase-commit-transactions.md`, `scalardb-samples/` |

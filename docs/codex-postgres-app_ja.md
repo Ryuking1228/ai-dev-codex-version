@@ -1,6 +1,6 @@
 # Codex + PostgreSQLで新規アプリを作る
 
-この拡張は `wfukatsu/nexus-architect` を土台に、個人の新規アプリ開発向けの実行経路を追加します。
+この拡張はWataru Fukatsu氏の上流プロジェクトを土台に、個人の新規アプリ開発向けの実行経路を追加します。
 既存のproduct・architect・scalardb・infraの動作とライセンスを保持しています。
 
 ## 想定する流れ
@@ -60,7 +60,7 @@ Docker Composeによるlocalと、公開先未定のdeployment hookは既存infr
 UI確認は実際に操作してから `inspect --note` で記録します。自動検証の代替にはなりません。
 再確認後に `release-check` が通るとデプロイ手順へ進めます。
 
-ひな形の検証は出発点であり、Nexusの全8段階品質ゲートを通過したという意味ではありません。
+ひな形の検証は出発点であり、AI Dev Loopの全8段階品質ゲートを通過したという意味ではありません。
 SAST・依存関係監査・認可検査・業務受入条件はプロダクトの要件に応じて追加します。
 
 ## デプロイの範囲
@@ -73,6 +73,6 @@ SAST・依存関係監査・認可検査・業務受入条件はプロダクト�
 
 ## 由来
 
-元リポジトリ: https://github.com/wfukatsu/nexus-architect
+上流作者: https://github.com/wfukatsu
 元の著作権表示はルートのLICENSEに保持しています。生成アプリにもLICENSEをコピーします。
 追加機能は `skills/app/start/`、`tools/new-app.py`、`templates/codex-postgres-app/` にまとまっています。

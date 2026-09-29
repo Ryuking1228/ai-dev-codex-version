@@ -86,9 +86,9 @@ mode, which needs no repository.
 Generated regions are delimited so re-runs are safe and reviewable:
 
 ```markdown
-<!-- nexus:begin:build-and-run -->
+<!-- ai-dev-loop:begin:build-and-run -->
 ...generated content...
-<!-- nexus:end:build-and-run -->
+<!-- ai-dev-loop:end:build-and-run -->
 ```
 
 - A **new** file is written entirely inside markers, section by section.
@@ -159,7 +159,7 @@ Report the resolved mode, root, scope, and target files before doing work.
 - configuration surface: config files, keys, environment variables, and their defaults
 - public interfaces: HTTP routes, gRPC services, CLI commands, exported components
 - dependencies and required runtimes/versions
-- existing docs: which READMEs and `docs/` pages exist, and which carry nexus ownership markers
+- existing docs: which READMEs and `docs/` pages exist, and which carry ai-dev-loop ownership markers
 
 **Observed vs inferred.** The digest must mark any value the sub-agent derived rather than read —
 `inferred: <value> (<basis>)`, e.g. `inferred: Node 18+ (Vite 5 requires it)` when `package.json`

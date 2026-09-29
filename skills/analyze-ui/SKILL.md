@@ -309,10 +309,10 @@ Write `reports/before/{project}/ui-design-tokens.json`:
   "$description": "As-is design tokens of <project>, extracted by /architect:analyze-ui",
   "color": {
     "hex-0066cc": { "$type": "color", "$value": "#0066cc",
-      "$extensions": { "nexus-architect": { "sources": ["src/main/webapp/css/common.css:12"],
+      "$extensions": { "ai-dev-loop": { "sources": ["src/main/webapp/css/common.css:12"],
                                             "usage_count": 14, "cluster": "primary-blue" } } }
   },
-  "font": { "size": { "px-14": { "$type": "dimension", "$value": "14px", "$extensions": { "nexus-architect": { "sources": ["..."], "usage_count": 31, "cluster": "body-text" } } } } },
+  "font": { "size": { "px-14": { "$type": "dimension", "$value": "14px", "$extensions": { "ai-dev-loop": { "sources": ["..."], "usage_count": 31, "cluster": "body-text" } } } } },
   "semantic": { "color": { "primary": { "$type": "color", "$value": "{color.hex-0066cc}",
                                         "$description": "candidate — most-used member of primary-blue" } } }
 }

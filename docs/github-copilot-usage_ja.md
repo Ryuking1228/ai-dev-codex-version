@@ -1,6 +1,6 @@
-# GitHub CopilotでNexusを使う一番簡単な手順
+# GitHub CopilotでAI Dev Loopを使う一番簡単な手順
 
-GitHub Copilotでは、Claude Code pluginやCodex CLIをインストールしなくてもNexusの標準
+GitHub Copilotでは、Claude Code pluginやCodex CLIをインストールしなくてもAI Dev Loopの標準
 workflowを利用できます。このリポジトリには次の4種類のCopilot設定があります。
 
 | 種類 | 配置場所 | 役割 |
@@ -8,7 +8,7 @@ workflowを利用できます。このリポジトリには次の4種類のCopil
 | Repository instructions | `.github/copilot-instructions.md` | 常に読み込むcommand対応表と安全ルール |
 | Custom agents | `.github/agents/*.agent.md` | 新規アプリ、製品設計、アーキテクチャ、実装の専門モード |
 | Prompt files | `.github/prompts/*.prompt.md` | 対応IDEで`/名前`から呼ぶ短い定型文 |
-| Agent skills | `.github/skills/*/SKILL.md` | 依頼内容から自動発見するNexus workflowへの入口 |
+| Agent skills | `.github/skills/*/SKILL.md` | 依頼内容から自動発見するAI Dev Loop workflowへの入口 |
 
 詳しい処理は従来どおり`skills/**/SKILL.md`に一本化されています。Copilot用ファイルは
 そこへ案内する薄いadapterなので、Claude Code・Codex・Copilotで手順が分裂しません。
@@ -25,8 +25,8 @@ GitHub Copilotを有効にしたIDEなどで、このリポジトリを開きま
 
 ## ① 新しいアプリをゼロから作る
 
-Copilotのagent選択から`nexus-app-builder`を選びます。VS Code、Visual Studio、JetBrains
-IDEでは、chatに`/nexus-new-app`と入力する方法でも開始できます。その後ろへ次を追加します。
+Copilotのagent選択から`ai-dev-loop-app-builder`を選びます。VS Code、Visual Studio、JetBrains
+IDEでは、chatに`/ai-dev-loop-new-app`と入力する方法でも開始できます。その後ろへ次を追加します。
 
 ```text
 保存先: /絶対パス/新しいアプリ名
@@ -47,7 +47,7 @@ IDEでは、chatに`/nexus-new-app`と入力する方法でも開始できます
 
 ## ② 既存アプリを機能拡張・リファクタリングする
 
-`nexus-architect` agentを選ぶか、chatで`/nexus-existing-app`を呼び、次を追加します。
+`ai-dev-loop-architect` agentを選ぶか、chatで`/ai-dev-loop-existing-app`を呼び、次を追加します。
 
 ```text
 対象: /絶対パス/既存アプリ
@@ -59,18 +59,18 @@ IDEでは、chatに`/nexus-new-app`と入力する方法でも開始できます
 ```
 
 最初に既存コードを調査して設計します。同じ依頼で実装まで必要なら「実装とテストまで」と
-追記してください。既にNexusのbacklogが承認済みなら、`nexus-delivery` agentまたは
-`/nexus-deliver-backlog`を使います。PRの承認とmerge前では、元のworkflowどおり停止します。
+追記してください。既にAI Dev Loopのbacklogが承認済みなら、`ai-dev-loop-delivery` agentまたは
+`/ai-dev-loop-deliver-backlog`を使います。PRの承認とmerge前では、元のworkflowどおり停止します。
 
 ## ③ 機能を細かく決めず、製品案から整理する
 
-`nexus-product` agentまたは`/nexus-product-design`を使います。製品の目的、対象利用者、
+`ai-dev-loop-product` agentまたは`/ai-dev-loop-product-design`を使います。製品の目的、対象利用者、
 制約、参考資料だけを渡すと、仮説検証、scope、journey、機能、domain、品質要件の順に整理し、
-その結果を`nexus-architect`へ引き継げます。
+その結果を`ai-dev-loop-architect`へ引き継げます。
 
 ## モデルと料金について
 
-Nexus本体の`haiku` / `sonnet` / `opus`は、作業の難しさを表す抽象tierです。Copilotでは、
+AI Dev Loop本体の`haiku` / `sonnet` / `opus`は、作業の難しさを表す抽象tierです。Copilotでは、
 現在のCopilot環境でユーザーが選んだmodelをcustom agentが引き継ぎます。
 
 Codex用のLuna / Terra / Sol自動割り振りはCopilotでは実行しません。費用を抑える場合は、
@@ -81,8 +81,8 @@ Codex用のLuna / Terra / Sol自動割り振りはCopilotでは実行しませ�
 
 - 指示が適用されたか確認する: Copilotの回答にある参照一覧で
   `.github/copilot-instructions.md`を確認する
-- `/nexus-new-app`が候補に出ない: prompt files対応のIDEか確認し、代わりに
-  `nexus-app-builder` agentを選ぶ
+- `/ai-dev-loop-new-app`が候補に出ない: prompt files対応のIDEか確認し、代わりに
+  `ai-dev-loop-app-builder` agentを選ぶ
 - agentが表示されない: 通常のCopilot chatへ同じ依頼を書けばrepository instructionsと
   agent skillsから標準workflowを利用できる
 - `codex exec`を実行しようとする: 停止して「CopilotではCodex model routerを使わない」と伝える

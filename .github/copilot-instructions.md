@@ -1,4 +1,4 @@
-# Nexus instructions for GitHub Copilot
+# AI Dev Loop instructions for GitHub Copilot
 
 This repository is a multi-runtime architecture toolkit. Treat the files under `skills/` as the
 canonical workflows and keep Claude Code and Codex compatibility intact.

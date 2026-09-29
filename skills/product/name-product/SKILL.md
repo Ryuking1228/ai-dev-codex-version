@@ -40,7 +40,7 @@ mock, so it must survive the same value story those artifacts tell.
 | `target` | Optional | Product idea / working name to re-name or theme to seed from |
 | `--input=<file\|dir>` | Optional, repeatable | Brief, brand notes, glossary, prior docs |
 | `--count=N` | Optional | Number of candidate names to generate (default 5) |
-| `--style` | Optional | `acronym` = pronounced as a word (NEXUS); `initialism` = spelled out letter-by-letter (SDK); `hybrid`. Default `acronym` |
+| `--style` | Optional | `acronym` = pronounced as a word (ORBIT); `initialism` = spelled out letter-by-letter (SDK); `hybrid`. Default `acronym` |
 | `--seed=<letters\|word>` | Optional | Fix letters or backronym a given base word (e.g. `--seed=SCALAR` finds a word per letter) |
 | `--auto` | Optional | Skip elicitation; generate from inputs only. Unknowns → `TBD`, recorded `unasked` with the options that would have been offered (@rules/open-questions.md §5) |
 | `--lang` | Optional | Override output language |

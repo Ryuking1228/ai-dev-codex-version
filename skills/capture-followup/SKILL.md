@@ -34,7 +34,7 @@ prose. Instead it flows through three states, each durable:
   them up as `status::todo` with no special handling.
 
 Runs against the **target project** (the one holding `reports/backlog/backlog-manifest.json` and
-the tracked repository). It never edits nexus-architect itself.
+the tracked repository). It never edits ai-dev-loop itself.
 
 ## Decision Criteria
 

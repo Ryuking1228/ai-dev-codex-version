@@ -1,5 +1,5 @@
 ---
-name: nexus-product-design
+name: ai-dev-loop-product-design
 description: Turn a product idea into validated product direction and requirements. Use for product vision, scope, journeys, feature design, domain mapping, and product review.
 ---
 

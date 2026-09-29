@@ -1,4 +1,4 @@
-"""Resolve Nexus skill model tiers to Codex models and build safe child-run commands."""
+"""Resolve AI Dev Loop skill model tiers to Codex models and build safe child-run commands."""
 
 from __future__ import annotations
 
@@ -161,7 +161,7 @@ def resolve_profile(config: dict[str, Any], target: Path, explicit: str | None =
     env = os.environ if environ is None else environ
     candidates = [
         (explicit, "command line"),
-        (env.get("NEXUS_CODEX_COST_PROFILE"), "NEXUS_CODEX_COST_PROFILE"),
+        (env.get("AI_DEV_LOOP_CODEX_COST_PROFILE"), "AI_DEV_LOOP_CODEX_COST_PROFILE"),
         (_project_profile(target), "work/pipeline-progress.json"),
         (config.get("default_profile"), "config.default_profile"),
     ]
@@ -205,15 +205,15 @@ def child_prompt(root: Path, target: Path, route: Route, skill_args: list[str]) 
     if skill_args:
         invocation += " " + shlex.join(skill_args)
     return "\n".join([
-        "Execute exactly one Nexus skill in this child Codex run.",
+        "Execute exactly one AI Dev Loop skill in this child Codex run.",
         f"Invocation: {invocation}",
         f"Invocation arguments (exact JSON): {json.dumps(skill_args, ensure_ascii=False)}",
         f"Skill instructions: {route.skill_file}",
-        f"Nexus repository root: {root.resolve()}",
+        f"AI Dev Loop repository root: {root.resolve()}",
         f"Target project root: {target.resolve()}",
-        "Read the complete SKILL.md before acting. Resolve its @rules, @skills, templates, and tools references against the Nexus repository root.",
+        "Read the complete SKILL.md before acting. Resolve its @rules, @skills, templates, and tools references against the AI Dev Loop repository root.",
         "Work in the target project root and follow its AGENTS.md too. Preserve unrelated user changes.",
-        "If this skill orchestrates child Nexus skills, use the Nexus Codex model router for those children; never reroute this same invocation.",
+        "If this skill orchestrates child AI Dev Loop skills, use the AI Dev Loop model router for those children; never reroute this same invocation.",
         "Complete and verify the requested skill, then return a concise result with changed files and checks.",
     ])
 

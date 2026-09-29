@@ -20,7 +20,7 @@ npm install -g @mermaid-js/mermaid-cli
 
 In Claude Code, install the plugins and use the slash commands directly.
 
-In Codex, open a session at the repository root and use the same command text in chat. `AGENTS.md` maps `/product:<name>`, `/architect:<name>`, and `/scalardb:<name>` to the matching `SKILL.md` file (`/product:<name>` resolves to `skills/product/<name>/SKILL.md`). See [Using Nexus Architect with Codex](codex-usage.md) for details.
+In Codex, open a session at the repository root and use the same command text in chat. `AGENTS.md` maps `/product:<name>`, `/architect:<name>`, and `/scalardb:<name>` to the matching `SKILL.md` file (`/product:<name>` resolves to `skills/product/<name>/SKILL.md`). See [Using AI Dev Loop with Codex](codex-usage.md) for details.
 
 ### 1. Deciding Product Direction (greenfield)
 

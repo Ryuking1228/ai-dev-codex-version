@@ -27,7 +27,7 @@ from manifest_common import duplicates  # noqa: E402
 INVENTORY_GLOB = os.path.join("reports", "before", "*", "ui-inventory.json")
 LABEL = "ui-inventory.json"
 LABEL_TOKENS = "ui-design-tokens.json"
-EXTENSION = "nexus-architect"
+EXTENSION = "ai-dev-loop"
 
 SCREEN_RE = re.compile(r"^UIS-\d{3,}$")
 COMPONENT_RE = re.compile(r"^UIC-\d{3,}$")

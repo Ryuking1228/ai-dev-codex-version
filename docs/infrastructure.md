@@ -36,7 +36,7 @@ sections:
 rather than a submodule; `--latest` reports that rather than fetching. See
 [`knowledge/OKF-K8S-TF-PROVENANCE.md`](../knowledge/OKF-K8S-TF-PROVENANCE.md).
 
-To point the skills at a different copy, set `NEXUS_OKF_K8S_TF` to its root.
+To point the skills at a different copy, set `AI_DEV_LOOP_OKF_K8S_TF` to its root.
 
 ## The four premises
 

@@ -6,7 +6,7 @@ description: |
   running right now, and what it has cost — on the terminal, live or as a one-shot
   render.
   /architect:report-status [--once] [--view=product|architect|codegen|backlog] [--group=core|extension] [--phase=<name>] [--exec] [--json] [--md] [--ascii] [--ambiguous-width=2] [--lang=ja|en] to invoke.
-  Wraps ${CLAUDE_PLUGIN_ROOT}/tools/nexus-status.sh, which on a terminal defaults to a
+  Wraps ${CLAUDE_PLUGIN_ROOT}/tools/ai-dev-loop-status.sh, which on a terminal defaults to a
   live dashboard polling work/pipeline-progress.json every 10s, with an action menu that
   generates the next slash command per phase, an `a` key that asks Claude about the
   selected phase, and a Tab key that cycles the dashboard's other views — Product (the
@@ -39,12 +39,12 @@ disagree — and can pick a phase and get the exact slash command to run next.
 
 ## Execution
 
-One script does the whole job: `${CLAUDE_PLUGIN_ROOT}/tools/nexus-status.sh`.
+One script does the whole job: `${CLAUDE_PLUGIN_ROOT}/tools/ai-dev-loop-status.sh`.
 
 | Invocation | Command | Effect |
 |-----------|---------|--------|
-| default (user's TTY) | `tools/nexus-status.sh` | Live dashboard: foldable phase tree + detail pane + action menu, inputs re-checked every 10s |
-| in-session render | `tools/nexus-status.sh --view=architect --once` | Static tree, prints and exits — **always use this when running it yourself** |
+| default (user's TTY) | `tools/ai-dev-loop-status.sh` | Live dashboard: foldable phase tree + detail pane + action menu, inputs re-checked every 10s |
+| in-session render | `tools/ai-dev-loop-status.sh --view=architect --once` | Static tree, prints and exits — **always use this when running it yourself** |
 | the other pipeline | `... --view=product --once` | The product pipeline's tree — a separate pipeline, so a separate view (`/product:report-status`) |
 | code generation | `... --view=codegen --once` | The code-generation phases of both plugins, grouped by plugin — they are not part of either pipeline tree |
 | core phases only | `... --group=core` | Hide the manual extension tier |
@@ -67,7 +67,7 @@ line and exits `0`.
 the user asks to watch progress live, do not run the dashboard yourself — tell them to
 run, prefixing with `!` inside Claude Code:
 
-- `!${CLAUDE_PLUGIN_ROOT}/tools/nexus-status.sh` — the dashboard
+- `!${CLAUDE_PLUGIN_ROOT}/tools/ai-dev-loop-status.sh` — the dashboard
 - add `--exec` to launch phases (and ask questions) straight from the menu
 
 Always pass `--once` (or `--json`/`--md`) when running it yourself: with no mode flag
@@ -137,7 +137,7 @@ Why they are separate rather than one tree:
   recorded as a bare string is read as that status, an unrecognized value falls back to
   filesystem derivation, and malformed sections are dropped.
 - Contracts are asserted by `tools/lib/pipeline_status_data.test.py` (state derivation)
-  and `tools/nexus-status.test.sh` (the CLI: exit codes, output modes, filters).
+  and `tools/ai-dev-loop-status.test.sh` (the CLI: exit codes, output modes, filters).
 
 ## Reporting Back
 

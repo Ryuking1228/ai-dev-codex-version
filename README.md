@@ -1,16 +1,16 @@
-# Nexus Architect
+# AI Dev Loop
 
-> **Codex / GitHub Copilot + PostgreSQL extension:** This independent adaptation adds `/app:start` for
+> **Codex / GitHub Copilot + PostgreSQL extension:** AI Dev Loop adds `/app:start` for
 > React + FastAPI + PostgreSQL apps, with localhost startup, database/browser tests,
 > verification tied to source content, deployment hooks and private GitHub push checks.
-> Start with [日本語ガイド](docs/codex-postgres-app_ja.md). Original Nexus functionality and
-> the upstream MIT license are retained. The starter is a demonstration, not a finished product.
+> Start with [日本語ガイド](docs/codex-postgres-app_ja.md). It retains the upstream architecture
+> workflows and MIT license. The starter is a demonstration, not a finished product.
 
 System architecture toolkit for Claude Code, Codex, and GitHub Copilot. Claude Code uses this repository as four plugins with 115 skills; Codex and Copilot use adapters around the same canonical skill files.
 
 This adaptation is published as [`Ryuking1228/ai-dev-codex-version`](https://github.com/Ryuking1228/ai-dev-codex-version).
-`Nexus Architect` remains the toolkit name inherited from the upstream project; it is not the
-GitHub repository name.
+`AI Dev Loop` is the toolkit and marketplace name; `ai-dev-codex-version` is the GitHub repository
+name. The original project remains credited through the license and upstream links.
 
 - **product** (28 skills) — Product direction: validation-driven, dialogue-based pipeline from product vision to SLA/NFR; hands off to architect for system implementation design
 - **architect** (69 skills) — Legacy refactoring, greenfield design, database investigation and migration, consulting deliverables
@@ -22,12 +22,12 @@ GitHub repository name.
 
 ```bash
 # 1. Add the marketplace
-claude plugin marketplace add wfukatsu/nexus-architect
+claude plugin marketplace add Ryuking1228/ai-dev-codex-version
 
 # 2. Install the plugins
-claude plugin install product@nexus-architect --scope user
-claude plugin install architect@nexus-architect --scope user
-claude plugin install scalardb@nexus-architect --scope user
+claude plugin install product@ai-dev-loop --scope user
+claude plugin install architect@ai-dev-loop --scope user
+claude plugin install scalardb@ai-dev-loop --scope user
 ```
 
 After installation, commands are available as `/product:skill-name`, `/architect:skill-name`, and `/scalardb:skill-name`.
@@ -35,9 +35,9 @@ After installation, commands are available as `/product:skill-name`, `/architect
 To update to the latest version:
 
 ```bash
-claude plugin update product@nexus-architect
-claude plugin update architect@nexus-architect
-claude plugin update scalardb@nexus-architect
+claude plugin update product@ai-dev-loop
+claude plugin update architect@ai-dev-loop
+claude plugin update scalardb@ai-dev-loop
 ```
 
 ### Manual Installation
@@ -50,9 +50,9 @@ git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-versi
 claude plugin marketplace add ./ai-dev-codex-version
 
 # 3. Install the plugins
-claude plugin install product@nexus-architect --scope user
-claude plugin install architect@nexus-architect --scope user
-claude plugin install scalardb@nexus-architect --scope user
+claude plugin install product@ai-dev-loop --scope user
+claude plugin install architect@ai-dev-loop --scope user
+claude plugin install scalardb@ai-dev-loop --scope user
 ```
 
 ### Verify Installation
@@ -72,7 +72,7 @@ If the skills are recognized, the installation is successful.
 Codex can use the same skill files without installing Claude Code plugins.
 
 For the shortest Japanese workflow covering new apps and existing-app changes, see
-[CodexでNexusを使う一番簡単な手順](docs/codex-simple-guide_ja.md).
+[CodexでAI Dev Loopを使う一番簡単な手順](docs/codex-simple-guide_ja.md).
 
 ```bash
 # 1. Clone the repository (with the ScalarDB/ScalarDL knowledge bundle submodule)
@@ -113,7 +113,7 @@ python3 tools/codex-model-router.py resolve architect:design-api --target ./path
 python3 tools/codex-model-router.py matrix --profile economy
 ```
 
-See [Using Nexus Architect with Codex](docs/codex-usage.md#automatic-model-routing) for profile
+See [Using AI Dev Loop with Codex](docs/codex-usage.md#automatic-model-routing) for profile
 selection, dry runs, and the current-turn limitation.
 
 When a skill asks to use Claude tools, Codex follows these mappings:
@@ -124,7 +124,7 @@ When a skill asks to use Claude tools, Codex follows these mappings:
 | `Write`, `Edit`, `MultiEdit` | Edit files with `apply_patch` |
 | `Bash` | Run shell commands |
 | `AskUserQuestion` | Present numbered choices in chat, add an "or type your own answer" line, and wait for the reply |
-| `Task`, `Subagent` | Nexus orchestrators route child Nexus skills through `tools/codex-model-router.py`; other sub-agent work stays in the main thread unless explicitly requested |
+| `Task`, `Subagent` | AI Dev Loop orchestrators route child AI Dev Loop skills through `tools/codex-model-router.py`; other sub-agent work stays in the main thread unless explicitly requested |
 | `WebFetch`, `WebSearch` | Use Codex web access, Context7, or approved `curl` |
 
 After editing generated reports or Mermaid diagrams in Codex, run the hooks manually when relevant:
@@ -134,15 +134,15 @@ hooks/validate-frontmatter.sh reports/before/example/technology-stack.md
 hooks/validate-mermaid.sh reports/before/example/codebase-structure.md
 ```
 
-Claude Code continues to use the plugin metadata and slash commands unchanged. See [Using Nexus Architect with Codex](docs/codex-usage.md) for the full Codex guide.
+Claude Code continues to use the plugin metadata and slash commands unchanged. See [Using AI Dev Loop with Codex](docs/codex-usage.md) for the full Codex guide.
 
 ### Using with GitHub Copilot
 
 GitHub Copilot uses the same canonical workflows through repository-native customizations:
 
 - `.github/copilot-instructions.md` for always-on repository guidance
-- `.github/agents/*.agent.md` for `nexus-app-builder`, `nexus-product`, `nexus-architect`, and `nexus-delivery`
-- `.github/prompts/*.prompt.md` for `/nexus-new-app`, `/nexus-existing-app`, `/nexus-product-design`, and `/nexus-deliver-backlog`
+- `.github/agents/*.agent.md` for `ai-dev-loop-app-builder`, `ai-dev-loop-product`, `ai-dev-loop-architect`, and `ai-dev-loop-delivery`
+- `.github/prompts/*.prompt.md` for `/ai-dev-loop-new-app`, `/ai-dev-loop-existing-app`, `/ai-dev-loop-product-design`, and `/ai-dev-loop-deliver-backlog`
 - `.github/skills/*/SKILL.md` for automatic workflow discovery
 
 ```bash
@@ -150,12 +150,12 @@ git clone --recurse-submodules https://github.com/Ryuking1228/ai-dev-codex-versi
 cd ai-dev-codex-version
 ```
 
-Open the repository with GitHub Copilot enabled, select a Nexus custom agent, or invoke one of the
+Open the repository with GitHub Copilot enabled, select an AI Dev Loop custom agent, or invoke one of the
 prompt files in a supported IDE. The Copilot adapters read the detailed workflow from `skills/`
 instead of duplicating it.
 
 Copilot inherits the model selected in the active Copilot environment. The Luna/Terra/Sol router is
-Codex-only and is not launched by Copilot. See [Using Nexus Architect with GitHub Copilot](docs/github-copilot-usage.md)
+Codex-only and is not launched by Copilot. See [Using AI Dev Loop with GitHub Copilot](docs/github-copilot-usage.md)
 or the [short Japanese guide](docs/github-copilot-usage_ja.md).
 
 ## Quick Start
@@ -214,7 +214,7 @@ partition all 115.
 | **Database Migration** | `/architect:migrate-database` | Oracle / MySQL / PostgreSQL → ScalarDB: schema extraction, analysis, SP/trigger conversion — see [Database Migration Guide](docs/database-migration.md) | 4 |
 | **ScalarDB Development** `/scalardb:*` | `/scalardb:build-app` | Schema modeling, configuration, scaffolding, CRUD/JDBC patterns, exception handling, code review, migration advice — see [ScalarDB Development Guide](docs/scalardb-development.md) | 11 |
 | **Multi-Cloud Infrastructure** `/infra:*` | `/infra:start` | Terraform / Kubernetes / Helm / Kustomize / Argo CD / GitLab CI / Cosign / Vault / ESO / Prometheus / Kyverno across AWS-Azure-GCP × local-test-staging-production, grounded in the vendored `okf-k8s-tf` bundle — see [Multi-Cloud Infrastructure Guide](docs/infrastructure.md) | 4 |
-| **Status & utility** | `/architect:report-status` | One terminal dashboard (`tools/nexus-status.sh`) whose `Tab` cycles four views — Product, Architect, Code Generation, Backlog Delivery — plus `render-mermaid` and `update-knowledge`. Recorded spend: `/architect:report-token-cost`; standalone database investigation from design documents or live catalogs | 5 |
+| **Status & utility** | `/architect:report-status` | One terminal dashboard (`tools/ai-dev-loop-status.sh`) whose `Tab` cycles four views — Product, Architect, Code Generation, Backlog Delivery — plus `render-mermaid` and `update-knowledge`. Recorded spend: `/architect:report-token-cost`; standalone database investigation from design documents or live catalogs | 5 |
 
 ## Workflows
 
@@ -318,7 +318,7 @@ Single steps are available too: `/architect:implement-backlog <issue>`, `/archit
 <issue>`, `/architect:merge-issue <issue>`. Work discovered mid-delivery but deferred is captured
 with `/architect:capture-followup` — queued locally, then (after an approval gate) registered as
 new Issues linked to the in-flight Sub-Epic/Epic, re-entering the loop as `status::todo`. Watch it
-all live with `tools/nexus-status.sh` — one dashboard, `Tab` cycling its four views (**Product**,
+all live with `tools/ai-dev-loop-status.sh` — one dashboard, `Tab` cycling its four views (**Product**,
 **Architect**, **Code Generation**, **Backlog Delivery**): the
 **backlog** view (`/architect:report-backlog-status`, or the `tools/backlog-status.sh` alias) shows
 the tree, per-item delivery stages and an action menu that hands you the next command; the
@@ -447,7 +447,7 @@ tools/update-okf-bundle.sh status    # resolved path, local/remote commits, bund
 Skills follow the protocol in [`rules/okf-knowledge-bundle.md`](rules/okf-knowledge-bundle.md):
 pin the project's product, version, and edition first; answer only from that release's docs; cite
 the canonical `resource` URL; never mix versions. When the submodule is absent, the script falls
-back to a shallow clone under `~/.cache/nexus-architect/`, then skills fall back to the online
+back to a shallow clone under `~/.cache/ai-dev-loop/`, then skills fall back to the online
 docs (explicitly labeled as not version-pinned).
 
 ## Kubernetes / Terraform Knowledge Bundle

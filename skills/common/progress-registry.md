@@ -111,7 +111,7 @@ orchestrator:
      evidence: before treating such an entry as satisfied (resume, dependency checks,
      "already done"), **confirm it against the phase's own declared `outputs:` on disk**. A
      `completed` with none of your manifest's outputs written is the neighbour's stamp:
-     run the phase. `tools/nexus-status.sh` applies exactly this — `plugin` when present,
+     run the phase. `tools/ai-dev-loop-status.sh` applies exactly this — `plugin` when present,
      output corroboration when not — and flags the unresolved ones as `shared-name` drift.
    - The token-usage hook reads `plugin` too, recording a shared name's spend under
      `<plugin>:<phase>` in `work/token-usage.json` so the two pipelines' cost stays

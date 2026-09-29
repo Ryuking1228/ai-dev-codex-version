@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate the repository-native GitHub Copilot adapters.
 
-The detailed Nexus workflows stay in skills/. These checks prevent the small Copilot-facing
+The detailed AI Dev Loop workflows stay in skills/. These checks prevent the small Copilot-facing
 instruction, agent, prompt, and discovery files from drifting to missing paths or accidentally
 invoking the Codex-only model router.
 """
@@ -14,22 +14,22 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 AGENTS = {
-    "nexus-app-builder.agent.md",
-    "nexus-product.agent.md",
-    "nexus-architect.agent.md",
-    "nexus-delivery.agent.md",
+    "ai-dev-loop-app-builder.agent.md",
+    "ai-dev-loop-product.agent.md",
+    "ai-dev-loop-architect.agent.md",
+    "ai-dev-loop-delivery.agent.md",
 }
 PROMPTS = {
-    "nexus-new-app.prompt.md",
-    "nexus-product-design.prompt.md",
-    "nexus-existing-app.prompt.md",
-    "nexus-deliver-backlog.prompt.md",
+    "ai-dev-loop-new-app.prompt.md",
+    "ai-dev-loop-product-design.prompt.md",
+    "ai-dev-loop-existing-app.prompt.md",
+    "ai-dev-loop-deliver-backlog.prompt.md",
 }
 SKILLS = {
-    "nexus-new-app": "skills/app/start/SKILL.md",
-    "nexus-product-design": "skills/product/start/SKILL.md",
-    "nexus-architecture": "skills/start/SKILL.md",
-    "nexus-backlog-delivery": "skills/deliver-backlog/SKILL.md",
+    "ai-dev-loop-new-app": "skills/app/start/SKILL.md",
+    "ai-dev-loop-product-design": "skills/product/start/SKILL.md",
+    "ai-dev-loop-architecture": "skills/start/SKILL.md",
+    "ai-dev-loop-backlog-delivery": "skills/deliver-backlog/SKILL.md",
 }
 
 
@@ -58,7 +58,7 @@ def markdown_paths(path: Path) -> list[Path]:
 class CopilotConfigurationTest(unittest.TestCase):
     def test_repository_instruction_and_path_instruction_exist(self):
         repository = ROOT / ".github/copilot-instructions.md"
-        scoped = ROOT / ".github/instructions/nexus-customization.instructions.md"
+        scoped = ROOT / ".github/instructions/ai-dev-loop-customization.instructions.md"
         self.assertTrue(repository.is_file())
         self.assertEqual(
             frontmatter(scoped).get("applyTo"),
@@ -106,10 +106,10 @@ class CopilotConfigurationTest(unittest.TestCase):
     def test_documentation_exposes_copilot_entry_points(self):
         readme = read(ROOT / "README.md")
         guide = read(ROOT / "docs/github-copilot-usage_ja.md")
-        for value in (".github/copilot-instructions.md", "nexus-app-builder",
-                      "/nexus-new-app", "docs/github-copilot-usage_ja.md"):
+        for value in (".github/copilot-instructions.md", "ai-dev-loop-app-builder",
+                      "/ai-dev-loop-new-app", "docs/github-copilot-usage_ja.md"):
             self.assertIn(value, readme)
-        for value in ("nexus-product", "nexus-architect", "nexus-delivery",
+        for value in ("ai-dev-loop-product", "ai-dev-loop-architect", "ai-dev-loop-delivery",
                       "Codex model router"):
             self.assertIn(value, guide)
 

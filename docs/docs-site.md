@@ -22,7 +22,7 @@ otherwise to the repository root. The first run installs Blume into `tools/docs-
 
 | Source | Becomes | Note |
 |--------|---------|------|
-| `reports/**/*.md` | one page per report, at `/<dir>/<name>` with the numeric phase prefix dropped (`01_analysis/system-overview.md` → `/analysis/system-overview`) | Mermaid diagrams render; the report's own frontmatter is shown under the title and kept under the `nexus` key |
+| `reports/**/*.md` | one page per report, at `/<dir>/<name>` with the numeric phase prefix dropped (`01_analysis/system-overview.md` → `/analysis/system-overview`) | Mermaid diagrams render; the report's own frontmatter is shown under the title and kept under the `ai-dev-loop` key |
 | `reports/**/*.json` (manifests, review findings) | a code page at the same route | |
 | `reports/**/openapi/*.yaml` | Blume's OpenAPI reference at `/api/<service>` | one page per operation, in search |
 | `reports/**/asyncapi/*.yaml` | Blume's AsyncAPI reference at `/events/<name>` | |
@@ -39,7 +39,7 @@ order; pages inside follow the manifest's declared-output order.
 `tools/docs-site/sync_reports.py` converts every report to **MDX** — Blume renders Mermaid only in
 `.mdx` pages — and escapes what MDX would otherwise parse (`{…}` as an expression, a bare `<` as a
 JSX tag), leaving fenced and inline code untouched. `tools/docs-site/blume.config.ts` declares the
-`nexus` frontmatter key (Blume rejects unknown keys and its built-in `id`/`status` collide with the
+`ai-dev-loop` frontmatter key (Blume rejects unknown keys and its built-in `id`/`status` collide with the
 ADR shape) and mounts the specs the sync copied. `blume validate` reports the links that were
 already broken in the reports — typically section-number anchors such as `scalardb-schema.md#9.5`
 that were never heading ids; fix those in the report, not in the site.

@@ -29,13 +29,13 @@ REPO_URL="https://github.com/wfukatsu/OKF-ScalarDB-ScalarDL.git"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-$ROOT}"
 SUB_DIR="$ROOT/knowledge/okf-scalardb-scalardl"
-CACHE_DIR="${OKF_CACHE_DIR:-$HOME/.cache/nexus-architect/okf-scalardb-scalardl}"
+CACHE_DIR="${OKF_CACHE_DIR:-$HOME/.cache/ai-dev-loop/okf-scalardb-scalardl}"
 
-# k8s-tf: vendored in-repo. NEXUS_OKF_K8S_TF overrides for a project that carries its own copy;
+# k8s-tf: vendored in-repo. AI_DEV_LOOP_OKF_K8S_TF overrides for a project that carries its own copy;
 # INFRA_DESIGN_OKF is honoured as the name the standalone infra-design plugin used.
-K8S_OVERRIDE="${NEXUS_OKF_K8S_TF:-${INFRA_DESIGN_OKF:-}}"
+K8S_OVERRIDE="${AI_DEV_LOOP_OKF_K8S_TF:-${INFRA_DESIGN_OKF:-}}"
 K8S_VENDORED="$PLUGIN_ROOT/knowledge/okf-k8s-tf"
-K8S_CACHE="${OKF_K8S_CACHE_DIR:-$HOME/.cache/nexus-architect/okf-k8s-tf}"
+K8S_CACHE="${OKF_K8S_CACHE_DIR:-$HOME/.cache/ai-dev-loop/okf-k8s-tf}"
 
 BUNDLE="scalardb"
 MODE=""
@@ -151,7 +151,7 @@ k8s_ensure() {
   echo "okf-bundle(k8s-tf): NOT available." >&2
   echo "  This bundle is vendored at knowledge/okf-k8s-tf and has no remote to fetch from" >&2
   echo "  (see knowledge/OKF-K8S-TF-PROVENANCE.md). Restore it from this repository, or point" >&2
-  echo "  NEXUS_OKF_K8S_TF at a copy." >&2
+  echo "  AI_DEV_LOOP_OKF_K8S_TF at a copy." >&2
   return 1
 }
 

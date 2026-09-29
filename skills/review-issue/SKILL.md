@@ -35,7 +35,7 @@ Epic:
   (`/architect:implement-backlog`) consult — the same issues are not re-introduced next time.
 
 Runs against the **target project** (the one holding `reports/backlog/backlog-manifest.json` and the
-tracked repository). It never edits nexus-architect itself.
+tracked repository). It never edits ai-dev-loop itself.
 
 ## Decision Criteria
 

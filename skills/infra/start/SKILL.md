@@ -40,7 +40,7 @@ build it") splits into design → user confirmation → implement; never proceed
 without agreement on the design.
 
 **Route by invoking the mode skill with the Skill tool**, passing the four settled facts as
-arguments. Under Codex, use `python3 <NEXUS_ROOT>/tools/codex-model-router.py run
+arguments. Under Codex, use `python3 <AI_DEV_LOOP_ROOT>/tools/codex-model-router.py run
 infra:<mode> --target <TARGET_ROOT> -- <mode arguments>` per
 `@rules/codex-model-routing.md`. This skill does triage only — design and review carry a higher
 reasoning tier (see Model Policy).

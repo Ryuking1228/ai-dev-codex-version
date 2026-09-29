@@ -62,7 +62,7 @@ script_order = re.findall(r'"\$(\w+)"', loop_header)
 check("the rule lists three resolution steps", len(rule_order) == 3, rule_order)
 check("the script tries three locations", len(script_order) == 3, script_order)
 check("step 1 is the user override",
-      "NEXUS_OKF_K8S_TF" in rule_order[0] and script_order[0] == "K8S_OVERRIDE",
+      "AI_DEV_LOOP_OKF_K8S_TF" in rule_order[0] and script_order[0] == "K8S_OVERRIDE",
       (rule_order[:1], script_order[:1]))
 check("step 2 is the vendored copy",
       "knowledge/okf-k8s-tf" in rule_order[1] and script_order[1] == "K8S_VENDORED",

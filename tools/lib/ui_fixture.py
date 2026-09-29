@@ -209,7 +209,7 @@ def _raw(value, kind, sources, count, cluster=None):
     ext = {"sources": list(sources), "usage_count": count}
     if cluster:
         ext["cluster"] = cluster
-    return {"$type": kind, "$value": value, "$extensions": {"nexus-architect": ext}}
+    return {"$type": kind, "$value": value, "$extensions": {"ai-dev-loop": ext}}
 
 
 _TOKENS = {

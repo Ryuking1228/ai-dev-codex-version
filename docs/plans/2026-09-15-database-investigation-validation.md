@@ -34,12 +34,12 @@ MySQLの読み取り用ユーザーでは追加監視統計が `permission_denie
 実行コマンド（各製品終了コード0）：
 
 ```text
-/tmp/nexus-db-investigation-venv/bin/python skills/common/database-investigation/tests/integration.py postgresql --runtime /tmp/nexus-db-investigation-runtime
-/tmp/nexus-db-investigation-venv/bin/python skills/common/database-investigation/tests/integration.py mysql --runtime /tmp/nexus-db-investigation-runtime
-/tmp/nexus-db-investigation-venv/bin/python skills/common/database-investigation/tests/integration.py oracle --runtime /tmp/nexus-db-investigation-runtime
+/tmp/ai-dev-loop-db-investigation-venv/bin/python skills/common/database-investigation/tests/integration.py postgresql --runtime /tmp/ai-dev-loop-db-investigation-runtime
+/tmp/ai-dev-loop-db-investigation-venv/bin/python skills/common/database-investigation/tests/integration.py mysql --runtime /tmp/ai-dev-loop-db-investigation-runtime
+/tmp/ai-dev-loop-db-investigation-venv/bin/python skills/common/database-investigation/tests/integration.py oracle --runtime /tmp/ai-dev-loop-db-investigation-runtime
 ```
 
-初期化時だけ `--initialize-disposable-fixtures` を付けた。再実行時には付けない。検証用コンテナ名は `nexus-inv-pg`、`nexus-inv-mysql`、`nexus-inv-oracle`。終了後は停止し、既存コンテナを操作しない。
+初期化時だけ `--initialize-disposable-fixtures` を付けた。再実行時には付けない。検証用コンテナ名は `ai-dev-loop-inv-pg`、`ai-dev-loop-inv-mysql`、`ai-dev-loop-inv-oracle`。終了後は停止し、既存コンテナを操作しない。
 
 ## 8段階の品質確認
 
@@ -60,7 +60,7 @@ SASTの限定的な抑制：OracleのROWNUM wrapperで、SQL文字列はリポ�
 
 Codex標準 `quick_validate.py` はClaude互換の `model` / `user_invocable` を未知フィールドとして拒否する。この既存互換性を壊さず、両フィールドを別途検査し、標準フィールドだけの一時コピーに対して両スキルの検証を実行して終了0を確認した。実ファイルから互換フィールドは削除していない。
 
-一時的な詳細ログ・生成レポートは `/tmp/nexus-db-investigation-runtime/`、検証Python環境は `/tmp/nexus-db-investigation-venv/`。この記録には認証情報を含めない。
+一時的な詳細ログ・生成レポートは `/tmp/ai-dev-loop-db-investigation-runtime/`、検証Python環境は `/tmp/ai-dev-loop-db-investigation-venv/`。この記録には認証情報を含めない。
 
 ## 計画との対応・実装範囲
 

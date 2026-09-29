@@ -1,4 +1,4 @@
-Build a new application with the Nexus workflow.
+Build a new application with the AI Dev Loop workflow.
 
 Read [the Copilot repository instructions](../copilot-instructions.md) and then read and follow
 [the canonical new-app skill](../../skills/app/start/SKILL.md) in full. Do not run the Codex model

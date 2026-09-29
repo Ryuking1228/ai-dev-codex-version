@@ -1,5 +1,5 @@
 ---
-name: nexus-new-app
+name: ai-dev-loop-new-app
 description: Build a new React, FastAPI, and PostgreSQL application end to end. Use when the user asks to create a new app from a brief and verify it locally.
 ---
 

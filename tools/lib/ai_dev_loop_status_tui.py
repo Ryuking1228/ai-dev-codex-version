@@ -1,4 +1,4 @@
-"""Live dashboard for a nexus-architect project — every view in one screen.
+"""Live dashboard for an AI Dev Loop project — every view in one screen.
 
 Builds the four views and hands them to the curses shell in status_tui.py:
 
@@ -13,9 +13,9 @@ than reports, so it is a third. Tab / Shift-Tab move between them, skipping the 
 project has nothing behind, and each keeps its own selection, folds and filter.
 
 Inputs are re-checked every NX_INTERVAL seconds and re-read only when they changed, so
-the selection survives a refresh. Invoked by tools/nexus-status.sh.
+the selection survives a refresh. Invoked by tools/ai-dev-loop-status.sh.
 
-Usage: nexus_status_tui.py <project-dir>
+Usage: ai_dev_loop_status_tui.py <project-dir>
 """
 
 import curses
@@ -90,9 +90,9 @@ def validate_filters(views):
         for view in tabs:
             known.update(view.state["phases"])
         if PHASE_FILTER not in known:
-            print("nexus-status: %s" % (T["unknown_phase"] % PHASE_FILTER),
+            print("ai-dev-loop-status: %s" % (T["unknown_phase"] % PHASE_FILTER),
                   file=sys.stderr)
-            print("nexus-status: %s" % (T["known_phases"] % (
+            print("ai-dev-loop-status: %s" % (T["known_phases"] % (
                 "/".join(v.name for v in tabs) or "-",
                 ", ".join(sorted(known)) or "-")), file=sys.stderr)
             return 2
@@ -103,9 +103,9 @@ def validate_filters(views):
                  (backlog.children.get(None, []) if backlog else [])]
         if EPIC_FILTER not in roots:
             BT = B.labels(LANG)
-            print("nexus-status: %s" % (BT["unknown_epic"] % EPIC_FILTER),
+            print("ai-dev-loop-status: %s" % (BT["unknown_epic"] % EPIC_FILTER),
                   file=sys.stderr)
-            print("nexus-status: %s" % (BT["known_epics"] % (", ".join(roots) or "-")),
+            print("ai-dev-loop-status: %s" % (BT["known_epics"] % (", ".join(roots) or "-")),
                   file=sys.stderr)
             return 2
     return 0

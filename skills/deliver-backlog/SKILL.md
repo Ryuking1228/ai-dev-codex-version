@@ -80,7 +80,7 @@ confirm before starting, unless `--auto`. With `--issue`, the working set is tha
 ### Step 2 — Per-Issue delivery loop
 For each Issue in order (determine its current stage from `impl.status`/labels, or `--from`):
 
-Under Codex, run every child stage through `python3 <NEXUS_ROOT>/tools/codex-model-router.py run
+Under Codex, run every child stage through `python3 <AI_DEV_LOOP_ROOT>/tools/codex-model-router.py run
 architect:<skill> --target <TARGET_ROOT> -- <skill arguments>` per
 `@rules/codex-model-routing.md`. The current turn owns only orchestration and the human gates.
 Claude Code continues to use its native Skill/Task invocation.

@@ -20,7 +20,7 @@ npm install -g @mermaid-js/mermaid-cli
 
 Claude Code では plugin をインストールし、slash command を直接使います。
 
-Codex ではリポジトリ root でセッションを開き、同じコマンド文字列をチャットで依頼してください。`AGENTS.md` が `/product:<name>`、`/architect:<name>`、`/scalardb:<name>` を対応する `SKILL.md` にマッピングします（`/product:<name>` は `skills/product/<name>/SKILL.md` に解決されます）。詳細は [Codex で Nexus Architect を使う](codex-usage_ja.md) を参照してください。
+Codex ではリポジトリ root でセッションを開き、同じコマンド文字列をチャットで依頼してください。`AGENTS.md` が `/product:<name>`、`/architect:<name>`、`/scalardb:<name>` を対応する `SKILL.md` にマッピングします（`/product:<name>` は `skills/product/<name>/SKILL.md` に解決されます）。詳細は [Codex で AI Dev Loop を使う](codex-usage_ja.md) を参照してください。
 
 ### 1. プロダクトの方向性を決める（グリーンフィールド）
 

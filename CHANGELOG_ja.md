@@ -1,11 +1,20 @@
 # 変更履歴
 
-Nexus Architect の主な変更点を記録します。
+AI Dev Loop の主な変更点を記録します。
 
 書式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に基づき、
 バージョニングは [セマンティック バージョニング](https://semver.org/lang/ja/) に従います。
 バージョン番号は `.claude-plugin/marketplace.json` のプラグインごとのバージョンを指し、
 4 つのプラグイン（`product`・`architect`・`scalardb`・`infra`）は同一の番号で一括リリースされます。
+
+## [Unreleased]
+
+### Changed
+- **プロジェクト名を AI Dev Loop に変更した。** marketplace ID は `ai-dev-loop`、GitHub Copilot の
+  agent・prompt・skill は `ai-dev-loop-*`、status command は `tools/ai-dev-loop-status.sh`、
+  Python module は `ai_dev_loop_*`、環境変数は `AI_DEV_LOOP_*` を使う。
+- この改名は意図的な破壊的変更であり、旧ブランドのaliasは提供しない。帰属表示とrelease履歴に必要な
+  upstream URLだけは維持する。
 
 ## [0.41.2] - 2026-09-15
 
@@ -13,7 +22,7 @@ Nexus Architect の主な変更点を記録します。
 - **golden 検証の差分表示が Oracle を前提にしなくなった。** `GoldenCheck` は、golden データを取った DB に関係なく、
   差分を `oracle=` / `java=` と表示していた。今後は `expected=` / `actual=` と表示する。要約行には `golden.json` に
   記録した移行元を示す（例: `PASS 3 rows (expected from postgres)`）。`golden.py capture` は、マニフェストの移行元方言を
-  記録する。元リポジトリの修正（wfukatsu/sql-migration#5）は、nexus 側のパラメータ拡張に合わせて手作業で統合した。
+  記録する。元リポジトリの修正（wfukatsu/sql-migration#5）は、AI Dev Loop側のパラメータ拡張に合わせて手作業で統合した。
   `GoldenCheck.rowKey` の NUL 区切りをエスケープ表記に直したので、ソースファイルは再びテキストとして扱える。
 
 ### Changed
@@ -40,7 +49,7 @@ Nexus Architect の主な変更点を記録します。
   記録する。verified になっても、証明されるのはその 1 通りだけである。
 - **アプリ側のクエリにパラメータを渡せるようにした。** `AppSideQuery` に `run(tables, params)` を加えた。これは
   `run(tables)` に委譲する default メソッドで、`GoldenCheck` が golden.json の `params` を渡す。複製したランタイムを
-  nexus 側で拡張したもので、`PROVENANCE.md` に記録した。`/architect:implement-sql-migration` は、バインド変数か
+  AI Dev Loop側で拡張したもので、`PROVENANCE.md` に記録した。`/architect:implement-sql-migration` は、バインド変数か
   `${...}` を含む読み取りに 2 引数の雛形を生成する。
 - `skills/common/sql-migration/references/operations.md` が、`golden.py` に存在しない引数（`--setup`、`--tables`、
   `--golden`、`--impl`）を案内していた。実際の取得と検査のコマンドに直した。
@@ -437,7 +446,7 @@ v0.34 以降にサンプルプロジェクトを通しで実行して（`design-
   `.mdx` のみ）、コード外の `{…}` と裸の `<` をエスケープ、ルートから数字のフェーズ接頭辞を除去
   （`01_analysis/x.md` → `/analysis/x`）してレポート間リンクを書き換え、サイトが配信できないプロジェクト内
   ファイル（`samples/…`、`work/context.md`）へのリンクはプレーンテキストに、各レポート自身のフロントマターは
-  宣言済みの `nexus` キーの下に保持（Blume は未知のキーを拒否し、組み込みの `id` / `status` は ADR の形と
+  宣言済みの `ai-dev-loop` キーの下に保持（Blume は未知のキーを拒否し、組み込みの `id` / `status` は ADR の形と
   衝突する）、トップレベルディレクトリはパイプライン順のサイドバーグループ、ページはマニフェストの出力宣言順。
 - `docs/docs-site.md`（＋ `_ja`）。README・`docs/getting-started`・CLAUDE.md からポインタ。
 
@@ -902,7 +911,7 @@ DDD 手法カバレッジのレビューで見つかった、パイプライン*
   を本文に定義しながらどのサマリーにも載せておらず `--no-scalardb` も欠落、
   `/product:generate-frontend` は動作を説明済みの `--confirm-versions` / `--no-confirm-versions` /
   `--refresh-versions` を欠落、`/architect:report-status` は `--view` と `--exec` を、
-  `/product:report-status` は `--exec` を欠落していました（いずれも `tools/nexus-status.sh` は受理）。
+  `/product:report-status` は `--exec` を欠落していました（いずれも `tools/ai-dev-loop-status.sh` は受理）。
 - **`AGENTS.md` に `generate-api-code`・`generate-contract-tests`・`verify-implementation`・
   `review-api-security`・`estimate-token-cost` が未記載**でした。`CLAUDE.md` がコマンド列挙を
   やめた結果、Codex 経路ではこの 5 つがどこにも記載されない状態になっていました。
@@ -1332,7 +1341,7 @@ critical 3 件が残っていました。** それこそが `verify-implementati
   の各エントリが `"plugin": "product" | "architect"` を持つ。`init-output` と各オーケストレーターの
   `in_progress` スタンプ時に書き込まれる。1 つのレジストリを両パイプラインが共有し、phase を bare 名で
   キーにしているため、両 manifest が定義する 4 つの名前については、このフィールドだけが「誰のエントリか」
-  を示す。`tools/nexus-status.sh` はこれを読んで一意に解決し（もう一方のパイプラインのラベルが付いた
+  を示す。`tools/ai-dev-loop-status.sh` はこれを読んで一意に解決し（もう一方のパイプラインのラベルが付いた
   エントリは、何と書いてあってもこの phase の状態ではない）、フィールドが無い場合のみ output の裏付けに
   フォールバックする。
 
@@ -1400,7 +1409,7 @@ critical 3 件が残っていました。** それこそが `verify-implementati
   `map-domains`・`design-api`・`create-domain-story`・`report` は両方の manifest が定義しており、
   進捗レジストリは phase を bare 名でキーにしているため、**product** 側の `completed` が
   **architect** 側の完了として表示され、`/architect:pipeline --resume-from` ではスキップされる
-  状態だった。`tools/nexus-status.sh` は、当該 phase 自身の宣言 output が実在して裏付けが取れる
+  状態だった。`tools/ai-dev-loop-status.sh` は、当該 phase 自身の宣言 output が実在して裏付けが取れる
   場合にのみそのエントリを信頼し、そうでなければ実ファイルから状態を導出して `shared-name`
   ドリフトとして報告するようになった（実行中の `in_progress`、およびプロジェクトが実際に指定した
   skip は対象外）。`skills/common/progress-registry.md` にオーケストレーター向けの同じ規則
@@ -1579,7 +1588,7 @@ critical 3 件が残っていました。** それこそが `verify-implementati
   を 15 番目のメンバーとしてティアに加えた。
 
 ### 追加
-- **`tools/nexus-status.test.sh`** — 2 つのデータモジュールの上位にあたる CLI 契約の実行可能な
+- **`tools/ai-dev-loop-status.test.sh`** — 2 つのデータモジュールの上位にあたる CLI 契約の実行可能な
   検証: プロジェクト解決と終了コード 0/1/2、ビュー選択、全出力モード (`--md` の frontmatter と
   `--ascii` の純度を含む)、フィルタが `--json` に適用されること、不正なフィルタが使用法エラーに
   なること、2 つのビューの一致、上書きされた 3 階層目のレポートをポーリングが検知すること。
@@ -1613,7 +1622,7 @@ critical 3 件が残っていました。** それこそが `verify-implementati
   バックログと同じダッシュボードでライブ表示。** バックログデリバリーにはライブ表示があったが、その
   手前の product / architect パイプラインには手段がなく、`work/pipeline-progress.json` を生の JSON で
   読むしかない上に、多くのスキルはフェーズ完了時にしか書き込まないため「今どこを走っているか」が
-  分からなかった。ダッシュボードを `tools/nexus-status.sh` 1 本に統合し、`Tab` で **pipeline**（新規）と
+  分からなかった。ダッシュボードを `tools/ai-dev-loop-status.sh` 1 本に統合し、`Tab` で **pipeline**（新規）と
   **backlog**（従来。`tools/backlog-status.sh` は薄い別名として存続、`/architect:report-backlog-status`
   も従来どおり）を切り替える。pipeline ビューはフェーズツリーをカテゴリ単位で表示し（architect の手動
   拡張ティアは折りたたみ可能な独立グループ）、各フェーズの状態、宣言された `outputs:` のうち実在する数
@@ -1800,7 +1809,7 @@ critical 3 件が残っていました。** それこそが `verify-implementati
   バージョン不定の「latest」ドキュメントではなく、**プロジェクトが実際に動かしているリリース**を
   根拠に回答するようにした。
   - `rules/okf-knowledge-bundle.md`（新しい共有契約）: バンドルの解決（submodule →
-    `~/.cache/nexus-architect/` への shallow clone → 「バージョン非固定」と明示した上での
+    `~/.cache/ai-dev-loop/` への shallow clone → 「バージョン非固定」と明示した上での
     オンラインドキュメント）、読む前に**製品・バージョン・エディション**を確定、スキル群に対応
     づけた `lifecycle_phase`（design / implement / operate）で概念を絞り込み、バージョンを跨いだ
     回答の禁止、各概念の正規 `resource` URL の引用、依存のピン留めには frontmatter の
@@ -2086,8 +2095,8 @@ critical 3 件が残っていました。** それこそが `verify-implementati
     領域のため）。*Delivery* は作業ブランチ上の解決済み `source_root` を対象とし、Issue 参照付きで
     コミットするため、コードと同じ PR/MR にドキュメントが載る — git に無視されるドキュメントは
     PR に到達できないため、`git check-ignore` とワークツリー内チェックを踏襲。
-  - **その場での更新。** オーナーシップマーカー（`<!-- nexus:begin:<section> -->` …
-    `<!-- nexus:end:<section> -->`）により再生成対象を本スキルが書いた領域のみに限定。人間が
+  - **その場での更新。** オーナーシップマーカー（`<!-- ai-dev-loop:begin:<section> -->` …
+    `<!-- ai-dev-loop:end:<section> -->`）により再生成対象を本スキルが書いた領域のみに限定。人間が
     書いた散文は保持し、マーカーの無い手書き README は確認なしにその場で書き換えない。
     セクションキー（`overview`・`build-and-run`・`configuration`・`layout`・`api`・`operations`・
     `traceability`）は安定しており、再実行時は同じ領域を更新する。
@@ -2380,7 +2389,7 @@ critical 3 件が残っていました。** それこそが `verify-implementati
   抽出・検証し、トレーサビリティグラフで変更を再伝播し、システム実装設計のために
   `/architect:define-requirements` へ引き継ぐ。
 
-これにより Nexus Architect は 3 プラグイン構成（`product`・`architect`・`scalardb`）、
+これにより AI Dev Loop は 3 プラグイン構成（`product`・`architect`・`scalardb`）、
 合計 75 スキルのツールキットになりました。
 
 ## [0.7.0] - 2026-06-11
@@ -2445,34 +2454,34 @@ critical 3 件が残っていました。** それこそが `verify-implementati
 ### 変更
 - リポジトリを Claude Code プラグイン互換の構成に再編。
 
-[0.22.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.22.0
-[0.21.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.21.2
-[0.21.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.21.1
-[0.21.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.21.0
-[0.20.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.20.0
-[0.19.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.19.0
-[0.18.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.18.0
-[0.17.4]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.4
-[0.17.3]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.3
-[0.17.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.2
-[0.17.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.1
-[0.17.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.0
-[0.16.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.16.2
-[0.16.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.16.1
-[0.16.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.16.0
-[0.15.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.15.0
-[0.14.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.14.0
-[0.13.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.13.0
-[0.12.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.12.0
-[0.11.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.11.0
-[0.10.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.10.0
-[0.9.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.9.0
-[0.8.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.8.2
-[0.8.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.8.1
-[0.8.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.8.0
-[0.6.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.6.2
-[0.6.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.6.1
-[0.6.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.6.0
-[0.5.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.5.0
-[0.4.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.4.0
-[0.3.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.3.0
+[0.22.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.22.0
+[0.21.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.21.2
+[0.21.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.21.1
+[0.21.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.21.0
+[0.20.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.20.0
+[0.19.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.19.0
+[0.18.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.18.0
+[0.17.4]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.4
+[0.17.3]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.3
+[0.17.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.2
+[0.17.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.1
+[0.17.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.0
+[0.16.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.16.2
+[0.16.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.16.1
+[0.16.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.16.0
+[0.15.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.15.0
+[0.14.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.14.0
+[0.13.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.13.0
+[0.12.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.12.0
+[0.11.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.11.0
+[0.10.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.10.0
+[0.9.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.9.0
+[0.8.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.8.2
+[0.8.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.8.1
+[0.8.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.8.0
+[0.6.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.6.2
+[0.6.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.6.1
+[0.6.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.6.0
+[0.5.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.5.0
+[0.4.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.4.0
+[0.3.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.3.0

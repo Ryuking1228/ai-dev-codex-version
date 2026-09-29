@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Nexus Architect token-usage recorder.
+"""AI Dev Loop token-usage recorder.
 
 A fail-safe Claude Code hook (PostToolUse on Write|Edit|MultiEdit|Task|Agent,
 plus Stop / SubagentStop). It reads the session transcript *incrementally*
@@ -27,7 +27,7 @@ Artifacts (both under work/, git-ignored):
   - token-usage.jsonl  append-only audit log, one record per firing
 
 Design rules:
-  - NEVER fail the session: any error -> exit 0 (set NEXUS_TOKEN_DEBUG=1 to
+  - NEVER fail the session: any error -> exit 0 (set AI_DEV_LOOP_TOKEN_DEBUG=1 to
     append tracebacks to work/token-usage.err).
   - Inert outside initialized pipeline projects (work/pipeline-progress.json
     must exist).
@@ -454,7 +454,7 @@ if __name__ == "__main__":
     try:
         main()
     except Exception:
-        if os.environ.get("NEXUS_TOKEN_DEBUG"):
+        if os.environ.get("AI_DEV_LOOP_TOKEN_DEBUG"):
             import traceback
             try:
                 os.makedirs("work", exist_ok=True)

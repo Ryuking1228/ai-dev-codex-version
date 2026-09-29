@@ -1,4 +1,4 @@
-"""The pipeline tabs of the nexus-status dashboard.
+"""The pipeline tabs of the ai-dev-loop-status dashboard.
 
 Three of the dashboard's four tabs are built from this module, because they show the same
 thing about different work:
@@ -414,7 +414,7 @@ class PipelineView(S.BaseView):
                                  P.group_title(self.T, row["key"]))
         else:
             context = P.phase_context(self.state, row["phase"], self.T)
-        return ("[nexus %s: %s] %s\n\nProject: %s. Read "
+        return ("[ai-dev-loop %s: %s] %s\n\nProject: %s. Read "
                 "work/pipeline-progress.json and the phase's declared outputs before "
                 "answering." % (self.name, context, question, PROJ))
 

@@ -16,6 +16,7 @@ Usage: python3 tools/docs_consistency.test.py     (exit 1 on failure)
 import json
 import os
 import re
+import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -470,6 +471,7 @@ SETUP_DOCS = [
     "docs/github-copilot-usage.md",
     "docs/github-copilot-usage_ja.md",
 ]
+legacy_brand = "nex" + "us"
 for path in SETUP_DOCS:
     setup_doc = read(path)
     check("%s clones the adaptation" % path, ADAPTATION_URL in setup_doc)
@@ -478,7 +480,31 @@ for path in SETUP_DOCS:
           "`ai-dev-codex-version`" in setup_doc,
           "missing ai-dev-codex-version directory instruction")
     check("%s has no stale renamed checkout" % path,
-          "cd nexus-codex" not in setup_doc and "cd nexus-architect" not in setup_doc)
+          ("cd " + legacy_brand + "-codex") not in setup_doc and
+          ("cd " + legacy_brand + "-architect") not in setup_doc)
+
+# Keep the retired keyword out of tracked paths and content. The word is assembled from fragments
+# so the guard itself does not reintroduce what it checks.
+tracked = subprocess.run(["git", "ls-files"], cwd=ROOT, check=True,
+                         text=True, capture_output=True).stdout.splitlines()
+legacy_paths = []
+legacy_content = []
+for relative in tracked:
+    if legacy_brand in relative.lower():
+        legacy_paths.append(relative)
+    absolute = os.path.join(ROOT, relative)
+    if not os.path.isfile(absolute):
+        continue
+    try:
+        content = read(relative)
+    except UnicodeDecodeError:
+        continue
+    if legacy_brand in content.lower():
+        lines = [number for number, line in enumerate(content.splitlines(), 1)
+                 if legacy_brand in line.lower()]
+        legacy_content.append("%s:%s" % (relative, ",".join(map(str, lines[:5]))))
+check("no tracked path uses the retired brand", not legacy_paths, legacy_paths)
+check("no tracked content uses the retired brand", not legacy_content, legacy_content)
 
 print()
 print("%d check(s), %d failure(s)" % (checks, failures))

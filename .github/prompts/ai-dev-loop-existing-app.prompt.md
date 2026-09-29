@@ -1,4 +1,4 @@
-Analyze and change an existing application with the Nexus workflow.
+Analyze and change an existing application with the AI Dev Loop workflow.
 
 Read [the Copilot repository instructions](../copilot-instructions.md) and then read and follow
 [the canonical architecture entry point](../../skills/start/SKILL.md) in full. Do not run the Codex

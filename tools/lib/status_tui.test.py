@@ -10,7 +10,7 @@ ran", and Esc quitting on a stray escape sequence.
 None of that needs a terminal. App touches `stdscr` only while drawing, so the key
 handling, the action dispatch and the panel assembly are all exercised here against a
 `stdscr` of None; the drawing itself stays covered by the PTY smoke test in
-nexus-status.test.sh. Run with no arguments.
+ai-dev-loop-status.test.sh. Run with no arguments.
 """
 
 import os

@@ -1,5 +1,5 @@
 ---
-name: nexus-architecture
+name: ai-dev-loop-architecture
 description: Investigate and design an existing or greenfield system. Use for architecture analysis, refactoring plans, DDD, API and data design, migration, and technical review.
 ---
 

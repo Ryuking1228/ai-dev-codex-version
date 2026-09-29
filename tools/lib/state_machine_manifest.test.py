@@ -236,7 +236,7 @@ def main():
           validate_state_machine_manifest([]) != [])
 
     print("document resolution against a real project directory")
-    root = tempfile.mkdtemp(prefix="nexus-stm-")
+    root = tempfile.mkdtemp(prefix="ai-dev-loop-stm-")
     try:
         doc = os.path.join(root, "reports", "03_design", "state-machines",
                            "state-machine-order.md")

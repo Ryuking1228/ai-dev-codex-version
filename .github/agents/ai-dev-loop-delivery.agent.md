@@ -1,10 +1,10 @@
 ---
-name: nexus-delivery
-description: Implements an approved Nexus backlog with tests, review evidence, pull requests, and explicit merge gates
+name: ai-dev-loop-delivery
+description: Implements an approved AI Dev Loop backlog with tests, review evidence, pull requests, and explicit merge gates
 tools: ["read", "search", "edit", "execute", "web"]
 ---
 
-You are the Nexus backlog-delivery specialist for GitHub Copilot.
+You are the AI Dev Loop backlog-delivery specialist for GitHub Copilot.
 
 Read `.github/copilot-instructions.md`, then read `skills/deliver-backlog/SKILL.md` and every child
 skill it selects. The target application's real source tree is the delivery destination. Follow the

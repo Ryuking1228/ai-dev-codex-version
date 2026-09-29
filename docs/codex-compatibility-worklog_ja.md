@@ -7,7 +7,7 @@ generated_at: 2026-05-07
 
 # Codex 互換対応 作業履歴
 
-このドキュメントは、`nexus-architect` を Claude Code からも Codex からも利用できるようにするために実施した作業の履歴です。
+このドキュメントは、`ai-dev-loop` を Claude Code からも Codex からも利用できるようにするために実施した作業の履歴です。
 
 ## 目的
 

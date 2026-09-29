@@ -6,7 +6,7 @@ description: |
   running right now, and the validation gate's verdict — on the terminal, live or as a
   one-shot render.
   /product:report-status [--once] [--phase=<name>] [--exec] [--json] [--md] [--ascii] [--ambiguous-width=2] [--lang=ja|en] to invoke.
-  Wraps ${CLAUDE_PLUGIN_ROOT}/tools/nexus-status.sh, which on a terminal defaults to a
+  Wraps ${CLAUDE_PLUGIN_ROOT}/tools/ai-dev-loop-status.sh, which on a terminal defaults to a
   live dashboard polling work/pipeline-progress.json every 10s, with an action menu that
   generates the next slash command per phase, an `a` key that asks Claude about the
   selected phase, and a Tab key that cycles the dashboard's other views — Architect (the
@@ -38,12 +38,12 @@ unmet dependency — and can pick a phase and get the exact slash command to run
 
 ## Execution
 
-One script does the whole job: `${CLAUDE_PLUGIN_ROOT}/tools/nexus-status.sh`.
+One script does the whole job: `${CLAUDE_PLUGIN_ROOT}/tools/ai-dev-loop-status.sh`.
 
 | Invocation | Command | Effect |
 |-----------|---------|--------|
-| default (user's TTY) | `tools/nexus-status.sh --view=product` | Live dashboard: foldable phase tree grouped by pipeline stage + detail pane + action menu |
-| in-session render | `tools/nexus-status.sh --view=product --once` | Static tree, prints and exits — **always use this when running it yourself** |
+| default (user's TTY) | `tools/ai-dev-loop-status.sh --view=product` | Live dashboard: foldable phase tree grouped by pipeline stage + detail pane + action menu |
+| in-session render | `tools/ai-dev-loop-status.sh --view=product --once` | Static tree, prints and exits — **always use this when running it yourself** |
 | the frontend codegen | `... --view=codegen --once` | `/product:generate-frontend` lives in the Code Generation view with the architect codegen phases, not in this tree |
 | one phase | `... --phase=validate-assumptions --once` | Render a single phase with its outputs (one-shot renders only; the live dashboard ignores it) |
 | run from the dashboard | `... --exec` | The action menu's `e` key and the `a` ask key suspend the dashboard and run `claude` in the foreground (requires the `claude` CLI) |
@@ -69,7 +69,7 @@ which is reported with the pipeline's real phase names instead of an empty tree.
 the user asks to watch progress live, tell them to run, prefixing with `!` inside
 Claude Code:
 
-- `!${CLAUDE_PLUGIN_ROOT}/tools/nexus-status.sh --view=product`
+- `!${CLAUDE_PLUGIN_ROOT}/tools/ai-dev-loop-status.sh --view=product`
 - add `--exec` to launch phases (and ask questions) straight from the menu
 
 Always pass `--once` (or `--json`/`--md`) when running it yourself.
@@ -103,7 +103,7 @@ Always pass `--once` (or `--json`/`--md`) when running it yourself.
   `adapt-change`) are marked; the suggested `next:` skips them in favour of the
   required path.
 - Contracts are asserted by `tools/lib/pipeline_status_data.test.py` (state derivation)
-  and `tools/nexus-status.test.sh` (the CLI: exit codes, output modes, filters).
+  and `tools/ai-dev-loop-status.test.sh` (the CLI: exit codes, output modes, filters).
 
 ## Reporting Back
 

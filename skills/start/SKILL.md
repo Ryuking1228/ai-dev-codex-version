@@ -6,11 +6,11 @@ model: sonnet
 user_invocable: true
 ---
 
-# Nexus Architect Orchestrator
+# AI Dev Loop Orchestrator
 
 ## Your Role
 
-As the main orchestrator of nexus-architect, evaluate the project and its objectives, then determine and execute the appropriate analysis and design path.
+As the main orchestrator of ai-dev-loop, evaluate the project and its objectives, then determine and execute the appropriate analysis and design path.
 
 ## Language Selection
 
@@ -150,7 +150,7 @@ rather than leaving the omission silent.
    to it; `plugin` is what keeps that attribution off the product pipeline's phase of the
    same name. On the handoff path this file already holds product's phases — add to it,
    never re-register it. Under Codex, invoke each child through `python3
-   <NEXUS_ROOT>/tools/codex-model-router.py run architect:<phase> --target <TARGET_ROOT> --
+   <AI_DEV_LOOP_ROOT>/tools/codex-model-router.py run architect:<phase> --target <TARGET_ROOT> --
    <phase arguments>` per `@rules/codex-model-routing.md`; the current turn remains the
    orchestrator. Claude Code continues to use its native Skill/Task invocation
 5. After `investigate`: when the technology stack reports a presentation layer, offer UI analysis

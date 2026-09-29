@@ -56,7 +56,7 @@ Concurrent firings (parallel subagents) are serialized with an `flock` lockfile
 the lock race simply leaves the bytes for the next firing.
 
 The hook is **fail-safe**: any error exits 0 without disturbing the session. Set
-`NEXUS_TOKEN_DEBUG=1` to append tracebacks to `work/token-usage.err`. It requires
+`AI_DEV_LOOP_TOKEN_DEBUG=1` to append tracebacks to `work/token-usage.err`. It requires
 `python3` on PATH — if missing, recording is **silently disabled** (nothing else
 breaks); check for `work/token-usage.json` after a run to confirm recording worked.
 

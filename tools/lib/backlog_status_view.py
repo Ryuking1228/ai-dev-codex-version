@@ -1,4 +1,4 @@
-"""The backlog tab of the nexus-status dashboard.
+"""The backlog tab of the ai-dev-loop-status dashboard.
 
 The Epic -> Sub-Epic -> Issue tree with each node's delivery status and its
 Implemented/Reviewed/Merged stages; the detail pane shows where the status came from,
@@ -321,7 +321,7 @@ class BacklogView(S.BaseView):
         context = "%s %s / %s / %s" % (row.get("level", "item"), row["local_id"],
                                        state["status"],
                                        B.stage_boxes(state["stages"]))
-        return ("[nexus backlog: %s] %s\n\nProject: %s. Read "
+        return ("[ai-dev-loop backlog: %s] %s\n\nProject: %s. Read "
                 "reports/backlog/backlog-manifest.json and the item's impl-log / review "
                 "documents before answering." % (context, question, PROJ))
 

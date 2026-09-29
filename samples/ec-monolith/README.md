@@ -1,6 +1,6 @@
-# EC Monolith — nexus-architect 検証用サンプルプロジェクト
+# EC Monolith — ai-dev-loop 検証用サンプルプロジェクト
 
-このプロジェクトは **nexus-architect** エージェントの動作検証用に作成されたサンプルアプリケーションです。Spring Boot + JPA で実装された EC サイトモノリスで、意図的な技術負債とセキュリティ課題を含みます。
+このプロジェクトは **ai-dev-loop** エージェントの動作検証用に作成されたサンプルアプリケーションです。Spring Boot + JPA で実装された EC サイトモノリスで、意図的な技術負債とセキュリティ課題を含みます。
 
 ---
 
@@ -101,11 +101,11 @@ com.example.ec/
 
 ---
 
-## nexus-architect 検証方法
+## ai-dev-loop 検証方法
 
 ```bash
 # リポジトリルートに戻る
-cd /path/to/nexus-architect
+cd /path/to/ai-dev-loop
 
 # エージェントパイプライン実行
 # Claude Code で以下を入力：

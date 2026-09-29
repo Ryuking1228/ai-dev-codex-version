@@ -1,7 +1,7 @@
 {
-  "name": "nexus-architect-docs-site",
+  "name": "ai-dev-loop-docs-site",
   "private": true,
-  "description": "Serves a nexus-architect project's reports/ tree as a local documentation site (Blume).",
+  "description": "Serves an AI Dev Loop project's reports/ tree as a local documentation site (Blume).",
   "type": "module",
   "engines": {
     "node": ">=22.12.0"

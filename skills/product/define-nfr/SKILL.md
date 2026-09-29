@@ -2,7 +2,7 @@
 description: |
   Turn SLOs into measurable non-functional requirements — availability, latency (p95/p99),
   throughput, error rate, durability, RPO/RTO — each traced to the SLO it derives from. Bridges to
-  nexus-architect. /product:define-nfr [--auto] [--lang=ja|en].
+  ai-dev-loop. /product:define-nfr [--auto] [--lang=ja|en].
 model: sonnet
 user_invocable: true
 ---

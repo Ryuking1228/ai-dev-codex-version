@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Executable check of the nexus-status CLI contract — the layer above the two data
+# Executable check of the ai-dev-loop-status CLI contract — the layer above the two data
 # modules, which pipeline_status_data.test.py / backlog_status_data.test.py already pin.
 #
 # What this asserts, against scratch projects it builds itself:
@@ -15,13 +15,13 @@
 #   - the backlog view's pipeline strip agrees with the pipeline view's own count
 #   - the live-refresh poll notices an *overwritten* file three levels down
 #
-# Usage: tools/nexus-status.test.sh
+# Usage: tools/ai-dev-loop-status.test.sh
 # Exit status 0 = all checks pass, 1 = at least one failed.
 
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-NX="$ROOT/tools/nexus-status.sh"
+NX="$ROOT/tools/ai-dev-loop-status.sh"
 BL="$ROOT/tools/backlog-status.sh"
 export NX_TEST_ROOT="$ROOT"
 # The fixtures name trackers that do not exist; syncing them would be a slow round trip
@@ -278,7 +278,7 @@ check "the usage error is localized like everything else" "$?" "$err"
 # before curses takes the screen, so it is reachable without a terminal.
 run_tui() {  # run_tui <project> <env assignments...>
   ( cd "$ROOT" && env NX_PLUGIN_ROOT="$ROOT" NX_PROJECT_DIR="$1" NX_LANG=en \
-      "${@:2}" python3 tools/lib/nexus_status_tui.py "$1" 2>&1 >/dev/null )
+      "${@:2}" python3 tools/lib/ai_dev_loop_status_tui.py "$1" 2>&1 >/dev/null )
 }
 err="$(run_tui "$PROD" NX_PHASE=nope)"; code=$?
 { [ "$code" -eq 2 ] && contains "$err" "unknown phase: nope"; }

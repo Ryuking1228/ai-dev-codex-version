@@ -1,4 +1,4 @@
-# Nexus Architect Skill Reference
+# AI Dev Loop Skill Reference
 
 Skills are invoked by plugin namespace: `/product:skill-name` (product direction),
 `/architect:skill-name` (system architecture), `/scalardb:skill-name` (ScalarDB development), and
@@ -140,7 +140,7 @@ merges).
 | `/architect:estimate-cost` | sonnet | Infrastructure, license, and operational costs |
 | `/architect:estimate-token-cost` | sonnet | Token usage and USD cost of running the agent (a-priori, calibrated by actuals) |
 | `/architect:report-token-cost` | haiku | Terminal report of the recorded actual agent cost — interactive two-pane dashboard by default (10s poll; selection above, detail/session log below), `--once`, `--follow`, `--session=ID`, `--since`, `--breakdown=tokens\|cost` (dashboard defaults to `$`, `b` toggles), `--ascii`, `--ambiguous-width=2`, `--debug`, `--md`, `--json` |
-| `/architect:report-status` | haiku | Terminal dashboard for pipeline progress: phase tree with status (`stale` once an upstream phase changed after it finished), declared-output completion, "running now" heartbeat, unmet dependencies and per-phase cost, with a next-command action menu, an ask-Claude key and `Tab` cycling its four views — Product, Architect, Code Generation, Backlog Delivery (wraps `tools/nexus-status.sh`) |
+| `/architect:report-status` | haiku | Terminal dashboard for pipeline progress: phase tree with status (`stale` once an upstream phase changed after it finished), declared-output completion, "running now" heartbeat, unmet dependencies and per-phase cost, with a next-command action menu, an ask-Claude key and `Tab` cycling its four views — Product, Architect, Code Generation, Backlog Delivery (wraps `tools/ai-dev-loop-status.sh`) |
 
 ## Utility
 
@@ -232,7 +232,7 @@ Phase order and the `mvp`/`core-only`/`ux-to-spec`/`full` profiles are defined i
 | `/product:design-architecture` | opus | 4/5. Synthesis | Runtime architecture diagrams (container/critical-path/deployment) + technology fitness (Kong / ScalarDB / ScalarDB Analytics / ScalarDL) with Adopt/Conditional/Reject rationale |
 | `/product:review` | opus | R. Review & Report | Review product artifacts (consistency, traceability, extensibility, strategy) |
 | `/product:report` | sonnet | R. Review & Report | Consolidate artifacts into one self-contained HTML report (validation status first) |
-| `/product:report-status` | haiku | R. Review & Report | Terminal dashboard for product-pipeline progress: phase tree with status (`stale` once an upstream phase changed after it finished), declared-output completion, gate verdict + open assumptions, per-phase cost, next-command action menu — the Product view of `tools/nexus-status.sh`; `generate-frontend` is tracked in its Code Generation view |
+| `/product:report-status` | haiku | R. Review & Report | Terminal dashboard for product-pipeline progress: phase tree with status (`stale` once an upstream phase changed after it finished), declared-output completion, gate verdict + open assumptions, per-phase cost, next-command action menu — the Product view of `tools/ai-dev-loop-status.sh`; `generate-frontend` is tracked in its Code Generation view |
 | `/product:adapt-change` | opus | 6. Adaptation | Re-propagation engine: compute affected scope from a change and re-run only impacted skills |
 
 ## Invocation signatures
@@ -243,7 +243,7 @@ commands that wrap a shell tool, checked against that tool's argument parser by
 
 Two things this block does **not** list. The terminal commands (`report-status`,
 `report-backlog-status`, `report-token-cost`) pass presentation flags straight through to
-`tools/nexus-status.sh` / `tools/token-cost-report.sh` — `--live`/`--watch[=SEC]`, `--plugin`,
+`tools/ai-dev-loop-status.sh` / `tools/token-cost-report.sh` — `--live`/`--watch[=SEC]`, `--plugin`,
 `--width`, `--color`/`--no-color`, `--glyphs`, `--debug`, and for the cost report `--currency`,
 `--fx`, `--top`, `--log-tail`; run the tool with `--help` for the current set, which is where they
 are defined. And skills nested under a migration router (`skills/migrate-oracle/…`) are read by

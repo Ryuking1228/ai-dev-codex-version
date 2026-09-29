@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the consolidated HTML report for a nexus-architect project.
+"""Build the consolidated HTML report for an AI Dev Loop project.
 
 This is the engine behind `/architect:report` and `/product:report`. It reads the
 Markdown a pipeline run already wrote under `<project>/reports/`, plus the pipeline
@@ -126,7 +126,7 @@ LANGS = ("en", "ja")
 UI = {
     "report_title": ("System Architecture Consolidated Report", "システムアーキテクチャ統合レポート"),
     "toc": ("Contents", "目次"),
-    "pipeline_meta": ("nexus-architect / architect pipeline", "nexus-architect / architect パイプライン"),
+    "pipeline_meta": ("ai-dev-loop / architect pipeline", "ai-dev-loop / architect パイプライン"),
     "target": ("Target", "対象"),
     "documents": ("Documents", "収録文書"),
     "generated": ("Generated", "生成"),
@@ -219,8 +219,8 @@ UI = {
     # Product layout — chrome
     "report_title_product": ("Product Direction Consolidated Report",
                              "プロダクト方向性統合レポート"),
-    "pipeline_meta_product": ("nexus-architect / product pipeline",
-                              "nexus-architect / product パイプライン"),
+    "pipeline_meta_product": ("ai-dev-loop / product pipeline",
+                              "ai-dev-loop / product パイプライン"),
     "profile": ("Profile", "プロファイル"),
     "sec_summary_product": ("Key Assumptions & Validation Status",
                             "主要な仮説と検証状況（Key Assumptions & Validation Status）"),
@@ -999,7 +999,7 @@ class ReportBuilder:
             out.append(self.mermaid_js_override)
         out.append(os.path.join(repo, "tools", "docs-site", "node_modules",
                                 "mermaid", "dist", "mermaid.min.js"))
-        out.append(os.path.expanduser("~/.cache/nexus-architect/mermaid.min.js"))
+        out.append(os.path.expanduser("~/.cache/ai-dev-loop/mermaid.min.js"))
         return out
 
     def mermaid_block(self):
@@ -1447,7 +1447,7 @@ def resolve_language(project_dir):
 def main(argv=None):
     parser = argparse.ArgumentParser(
         prog="build-report.py",
-        description="Build the consolidated HTML report for a nexus-architect project: "
+        description="Build the consolidated HTML report for an AI Dev Loop project: "
                     "reports/00_summary/full-report.html (architect layout) or "
                     "reports/report/full-report.html (product layout).")
     parser.add_argument("project_dir", nargs="?", default=".",
@@ -1465,7 +1465,7 @@ def main(argv=None):
     project_dir = os.path.abspath(args.project_dir)
     if not os.path.isdir(os.path.join(project_dir, "reports")):
         sys.stderr.write(
-            "build-report: %s has no reports/ directory — is this a nexus-architect project?\n"
+            "build-report: %s has no reports/ directory — is this an AI Dev Loop project?\n"
             % project_dir)
         return 1
 

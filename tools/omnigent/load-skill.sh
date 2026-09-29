@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# load-skill.sh — Omnigent skill resolver for nexus-architect.
+# load-skill.sh — Omnigent skill resolver for ai-dev-loop.
 #
 # Resolves a Claude-Code-style slash command (e.g. /architect:investigate) to
 # the corresponding SKILL.md on disk, prints a short translation preamble that
@@ -56,7 +56,7 @@ list_skills() {
 
   local count=0
 
-  echo "# nexus-architect skills (repo root: $ROOT)"
+  echo "# ai-dev-loop skills (repo root: $ROOT)"
   echo
   echo "## Flat namespace — invoke as architect:<name> or scalardb:<name>"
   echo "## (architect and scalardb share skills/<name>/SKILL.md)"
@@ -129,7 +129,7 @@ print_preamble() {
   local plugin="$1" name="$2" path="$3"
   cat <<EOF
 ===== OMNIGENT TRANSLATION PREAMBLE =====
-You are running the nexus-architect skill: ${plugin}:${name}
+You are running the ai-dev-loop skill: ${plugin}:${name}
 Source file: ${path}
 CLAUDE_PLUGIN_ROOT == ${ROOT}  (already expanded in the body below)
 

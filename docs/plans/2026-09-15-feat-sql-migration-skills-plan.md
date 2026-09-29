@@ -11,7 +11,7 @@ date: 2026-09-15
 
 ## Context
 
-既存システムの SQL を ScalarDB に移す作業は、今の nexus-architect では分析止まりである。
+既存システムの SQL を ScalarDB に移す作業は、今の ai-dev-loop では分析止まりである。
 
 - `migrate-{oracle,mysql,postgresql}` は、スキーマ抽出と移行手順の Markdown を作る。アプリケーションの SQL は「Application Impact」という散文の評価に留まる。
 - `investigate-db-design` / `investigate-db-live`（v0.40.0）は、DDL・カタログ・統計を根拠付きで棚卸しする。ただし、その結果を移行に使う経路がない。
@@ -25,11 +25,11 @@ date: 2026-09-15
 
 あわせて、Schema Loader JSON、Java のランタイムとアプリ側の補助クラス、正解データとの突き合わせ（golden）、差分テストを持つ。
 
-これを nexus に取り込み、**分析結果を入力にして 1 文ずつ移行経路を決め、コードを生成し、実データで確かめる**仕組みにする。
+これを ai-dev-loop に取り込み、**分析結果を入力にして 1 文ずつ移行経路を決め、コードを生成し、実データで確かめる**仕組みにする。
 
 利用者の決定（2026-09-15）:
 
-- **取り込み**: sql-migration を nexus に複製し、その際に英語へ書き直す。
+- **取り込み**: sql-migration を ai-dev-loop に複製し、その際に英語へ書き直す。
 - **スキル構成**: 設計・実装・検証の 3 スキルに分ける。
 - **対象 SQL**: DDL（調査結果から）、アプリ内の SQL、ビュー・ルーチンの本体、利用者が渡す SQL ファイルのすべて。
 - **実装の出力先**: `generated/`。
@@ -59,11 +59,11 @@ application code / DB objects / SQL files     (statement sources)
 | 複製するもの | 元 | 扱い |
 |---|---|---|
 | 変換器 `scalardb_migrate/` 7 モジュール（`converter`、`decomposer`、`appside`、`dialect`、`schema`、`types`、`__init__`） | 同名 | コードは既に英語。挙動は変えない。import パスだけ調整する |
-| CLI | `scalardb_migrate/cli.py` | 英語のまま移し、nexus の出力規約（frontmatter）に合わせたレポート出力を追加する |
+| CLI | `scalardb_migrate/cli.py` | 英語のまま移し、ai-dev-loop の出力規約（frontmatter）に合わせたレポート出力を追加する |
 | Java ランタイム | `runtime-java/`（`Runner`、`Fetcher`/`CoreFetcher`/`JdbcFetcher`、`Residual`、`OracleFunctions`、`appside/*`、`golden/GoldenCheck`） | 移す。`Bench` と例の `AreaSalesReport` は外す。依存バージョンは実装時に dependency-versions ルールで調べ直す |
 | 検証 | `difftest/golden.py`、`difftest/run.py`、`backends.py` | 移す。固定の接続情報（`postgres:postgres` など）は、investigate-db-live と同じ環境変数参照の profile に置き換える |
 | 参照資料 | `skills/sql-transpile/references/{scalardb-grammar,app-side-notes,operations}.md`、`docs/architecture.md` の要点 | **英語に書き直す**（日本語は計 400 行ほど） |
-| テスト | `tests/test_{converter,decomposer,appside,dml_examples}.py`（77 件）、Java テスト（`AreaSalesReport` 以外） | 移す。Python は nexus のランナーが見つける `*.test.py` にし、日本語の期待値文字列を英語化する |
+| テスト | `tests/test_{converter,decomposer,appside,dml_examples}.py`（77 件）、Java テスト（`AreaSalesReport` 以外） | 移す。Python は ai-dev-loop のランナーが見つける `*.test.py` にし、日本語の期待値文字列を英語化する |
 
 **移さないもの**: 汎用方言変換（`generic.py`、関数カタログ）、`sql-transpile` スキル本体、ベンチマーク、spikes、スライドの生成元。いずれも ScalarDB 移行の対象外である。
 

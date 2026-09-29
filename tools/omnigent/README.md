@@ -1,7 +1,7 @@
 # tools/omnigent
 
 Compatibility helpers that let a generic multi-agent orchestrator (**Omnigent**) run the
-nexus-architect skills, which are otherwise packaged as Claude Code plugins. See the
+ai-dev-loop skills, which are otherwise packaged as Claude Code plugins. See the
 repository-root [`OMNIGENT.md`](../../OMNIGENT.md) for the full runtime mapping
 (tools, `Task` dispatch, `AskUserQuestion` gating, hooks, pipeline sequencing).
 

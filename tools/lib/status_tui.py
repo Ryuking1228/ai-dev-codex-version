@@ -1,4 +1,4 @@
-"""The curses shell shared by the nexus-status dashboard views.
+"""The curses shell shared by the ai-dev-loop-status dashboard views.
 
 Owns everything that is not specific to what is being watched: the three-pane layout
 (header / foldable tree / detail), the tab strip, the action menu, the ask panel, the
@@ -45,7 +45,7 @@ bracketed-paste or focus-change marker, an unknown $TERM — delivers the leadin
 bare keypress, so binding Esc to quit takes the dashboard down on a stray sequence. Only
 `q` quits.
 
-Invoked by tools/lib/nexus_status_tui.py, which builds the views and hands them over.
+Invoked by tools/lib/ai_dev_loop_status_tui.py, which builds the views and hands them over.
 """
 
 import curses
@@ -459,7 +459,7 @@ class App:
         try:
             subprocess.call(["claude", command])
         except Exception as exc:
-            print("nexus-status: claude failed: %s" % exc, file=sys.stderr)
+            print("ai-dev-loop-status: claude failed: %s" % exc, file=sys.stderr)
             time.sleep(2)
         self.stdscr.refresh()
         curses.curs_set(0)

@@ -7,7 +7,7 @@ generated_at: 2026-05-07
 
 # Codex 互換性調査
 
-このドキュメントは、`nexus-architect` リポジトリに含まれる Claude Code 用のエージェント、スキル、ルール、フックを Codex で使う場合に動作が異なる箇所を洗い出したものです。
+このドキュメントは、`ai-dev-loop` リポジトリに含まれる Claude Code 用のエージェント、スキル、ルール、フックを Codex で使う場合に動作が異なる箇所を洗い出したものです。
 
 > **注記（時点情報）**: 本ドキュメントは 2026-05-07 時点のスナップショットです。本文中の「51 skills / 2 plugins」や行番号の引用は当時の構成であり、現在は **3 plugins（product / architect / scalardb）/ 80 skills**（`/product:*` を含む）です。最新の構成は `README.md` と `.claude-plugin/marketplace.json` を参照してください。
 

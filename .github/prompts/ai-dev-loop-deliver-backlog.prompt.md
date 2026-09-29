@@ -1,4 +1,4 @@
-Deliver an approved Nexus backlog.
+Deliver an approved AI Dev Loop backlog.
 
 Read [the Copilot repository instructions](../copilot-instructions.md) and
 [the canonical backlog-delivery skill](../../skills/deliver-backlog/SKILL.md) in full. Then read the

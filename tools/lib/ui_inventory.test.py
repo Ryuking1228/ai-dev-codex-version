@@ -335,14 +335,14 @@ for label, mutate, expect in (
          lambda t: t["semantic"]["color"]["primary"].update({"$value": "{color.hex-999999}"}),
          "not a token"),
         ("a raw token without sources",
-         lambda t: t["space"]["px-8"]["$extensions"]["nexus-architect"].update(sources=[]),
+         lambda t: t["space"]["px-8"]["$extensions"]["ai-dev-loop"].update(sources=[]),
          "no $extensions"),
         ("a color that is not hex", lambda t: t["color"]["hex-aaaaaa"].update({"$value": "grey"}),
          "not a 6-digit lowercase hex"),
         ("a 3-digit color", lambda t: t["color"]["hex-aaaaaa"].update({"$value": "#aaa"}),
          "not a 6-digit lowercase hex"),
         ("a zero usage count",
-         lambda t: t["color"]["hex-aaaaaa"]["$extensions"]["nexus-architect"].update(usage_count=0),
+         lambda t: t["color"]["hex-aaaaaa"]["$extensions"]["ai-dev-loop"].update(usage_count=0),
          "positive integer")):
     bad = copy.deepcopy(tok)
     mutate(bad)
@@ -432,7 +432,7 @@ try:
     check("a token file that does not exist", any("is unreadable" in e for e in errors), errors)
 
     tok = ui_fixture.tokens()
-    tok["color"]["hex-0066cc"]["$extensions"]["nexus-architect"]["sources"] = ["web/none.css:1"]
+    tok["color"]["hex-0066cc"]["$extensions"]["ai-dev-loop"]["sources"] = ["web/none.css:1"]
     errors = validate_inventory(ui_fixture.inventory(), project("token-source", tok=tok))
     check("a token source that does not exist",
           any("token color.hex-0066cc" in e for e in errors), errors)

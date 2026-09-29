@@ -38,7 +38,7 @@ Implement a selected backlog item while keeping the whole Epic coherent:
 Code lands in the target project's **source tree** (see Output Location); the tracker and
 `reports/backlog/` hold the progress trail. This skill runs against the **target project** (the one
 holding `reports/` and the backlog), the same way other architect skills operate — it never edits
-nexus-architect itself.
+ai-dev-loop itself.
 
 ## Decision Criteria
 

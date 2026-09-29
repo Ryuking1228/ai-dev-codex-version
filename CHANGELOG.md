@@ -1,11 +1,21 @@
 # Changelog
 
-All notable changes to Nexus Architect are documented in this file.
+All notable changes to AI Dev Loop are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Version numbers refer to the per-plugin versions in `.claude-plugin/marketplace.json`;
 all four plugins (`product`, `architect`, `scalardb`, `infra`) are released together under one number.
+
+## [Unreleased]
+
+### Changed
+- **The project identity is now AI Dev Loop.** The marketplace ID is `ai-dev-loop`; GitHub Copilot
+  agents, prompts, and skills use the `ai-dev-loop-*` prefix; the status command is
+  `tools/ai-dev-loop-status.sh`; Python modules use `ai_dev_loop_*`; and environment variables use
+  `AI_DEV_LOOP_*`.
+- This is an intentional breaking rename. No aliases for the retired brand are shipped. Historical
+  upstream URLs remain only where required for attribution and release history.
 
 ## [0.41.2] - 2026-09-15
 
@@ -481,7 +491,7 @@ Two `blume validate` findings from the first run of `tools/docs-site.sh` over a 
   only in `.mdx`); `{…}` and a bare `<` outside code are escaped; numeric phase prefixes are
   dropped from routes (`01_analysis/x.md` → `/analysis/x`) so cross-report links can be
   rewritten; links to project files the site cannot serve (`samples/…`, `work/context.md`)
-  become plain text; each report's own frontmatter is kept under a declared `nexus` key (Blume
+  become plain text; each report's own frontmatter is kept under a declared `ai-dev-loop` key (Blume
   rejects unknown keys and its built-in `id` / `status` collide with the ADR shape); top-level
   directories are sidebar groups in pipeline order, pages inside follow the manifest's
   declared-output order.
@@ -996,7 +1006,7 @@ contract suites ran anywhere except when somebody remembered. Both are now close
   `--analyze-only` in its body and in no summary anywhere, and omitted `--no-scalardb`;
   `/product:generate-frontend` omitted `--confirm-versions` / `--no-confirm-versions` /
   `--refresh-versions` despite documenting what they do; `/architect:report-status` omitted `--view`
-  and `--exec`, and `/product:report-status` omitted `--exec`, though `tools/nexus-status.sh` accepts
+  and `--exec`, and `/product:report-status` omitted `--exec`, though `tools/ai-dev-loop-status.sh` accepts
   them.
 - **`AGENTS.md` never listed `generate-api-code`, `generate-contract-tests`, `verify-implementation`,
   `review-api-security` or `estimate-token-cost`**, so on the Codex path those five were documented
@@ -1470,7 +1480,7 @@ designed.
   `work/pipeline-progress.json` now carries `"plugin": "product" | "architect"`, written by
   `init-output` and by each orchestrator on its `in_progress` stamp. One registry serves both
   pipelines and keys phases by bare name, so for the four names both manifests define this
-  field is the only thing that says whose entry it is. `tools/nexus-status.sh` reads it to
+  field is the only thing that says whose entry it is. `tools/ai-dev-loop-status.sh` reads it to
   settle the question outright — an entry labelled for the other pipeline is not this phase's
   status, whatever it says — and falls back to output corroboration where the field is absent.
 
@@ -1544,7 +1554,7 @@ designed.
   `map-domains`, `design-api`, `create-domain-story` and `report` are defined by both
   manifests, and the progress registry keys phases by bare name — so a *product* phase
   recorded `completed` rendered as the *architect* phase being complete, and
-  `/architect:pipeline --resume-from` would have skipped it. `tools/nexus-status.sh` now
+  `/architect:pipeline --resume-from` would have skipped it. `tools/ai-dev-loop-status.sh` now
   trusts such an entry only when the phase's own declared outputs exist to corroborate it,
   and otherwise derives the status from the filesystem and reports `shared-name` drift; a
   running phase (`in_progress`) and a skip the project actually asked for are exempt.
@@ -1736,7 +1746,7 @@ designed.
   what its SKILL.md promises. `report-token-cost` joins the tier as its fifteenth member.
 
 ### Added
-- **`tools/nexus-status.test.sh`** — an executable check of the dashboard's CLI contract,
+- **`tools/ai-dev-loop-status.test.sh`** — an executable check of the dashboard's CLI contract,
   the layer above the two data modules: project resolution and the 0/1/2 exit codes, view
   selection, every output mode (including `--md` frontmatter and `--ascii` purity), the
   filters applying to `--json`, unknown filters failing as usage, the two views agreeing,
@@ -1774,7 +1784,7 @@ designed.
   progress, in the same dashboard as the backlog.** The backlog delivery loop already had a live
   terminal view; the product and architect pipelines that precede it had none — `work/pipeline-progress.json`
   was readable only as raw JSON, and most skills only wrote to it when a phase finished, so
-  "where are we right now" was unanswerable. The dashboard is now one tool, `tools/nexus-status.sh`,
+  "where are we right now" was unanswerable. The dashboard is now one tool, `tools/ai-dev-loop-status.sh`,
   with two views switched by `Tab`: **pipeline** (new) and **backlog** (the existing one;
   `tools/backlog-status.sh` remains as a thin alias and `/architect:report-backlog-status` is
   unchanged). The pipeline view renders the phase tree grouped by category — the architect manual
@@ -1973,7 +1983,7 @@ designed.
   vendored as a git submodule at `knowledge/okf-scalardb-scalardl/`, so skills answer from the
   release a project actually runs instead of model memory or unpinned "latest" docs.
   - `rules/okf-knowledge-bundle.md` (new shared contract): resolve the bundle (submodule →
-    `~/.cache/nexus-architect/` shallow clone → online docs explicitly labeled as **not**
+    `~/.cache/ai-dev-loop/` shallow clone → online docs explicitly labeled as **not**
     version-pinned), pin **product, version, and edition** before reading anything, filter
     concepts by `lifecycle_phase` (design / implement / operate) mapped to the skill families,
     never mix versions, cite each concept's canonical `resource` URL, and pin dependencies with
@@ -2267,8 +2277,8 @@ live work items.
     regenerable). *Delivery* documents the resolved `source_root` on the working branch and commits
     with the Issue reference, so the docs reach the same PR/MR as the code — reusing the
     `git check-ignore` / in-worktree checks, since documentation git ignores cannot reach a PR.
-  - **Updates in place.** Ownership markers (`<!-- nexus:begin:<section> -->` …
-    `<!-- nexus:end:<section> -->`) scope regeneration to this skill's own regions; human-authored
+  - **Updates in place.** Ownership markers (`<!-- ai-dev-loop:begin:<section> -->` …
+    `<!-- ai-dev-loop:end:<section> -->`) scope regeneration to this skill's own regions; human-authored
     prose is preserved and an unmarked, hand-written README is never rewritten in place without
     confirmation. Section keys (`overview`, `build-and-run`, `configuration`, `layout`, `api`,
     `operations`, `traceability`) are stable, so a later run updates the same region.
@@ -2571,7 +2581,7 @@ live work items.
   assumptions before deep design, propagates changes through a traceability graph, and hands
   off to `/architect:define-requirements` for system implementation design.
 
-Nexus Architect is now a three-plugin toolkit (`product`, `architect`, `scalardb`)
+AI Dev Loop is now a three-plugin toolkit (`product`, `architect`, `scalardb`)
 with 75 skills total.
 
 ## [0.7.0] - 2026-06-11
@@ -2636,34 +2646,34 @@ with 75 skills total.
 ### Changed
 - Restructured the repository into a Claude Code plugin-compatible layout.
 
-[0.22.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.22.0
-[0.21.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.21.2
-[0.21.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.21.1
-[0.21.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.21.0
-[0.20.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.20.0
-[0.19.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.19.0
-[0.18.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.18.0
-[0.17.4]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.4
-[0.17.3]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.3
-[0.17.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.2
-[0.17.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.1
-[0.17.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.17.0
-[0.16.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.16.2
-[0.16.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.16.1
-[0.16.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.16.0
-[0.15.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.15.0
-[0.14.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.14.0
-[0.13.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.13.0
-[0.12.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.12.0
-[0.11.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.11.0
-[0.10.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.10.0
-[0.9.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.9.0
-[0.8.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.8.2
-[0.8.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.8.1
-[0.8.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.8.0
-[0.6.2]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.6.2
-[0.6.1]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.6.1
-[0.6.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.6.0
-[0.5.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.5.0
-[0.4.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.4.0
-[0.3.0]: https://github.com/wfukatsu/nexus-architect/releases/tag/v0.3.0
+[0.22.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.22.0
+[0.21.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.21.2
+[0.21.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.21.1
+[0.21.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.21.0
+[0.20.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.20.0
+[0.19.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.19.0
+[0.18.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.18.0
+[0.17.4]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.4
+[0.17.3]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.3
+[0.17.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.2
+[0.17.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.1
+[0.17.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.17.0
+[0.16.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.16.2
+[0.16.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.16.1
+[0.16.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.16.0
+[0.15.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.15.0
+[0.14.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.14.0
+[0.13.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.13.0
+[0.12.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.12.0
+[0.11.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.11.0
+[0.10.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.10.0
+[0.9.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.9.0
+[0.8.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.8.2
+[0.8.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.8.1
+[0.8.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.8.0
+[0.6.2]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.6.2
+[0.6.1]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.6.1
+[0.6.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.6.0
+[0.5.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.5.0
+[0.4.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.4.0
+[0.3.0]: https://github.com/Ryuking1228/ai-dev-codex-version/releases/tag/v0.3.0

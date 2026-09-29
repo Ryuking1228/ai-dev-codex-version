@@ -45,7 +45,7 @@ by id, not by direct object containment.
   notifications → `Eventual`). A *hint* that seeds architect's transaction classification, not a
   binding decision.
 
-## Handoff to nexus-architect
+## Handoff to ai-dev-loop
 
 The `CTX-` bounded contexts and ubiquitous language map to architect's Bounded Context inputs
 (design.md §1.3). `map-domains` output is the bridge to `/architect:define-requirements`; the

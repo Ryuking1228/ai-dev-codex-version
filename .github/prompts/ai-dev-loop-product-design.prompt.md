@@ -1,4 +1,4 @@
-Develop a product idea with the Nexus product workflow.
+Develop a product idea with the AI Dev Loop product workflow.
 
 Read [the Copilot repository instructions](../copilot-instructions.md),
 [the product entry point](../../skills/product/start/SKILL.md), and the selected profile's required
@@ -10,4 +10,4 @@ validation gate before deep design, record open questions rather than inventing 
 maintain the shared product-to-architect traceability state.
 
 Finish with the completed artifacts, validation verdict, assumptions still at risk, and the next
-recommended Nexus command or Copilot agent.
+recommended AI Dev Loop command or Copilot agent.

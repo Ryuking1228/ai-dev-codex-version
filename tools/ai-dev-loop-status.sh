@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Live dashboard for a nexus-architect project, in four views:
+# Live dashboard for an AI Dev Loop project, in four views:
 #
 #   product    the product pipeline's phase tree — each phase's status
 #              (pending/in_progress/completed/failed/skipped), how many of its declared
@@ -23,7 +23,7 @@
 #   reports/backlog/followup-queue.md       backlog view: queued follow-ups
 #
 # Usage:
-#   tools/nexus-status.sh [PROJECT_DIR] [options]
+#   tools/ai-dev-loop-status.sh [PROJECT_DIR] [options]
 #
 # Modes:
 #   (default)          live dashboard on a TTY; a single render when piped,
@@ -81,7 +81,7 @@
 #   --ascii            draw with ASCII glyphs (see token-cost-report.sh for when)
 #   --glyphs=auto|ascii|unicode   explicit glyph set (default auto)
 #   --ambiguous-width=N  columns for East Asian ambiguous chars: 1 (default) or 2
-#   --debug[=PATH]     log rendering diagnostics (default PATH: work/nexus-status-debug.log)
+#   --debug[=PATH]     log rendering diagnostics (default PATH: work/ai-dev-loop-status-debug.log)
 #   --json             emit the derived states as JSON instead of the rendered tree
 #   --md[=PATH]        also write the tree as Markdown (default PATH depends on the view:
 #                      reports/pipeline-status.md for a pipeline view,
@@ -95,7 +95,7 @@
 # unknown --phase / --epic). A filter that legally matches nothing renders a
 # "nothing to show" line and exits 0.
 #
-# Contract asserted by tools/nexus-status.test.sh.
+# Contract asserted by tools/ai-dev-loop-status.test.sh.
 
 set -euo pipefail
 
@@ -124,8 +124,8 @@ GROUP=""
 PHASE=""
 
 usage() { awk 'NR>1 && /^#/ { sub(/^# ?/, ""); print; next } NR>1 { exit }' "$0"; }
-die() { echo "nexus-status: $*" >&2; exit 1; }
-usage_die() { echo "nexus-status: $*" >&2; exit 2; }
+die() { echo "ai-dev-loop-status: $*" >&2; exit 1; }
+usage_die() { echo "ai-dev-loop-status: $*" >&2; exit 2; }
 
 for arg in "$@"; do
   case "$arg" in
@@ -147,13 +147,13 @@ for arg in "$@"; do
     --ascii)         GLYPHS=ascii ;;
     --glyphs=*)      GLYPHS="${arg#*=}" ;;
     --ambiguous-width=*) AMBIGUOUS="${arg#*=}" ;;
-    --debug)         DEBUG_LOG="work/nexus-status-debug.log" ;;
+    --debug)         DEBUG_LOG="work/ai-dev-loop-status-debug.log" ;;
     --debug=*)       DEBUG_LOG="${arg#*=}" ;;
     --json)          JSON_OUT=1 ;;
     --md)            MD_REQUESTED=1 ;;
     --md=*)          MD_REQUESTED=1; MD_OUT="${arg#*=}" ;;
     -h|--help)       usage; exit 0 ;;
-    -*)              echo "nexus-status: unknown option: $arg" >&2; usage >&2; exit 2 ;;
+    -*)              echo "ai-dev-loop-status: unknown option: $arg" >&2; usage >&2; exit 2 ;;
     *)               PROJECT_DIR="$arg" ;;
   esac
 done
@@ -189,7 +189,7 @@ if [ -n "$PROJECT_DIR" ]; then
   [ -n "$RESOLVED" ] || die "no $PIPELINE_MARK or $BACKLOG_MARK under $PROJECT_DIR"
 else
   RESOLVED="$(find_project "$PWD" || true)"
-  [ -n "$RESOLVED" ] || die "no nexus-architect project found.
+  [ -n "$RESOLVED" ] || die "no ai-dev-loop project found.
 $PIPELINE_MARK is written by /architect:init-output or /product:init-output;
 $BACKLOG_MARK by /architect:export-backlog. Pass PROJECT_DIR explicitly if the
 target project lives elsewhere."
@@ -263,7 +263,7 @@ if [ -n "$DEBUG_LOG" ]; then
   case "$DEBUG_LOG" in /*) ;; *) DEBUG_LOG="$PROJECT_DIR/$DEBUG_LOG" ;; esac
   mkdir -p "$(dirname "$DEBUG_LOG")" 2>/dev/null || true
   export NX_DEBUG_LOG="$DEBUG_LOG"
-  echo "nexus-status: debug log -> $DEBUG_LOG" >&2
+  echo "ai-dev-loop-status: debug log -> $DEBUG_LOG" >&2
 fi
 export NX_LANG="$LANG_OPT" NX_WIDTH="$WIDTH" NX_COLOR="$USE_COLOR" \
        NX_JSON="$JSON_OUT" NX_MD="$MD_OUT" NX_PROJECT_DIR="$PROJECT_DIR" \
@@ -281,6 +281,6 @@ case "$MODE" in
     ;;
   live)
     [ -t 0 ] && [ -t 1 ] || die "the live dashboard needs an interactive terminal - use --once (or --json/--md) when piping"
-    exec python3 "$LIB/nexus_status_tui.py" "$PROJECT_DIR"
+    exec python3 "$LIB/ai_dev_loop_status_tui.py" "$PROJECT_DIR"
     ;;
 esac

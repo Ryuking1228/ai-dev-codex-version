@@ -62,7 +62,7 @@ class CodexModelRouterTest(unittest.TestCase):
                 "options": {"codex_cost_profile": "quality"}
             }))
             route = resolve_route(ROOT, target, "architect:design-api",
-                                  environ={"NEXUS_CODEX_COST_PROFILE": "balanced"})
+                                  environ={"AI_DEV_LOOP_CODEX_COST_PROFILE": "balanced"})
             self.assertEqual(route.profile, "balanced")
 
     def test_build_command_uses_argument_array_and_reasoning_setting(self):

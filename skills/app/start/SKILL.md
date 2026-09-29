@@ -8,7 +8,7 @@ model: sonnet
 
 Read `docs/codex-postgres-app_ja.md` and the target project's `AGENTS.md`.
 Use ordinary PostgreSQL directly, without ScalarDB, unless the user requests otherwise.
-Retain the original Nexus product/architect workflows for complex design; this entry is a small-app path.
+Retain the original AI Dev Loop product/architect workflows for complex design; this entry is a small-app path.
 
 1. Establish the app's user, one primary workflow and acceptance examples. Reuse supplied answers.
    If no app purpose was supplied, create the development foundation only; label the Items CRUD as a demonstration.
@@ -16,7 +16,7 @@ Retain the original Nexus product/architect workflows for complex design; this e
    Never put maintained code in `generated/`. Never overwrite an existing project.
 3. Write `docs/product.md`: purpose, actor, happy path, exceptions, acceptance examples, auth/access boundary.
    Use `product/example-map` for unclear business rules. Under Codex, invoke that child with
-   `python3 <NEXUS_ROOT>/tools/codex-model-router.py run product:example-map --target
+   `python3 <AI_DEV_LOOP_ROOT>/tools/codex-model-router.py run product:example-map --target
    <TARGET_ROOT> -- <skill arguments>` per `@rules/codex-model-routing.md`. Decide permissions
    before implementing sensitive data.
 4. Extend `backend/app/`, `frontend/src/`, migrations and tests in small vertical slices.

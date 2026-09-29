@@ -1,6 +1,6 @@
 # ec-monolith — reference DDD document set
 
-What the DDD-relevant skills of nexus-architect produce on `samples/ec-monolith`, committed here
+What the DDD-relevant skills of ai-dev-loop produce on `samples/ec-monolith`, committed here
 because the real output tree (`reports/`) is git-ignored. The set exists so that "the toolkit
 produces a complete DDD document set" can be **seen** rather than inferred from
 `docs/ddd-coverage.md`; that table links here, and `reference-set.test.py` (run by

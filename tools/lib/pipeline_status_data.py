@@ -1,4 +1,4 @@
-"""Shared data layer for the pipeline view of the nexus status dashboard.
+"""Shared data layer for the pipeline view of the ai-dev-loop status dashboard.
 
 Answers "where is this project in the product / architect pipeline, right now?" from
 three sources, in this order of authority:
@@ -543,7 +543,7 @@ _manifest_cache = {}
 
 
 def plugin_root():
-    """The nexus-architect checkout that ships the skills (env override wins)."""
+    """The ai-dev-loop checkout that ships the skills (env override wins)."""
     env_root = os.environ.get("CLAUDE_PLUGIN_ROOT") or os.environ.get("NX_PLUGIN_ROOT")
     if env_root and os.path.isdir(env_root):
         return env_root

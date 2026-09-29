@@ -2,7 +2,7 @@
 description: |
   Abstract features and entities into bounded contexts (DDD strategic design) — a Core/Supporting/
   Generic domain map, a context map with relationships, and a ubiquitous language — sized to absorb
-  future features. Bridges to nexus-architect. Boundaries are derived from features and entities
+  future features. Bridges to ai-dev-loop. Boundaries are derived from features and entities
   by default, or found with the user in a Big Picture EventStorming walk (--mode=event-storming).
   /product:map-domains [--mode=derive|event-storming] [--auto] [--lang=ja|en].
 model: opus

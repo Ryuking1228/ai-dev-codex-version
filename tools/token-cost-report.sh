@@ -68,7 +68,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 LIB="$SCRIPT_DIR/lib"
-PRICING="${NEXUS_PRICING_FILE:-$ROOT/skills/common/references/model-pricing.json}"
+PRICING="${AI_DEV_LOOP_PRICING_FILE:-$ROOT/skills/common/references/model-pricing.json}"
 
 PROJECT_DIR=""
 MODE="auto"

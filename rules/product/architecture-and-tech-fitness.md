@@ -64,7 +64,7 @@ The standing checklist (assess all five every run):
 - **Reject-when**: a single datastore with no cross-service transaction; a purely append-only /
   event-sourced model where eventual consistency is acceptable everywhere.
 - **Note**: if adopted, flag whether `select-scalardb-edition` / `design-scalardb` (architect plugin)
-  should follow — this is the bridge to nexus-architect's ScalarDB pipeline.
+  should follow — this is the bridge to ai-dev-loop's ScalarDB pipeline.
 
 ### ScalarDB Saga (cross-service saga orchestration)
 - **What**: a saga orchestration engine coordinating **eventually consistent** transactions across

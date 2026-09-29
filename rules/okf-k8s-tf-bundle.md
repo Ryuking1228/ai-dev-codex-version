@@ -26,9 +26,9 @@ order and use the first hit:
 
 | Order | Path | Purpose |
 |-------|------|---------|
-| 1 | `$NEXUS_OKF_K8S_TF` (or `$INFRA_DESIGN_OKF`) | Explicit override by the user |
+| 1 | `$AI_DEV_LOOP_OKF_K8S_TF` (or `$INFRA_DESIGN_OKF`) | Explicit override by the user |
 | 2 | `${CLAUDE_PLUGIN_ROOT}/knowledge/okf-k8s-tf` | The vendored bundle that ships with this repository |
-| 3 | `~/.cache/nexus-architect/okf-k8s-tf` | A local copy, if one was placed there |
+| 3 | `~/.cache/ai-dev-loop/okf-k8s-tf` | A local copy, if one was placed there |
 
 Call the resolved root `$OKF` and read `$OKF/index.md` first.
 

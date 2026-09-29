@@ -35,7 +35,7 @@ sections:
 います。`--latest` は取得を試みず、その事実を報告します。詳細は
 [`knowledge/OKF-K8S-TF-PROVENANCE.md`](../knowledge/OKF-K8S-TF-PROVENANCE.md)。
 
-別のコピーを参照させたい場合は、そのルートを `NEXUS_OKF_K8S_TF` に設定してください。
+別のコピーを参照させたい場合は、そのルートを `AI_DEV_LOOP_OKF_K8S_TF` に設定してください。
 
 ## 4つの前提
 

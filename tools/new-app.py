@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a maintained Codex app outside Nexus's disposable generated/ tree."""
+"""Create a maintained Codex app outside AI Dev Loop's disposable generated/ tree."""
 import argparse
 import re
 import shutil

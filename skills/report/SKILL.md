@@ -58,7 +58,7 @@ Steps:
 
 The tool inlines Mermaid from the first copy it finds — the one named on the command line,
 then `<repo>/tools/docs-site/node_modules/mermaid/dist/mermaid.min.js`, then
-`~/.cache/nexus-architect/mermaid.min.js` — and falls back to a CDN `<script src>` with a
+`~/.cache/ai-dev-loop/mermaid.min.js` — and falls back to a CDN `<script src>` with a
 visible note in the report when none exists.
 
 Quality review of the produced HTML is a separate skill: `/architect:review-report`.

@@ -61,7 +61,7 @@ before pinning them (see @rules/dependency-versions.md), and record it as
    attributes its tokens to it; `plugin` is what keeps that attribution off the architect
    pipeline's phase of the same name, since both pipelines write this one file — add to it,
    never re-register it. Append key decisions to `work/context.md` after each phase.
-   Under Codex, invoke each child phase through `python3 <NEXUS_ROOT>/tools/codex-model-router.py
+   Under Codex, invoke each child phase through `python3 <AI_DEV_LOOP_ROOT>/tools/codex-model-router.py
    run product:<phase> --target <TARGET_ROOT> -- <phase arguments>` per
    `@rules/codex-model-routing.md`; the current turn remains the product orchestrator. Claude Code
    continues to use its native Skill/Task invocation.

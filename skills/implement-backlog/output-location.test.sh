@@ -49,14 +49,14 @@ git checkout -q -b feature/I1.2.3-api-docs
 cat > services/api/README.md <<'MD'
 # api
 
-<!-- nexus:begin:build-and-run -->
+<!-- ai-dev-loop:begin:build-and-run -->
 ## Build and run
 
 | Command | Runs |
 |---------|------|
 | `npm run build` | `tsc` |
 | `npm run test` | `vitest run` |
-<!-- nexus:end:build-and-run -->
+<!-- ai-dev-loop:end:build-and-run -->
 MD
 git add -A
 git commit -qm "docs: document api build and run (#3)"

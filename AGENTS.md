@@ -127,7 +127,7 @@ artifact (`docs/design.md` §7.5).
 ## Model Recommendations
 
 Claude Code switches models automatically based on each skill's assignment. A running Codex turn
-cannot replace its own model, so a Codex **orchestrator** MUST launch each child Nexus skill through
+cannot replace its own model, so a Codex **orchestrator** MUST launch each child AI Dev Loop skill through
 the `tools/codex-model-router.py run` command described in `rules/codex-model-routing.md`. The
 router starts a child `codex exec` with the configured model and reasoning effort. Directly invoked
 leaf skills remain on the current session model because there is no child boundary. The rule also
@@ -148,7 +148,7 @@ skills with the same name.
 
 `implement-backlog` is a thin sonnet orchestrator that delegates heavy steps to model-tiered
 sub-agents (haiku digests, sonnet implementation, opus only for planning and consistency verdicts —
-see its Sub-Agent Execution table). Under Codex, use the router for Nexus child skills and preserve
+see its Sub-Agent Execution table). Under Codex, use the router for AI Dev Loop child skills and preserve
 the declared delegation structure for its internal agents (sub-agents return digests, not full
 sources). Never silently fall back to the parent model when a routed child cannot start.
 

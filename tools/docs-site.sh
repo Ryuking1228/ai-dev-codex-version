@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Serve a nexus-architect project's reports/ as a local documentation site, using Blume
+# Serve an AI Dev Loop project's reports/ as a local documentation site, using Blume
 # (https://useblume.dev — Markdown-first docs framework on Astro; Node >= 22.12).
 #
 # The site is a stage, not a source: tools/docs-site/sync_reports.py converts reports/**

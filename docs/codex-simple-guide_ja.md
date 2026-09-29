@@ -1,4 +1,4 @@
-# CodexでNexusを使う一番簡単な手順
+# CodexでAI Dev Loopを使う一番簡単な手順
 
 GitHub Copilotを使う場合は、[GitHub Copilot版の簡単な手順](github-copilot-usage_ja.md)を
 参照してください。

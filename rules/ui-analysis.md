@@ -234,7 +234,7 @@ visual language can be incorporated without conversion.
 - **Normalize** colors to 6-digit lowercase hex (`#06c`, `rgb()` and named colors alike), sizes to
   px, `bold` to 700 and `normal` to 400. Zero, `inherit`, `transparent` and layout sizes are not
   tokens.
-- Each raw token carries `$extensions["nexus-architect"]`: `sources` (every place it is used,
+- Each raw token carries `$extensions["ai-dev-loop"]`: `sources` (every place it is used,
   `path:line`), `usage_count` (the number of declarations that use it — two on one line count two),
   and `cluster` — the group of near-identical values that play the same role.
 - **Clusters** are decided by role first and closeness second: colors used for the same purpose
