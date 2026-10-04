@@ -209,7 +209,7 @@ partition all 115.
 | **Product Direction** `/product:*` | `/product:start` | Validation-driven pipeline from product vision to SLA/NFR, gating on the riskiest assumptions before deep design; hands off to `/architect:define-requirements` | 28 |
 | **Orchestration & setup** | `/architect:start`, `/architect:pipeline` | Interactive or automated execution of the architect core pipeline, plus `init-output` | 3 |
 | **Core pipeline** `/architect:*` | run by the orchestrators | requirements → investigate → analyze → evaluate → redesign → design → review → report — see [Pipeline Dependency Graph](#pipeline-dependency-graph) | 29 |
-| **Extension tier** | invoked individually | Implementation specs, code generation (REST / GraphQL / ScalarDB / contract tests / acceptance tests / characterization tests / IaC / docs), verification and the eight-stage quality gate, infrastructure / security / observability / DR design, cost estimation, SQL migration to ScalarDB (design / generation / verification) — see [Code Generation & Delivery](#code-generation--delivery) | 24 |
+| **Extension tier** | invoked individually | Implementation specs, code generation (REST / GraphQL / ScalarDB / contract tests / acceptance tests / characterization tests / IaC / docs), verification and the nine-stage quality gate ending in an independent Cloudflare security audit, infrastructure / security / observability / DR design, cost estimation, SQL migration to ScalarDB (design / generation / verification) — see [Code Generation & Delivery](#code-generation--delivery) | 24 |
 | **Backlog Delivery** | `/architect:deliver-backlog` | export → implement → review → merge over GitLab/GitHub work items; writes merge-bound code into the project's real source tree and stops at every human gate | 7 |
 | **Database Migration** | `/architect:migrate-database` | Oracle / MySQL / PostgreSQL → ScalarDB: schema extraction, analysis, SP/trigger conversion — see [Database Migration Guide](docs/database-migration.md) | 4 |
 | **ScalarDB Development** `/scalardb:*` | `/scalardb:build-app` | Schema modeling, configuration, scaffolding, CRUD/JDBC patterns, exception handling, code review, migration advice — see [ScalarDB Development Guide](docs/scalardb-development.md) | 11 |
@@ -312,6 +312,9 @@ The path is test-driven end to end (`rules/tdd-workflow.md`): a `walking-skeleto
 every unit as a `test:` → `feat:` → `refactor:` commit series with its Gherkin scenarios as the
 outer loop, Fakes behind every port, blockers fixed from a reproduction test, and the gate
 reporting the sequence per unit from the branch log.
+The gate's ninth and final stage runs the pinned Cloudflare `security-audit` skill with fresh
+hunters and verifiers, validates its coverage ledger and findings JSON, and blocks handoff on a
+confirmed critical/high finding or an incomplete audit (`rules/independent-security-gate.md`).
 `deliver-backlog` stops at the human gates; it never merges without approval (or `--yes-merge`).
 
 Single steps are available too: `/architect:implement-backlog <issue>`, `/architect:review-issue

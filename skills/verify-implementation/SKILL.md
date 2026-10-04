@@ -184,7 +184,7 @@ A requirement with no implementation and an implementation with no requirement a
 
 ### Step 7 — Quality gate (`--gate` only)
 
-Run the eight stages of @rules/ai-code-quality-gate.md, using axes 1–4 above as stage 8 and the
+Run the nine stages of @rules/ai-code-quality-gate.md, using axes 1–4 above as stage 8 and the
 delegated `ASEC-` findings as stage 7. Execute stages 1–6 as real commands **from a clean build
 state** (`./gradlew clean` first or `--rerun-tasks` per task — an UP-TO-DATE task exits 0 having run
 nothing) and record exit codes and the counts the gate's own run produced.
@@ -212,6 +212,19 @@ the two is listed as a decision to confirm, not absorbed. An acceptance scenario
 design artefacts contradict each other is a `VER-1xx` finding naming both, and the verdict stays
 FAIL until the design decides (§A stage-4 failure caused by the design).
 
+After stages 1–8 have no failure, run the pinned Cloudflare skill at
+`.agents/skills/security-audit/SKILL.md` as stage 9, following
+@rules/independent-security-gate.md. Use fresh hunters and verifiers that did not write the code or
+perform stages 7–8. `--scope=changed` maps to a scoped `quick` audit; service/repository scope maps to
+`standard`. Run both upstream JSON validators, record the pinned skill ref and the audited target
+source ref, and merge only the counts and artifact paths into the quality-gate result. If an earlier
+stage failed, record stage 9 as `blocked` with `blocked-by-prior-stage`; it must run after the failure
+is fixed.
+
+Finally run `${CLAUDE_PLUGIN_ROOT}/tools/validate-quality-gate.py` over `quality-gate.json`. Its
+non-zero exit is a gate failure. The Markdown summary includes this command and exit code together
+with the two upstream validator commands.
+
 ### Step 8 — Write the report
 
 Write both outputs, then print a summary: verdict, finding counts by severity and axis, and the
@@ -226,7 +239,7 @@ Write all reports in the language configured in `work/pipeline-progress.json` (`
 | `reports/09_verification/design-code-conformance.md` | Findings by axis, each with file:line, the design statement it contradicts, the failure scenario, and the fix |
 | `reports/09_verification/design-code-conformance.json` | The same findings, machine-readable, for the gate and the fix loop |
 | `reports/06_implementation/api-contract-map.json` | Rewritten with what the code actually binds (Step 2) |
-| `reports/09_verification/quality-gate.json`, `reports/09_verification/quality-gate.md` | `--gate` only — the eight-stage gate result (@rules/ai-code-quality-gate.md §Gate result artifact) |
+| `reports/09_verification/quality-gate.json`, `reports/09_verification/quality-gate.md` | `--gate` only — the validated nine-stage gate result (@rules/ai-code-quality-gate.md §Gate result artifact) |
 
 ## Acceptance Criteria
 
@@ -237,7 +250,9 @@ Write all reports in the language configured in `work/pipeline-progress.json` (`
 - Inputs a delegate reported missing (`security-design.md` for the security review) are named in the report, never silently absorbed
 - Every axis reports a result, including "not applicable" with its reason — an axis that did not run
   is never absent from the report
-- Under `--gate`, every stage carries either evidence or a recorded skip reason
+- Under `--gate`, every stage carries either evidence or a recorded skip/block reason; stage 9 is
+  independently executed after stages 1–8 and both upstream artifact validators pass
+- `tools/validate-quality-gate.py` exits 0 over the final `quality-gate.json`
 
 ## Related Skills
 
@@ -248,6 +263,7 @@ Write all reports in the language configured in `work/pipeline-progress.json` (`
 | /architect:design-scalardb | Input source — transaction placement |
 | /architect:design-security | Input source — declared controls |
 | /architect:review-api-security | Delegated to for the security axis |
+| Cloudflare `security-audit` | Independent final security gate, pinned under `.agents/skills/security-audit/` |
 | /architect:generate-api-code | Verification target |
 | /architect:generate-scalardb-code | Verification target |
 | /architect:implement-backlog | Calls this as Step 5c |

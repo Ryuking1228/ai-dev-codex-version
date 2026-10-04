@@ -83,7 +83,7 @@
 | `/architect:generate-acceptance-tests` | sonnet | `bdd-scenarios/` + `api-layer-spec.md` または `repository-interfaces-spec.md` | Gherkin シナリオ（`RULE-`/`EX-` タグ付き）の Cucumber-JVM ステップ定義 — API 経由または Fake 上のアプリケーションサービス経由で駆動し、アイテムが着地するまで `@wip`。ATDD の外側ループとステージ 4 の `acceptanceTest` |
 | `/architect:generate-infra-code` | sonnet | `reports/08_infrastructure/` | K8s/Terraform/Helm コード生成 |
 | `/architect:generate-docs` | sonnet | 生成・実装済みコード | 生成・実装済みコードの README と `docs/`（コード生成の後、および implement-backlog の Step 5b で実行） |
-| `/architect:verify-implementation` | opus | 生成・実装済みコード＋設計 | 設計 ↕ コードの適合性検証（契約・トランザクション・セキュリティ・要件の4軸）。`--gate` で8段階の AI コード品質ゲートを実行（implement-backlog の Step 5c） |
+| `/architect:verify-implementation` | opus | 生成・実装済みコード＋設計 | 設計 ↕ コードの適合性検証（契約・トランザクション・セキュリティ・要件の4軸）。`--gate` で、独立検証付きの固定済みCloudflare監査を最終段に置く9段階のAIコード品質ゲートを実行（implement-backlog の Step 5c） |
 | `/architect:design-sql-migration` | opus | アプリケーションコード / SQL ファイル / `investigate-db-*` の実行結果 + `design-scalardb` | SQL → ScalarDB 移行設計 — 全文の棚卸し（MyBatis、JDBC、JPA、SQL ファイル、DDL、ビュー、ルーチン）、分析したキー・ストレージ・エディション・推定行数を与えた同梱の SQLGlot 変換器の実行、文ごとに検証済みの経路を `sql-migration-manifest.json` に記録 |
 | `/architect:implement-sql-migration` | sonnet | `sql-migration-manifest.json` | `generated/sql-migration/` に Gradle モジュールを生成 — ScalarDB SQL、スキーマ、取得と H2 の実行計画、Core API インターフェース、結果を変えないための注意を持つアプリ側の雛形。変換結果の食い違いやソースの変更を拒否するオフラインゲート付き |
 | `/architect:verify-sql-migration` | sonnet | 生成した移行モジュール + 許可された本番以外の移行元 DB | アプリ側の読み取りは golden 検証、実行計画 / ScalarDB SQL の経路は差分テストで確認し、検証状態をマニフェストに記録 |

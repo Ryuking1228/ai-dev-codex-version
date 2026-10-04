@@ -1,5 +1,5 @@
 ---
-description: The quality gate that generated or AI-written code passes before human review — eight stages, their evidence requirements, and the verdict rules. Applies to implement-backlog, review-issue, verify-implementation, and the CI the infra codegen emits.
+description: The quality gate that generated or AI-written code passes before human review — nine stages ending in an independent third-party security audit, their evidence requirements, and the verdict rules. Applies to implement-backlog, review-issue, verify-implementation, and the CI the infra codegen emits.
 ---
 
 # AI Code Quality Gate
@@ -20,7 +20,7 @@ So the gate's rule is: **every stage produces evidence, and a stage with no evid
 "I reviewed it and it looks correct" is not a gate result. A command that ran, with its exit status
 and output, is.
 
-## The eight stages
+## The nine stages
 
 Run in this order; the cheap deterministic stages fail fast before the expensive judgment ones.
 
@@ -53,9 +53,11 @@ which is legal Java, reviews cleanly, and cannot commit
 | 6 | **Dependency scan** | No new high/critical CVE, and no dependency added that the version rules reject (@rules/dependency-versions.md) | Tool + advisory IDs |
 | 7 | **API security** | `review-api-security --mode=code` returns no critical and no unresolved major, including GraphQL-specific checks when applicable (@rules/api-security-checks.md, @rules/graphql-security-checks.md) | `ASEC-` findings with severities |
 | 8 | **Architecture / conformance** | `verify-implementation` reports no contract, transaction, or security conformance break; ArchUnit layering rules pass | `VER-` findings + `api-contract-map.json` with both `unmapped` arrays empty **when the API layer exists**; when it has not been generated yet (scope is domain/application only), `unmapped_operations` is legitimately non-empty, recorded with reason `api-layer-absent` as `info`, not as criticals |
+| 9 | **Independent security audit** | The pinned Cloudflare `security-audit` skill completes a scoped, coverage-led audit with fresh hunters and verifiers; both upstream JSON validators pass; there is no confirmed finding above informational, unresolved candidate, or incomplete run (@rules/independent-security-gate.md) | `run-metadata.json`, `coverage-ledger.json`, `findings.json`, `REPORT.md`; validator commands + exit codes; pinned skill ref and target source ref |
 
-Stages 1–6 are commands. Stages 7–8 are skills that emit machine-readable findings. All eight write
-into one gate result (§4).
+Stages 1–6 are commands. Stages 7–9 are skills that emit machine-readable findings. Stage 9 runs
+last and independently; a code-writing agent or a stage-7/8 reviewer cannot hunt or verify its
+findings. All nine write into one gate result (§4).
 
 ## Verdict
 
@@ -63,7 +65,7 @@ into one gate result (§4).
 |---------|-----------|
 | **PASS** | Every stage passed |
 | **CONDITIONAL** | Stages 1–4 passed; the remaining findings are all `major` or below, each with a recorded owner and decision. A `major` **without** a recorded decision yet is reported as CONDITIONAL *pending* with the decision named as the condition — it is not PASS and it is not silently accepted |
-| **FAIL** | Any of stages 1–4 failed, or any `critical` finding in stages 5–8 |
+| **FAIL** | Any of stages 1–4 failed; any `critical` finding in stages 5–8; or stage 9 has a confirmed critical/high, invalid artifact, incomplete run, unvalidated candidate, or missing independence/sandbox control |
 
 **FAIL blocks the human review request.** It does not become a note on the pull request for someone
 to weigh — the point of the gate is that a human is never asked to review code that has not passed
@@ -174,7 +176,7 @@ stage 5. That is legitimate — **and it is reported**, per stage, with the reas
 | `not-configured` | The stage applies but the project has no tool for it. Raise it as a gap once, so the answer is a decision rather than a habit — and for stage 5 specifically, the CI workflow `generate-infra-code` emits installs Semgrep in its job, so the in-session gap does not become the CI's |
 | `skipped-by-user` | Explicitly waived for this run, with who waived it |
 
-A gate result that silently omits a stage reads as "eight stages passed" when six ran. That is worse
+A gate result that silently omits a stage reads as "nine stages passed" when fewer ran. That is worse
 than no gate, and `verify-implementation` treats a missing stage with no reason as a FAIL.
 
 ## Tooling
@@ -202,14 +204,16 @@ report, not a reason to substitute a command that happens to work — the same d
 
 ## Gate result artifact
 
-Written to `reports/09_verification/quality-gate.json`, and summarized in
+Written to `reports/09_verification/quality-gate.json`, validated by
+`tools/validate-quality-gate.py`, and summarized in
 `reports/09_verification/quality-gate.md`:
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "run_at": "2026-08-09T00:00:00Z",
   "item": "I1.2",
+  "source_ref": "4e98c4f-clean",
   "source_root": "services/order-service",
   "verdict": "FAIL",
   "stages": [
@@ -232,12 +236,22 @@ Written to `reports/09_verification/quality-gate.json`, and summarized in
     {"stage": "contract", "status": "failed",
      "command": "./gradlew test --tests '*ContractTest'", "exit_code": 1,
      "detail": "confirmOrder returned 500 for the transaction-status-unknown case; contract declares 503"},
+    {"stage": "integration", "status": "passed",
+     "command": "./gradlew integrationTest", "exit_code": 0},
     {"stage": "sast", "status": "skipped", "reason": "not-configured"},
-    {"stage": "secrets", "status": "skipped", "reason": "not-configured",
-     "detail": "gitleaks present, but `detect` scanned 0 bytes here — a zero-coverage pass is not a pass"},
-    {"stage": "api-security", "status": "passed", "findings": {"critical": 0, "major": 1, "minor": 3}}
+    {"stage": "dependency-scan", "status": "passed",
+     "command": "osv-scanner scan --lockfile gradle.lockfile", "exit_code": 0},
+    {"stage": "api-security", "status": "passed",
+     "findings": {"critical": 0, "major": 0, "minor": 3}},
+    {"stage": "architecture-conformance", "status": "failed",
+     "findings": {"critical": 1, "major": 0}},
+    {"stage": "independent-security-audit", "status": "blocked",
+     "reason": "blocked-by-prior-stage",
+     "provider": "cloudflare/security-audit-skill",
+     "skill_ref": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+     "source_ref": "4e98c4f-clean"}
   ],
-  "blocking": ["VER-004", "ASEC-011"]
+  "blocking": ["VER-004", "contract:confirmOrder"]
 }
 ```
 
@@ -252,15 +266,30 @@ rather than a report to re-read. Stages 5–6 have no `VER-` / `ASEC-` scheme of
 blocking entries are the tool's identifiers — the CVE / GHSA id for a dependency finding, the
 rule id plus `file:line` for a SAST finding — never a prose description.
 
-## Where the gate runs
+The stage names and order are canonical: `build`, `unit`, `contract`, `integration`, `sast`,
+`dependency-scan`, `api-security`, `architecture-conformance`, and
+`independent-security-audit`. After stages 1–8 are green or conditional, run stage 9 and replace its
+temporary `blocked-by-prior-stage` record with the complete evidence contract from
+@rules/independent-security-gate.md. Then run:
 
-Twice, deliberately:
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/tools/validate-quality-gate.py \
+  reports/09_verification/quality-gate.json
+```
 
-1. **In the session**, as `implement-backlog` Step 5c — so the model fixes its own output before a
-   human is involved.
-2. **In CI**, from the workflow `generate-infra-code` emits — so the gate holds for hand-written
-   changes, for later changes, and when nobody thought to run it.
+The command and exit code belong in `quality-gate.md`; a non-zero exit is a gate failure.
 
-The in-session run is the fast feedback loop; the CI run is the one that is actually enforced. A gate
-that exists only as a checklist a model is asked to follow is the weakness this file exists to
-remove, so the CI half is not optional once the project has CI.
+## Where the gate is enforced
+
+Two layers are deliberate:
+
+1. **In the session**, `implement-backlog` Step 5c runs all nine stages so the model fixes its own
+   output before a human is involved.
+2. **In CI**, the workflow `generate-infra-code` emits always reruns deterministic stages 1–6. When
+   the platform has a trusted agent runner, it also runs stages 7–9 and validates the complete
+   artifact. Otherwise it explicitly records stages 7–9 as required pre-merge evidence tied to the
+   reviewed commit; it never labels the six-job result a complete nine-stage pass.
+
+The in-session run is the full feedback loop; CI prevents later or hand-written changes from
+bypassing the executable checks. A gate that exists only as a checklist a model is asked to follow
+is the weakness this file exists to remove, so the CI half is not optional once the project has CI.

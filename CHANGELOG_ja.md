@@ -9,6 +9,14 @@ AI Dev Loop の主な変更点を記録します。
 
 ## [Unreleased]
 
+### Added
+- **品質ゲートの第9段階に独立セキュリティ監査を追加した。** Cloudflareの
+  `security-audit` skillをcommit固定で同梱し、APIセキュリティ検査と設計↕コード適合性検証の後に実行する。
+  実装や前段のレビューを担当していないhunterとverifierが、検証済みのcoverage ledgerとfindingsを作る。
+  critical/highの確定finding、検証未完了、独立性の欠落があればhandoffを失敗にする。
+  `tools/validate-quality-gate.py`は9段階の順序、対象source ref、同梱skillのhash、artifact、finding件数、
+  upstreamの2つのJSON validatorを機械的に検査する。
+
 ### Changed
 - **プロジェクト名を AI Dev Loop に変更した。** marketplace ID は `ai-dev-loop`、GitHub Copilot の
   agent・prompt・skill は `ai-dev-loop-*`、status command は `tools/ai-dev-loop-status.sh`、

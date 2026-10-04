@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run every executable contract in the repository.
 #
-# Suites are discovered, not listed: any file named *.test.py or *.test.sh under the repo is
+# Suites are discovered, not listed: any file named *.test.py, *.test.sh, or *.test.cjs under the repo is
 # picked up, so adding a suite needs no edit here and none in CI. They need no network and no
 # services, and create their own scratch directories; each exits non-zero on failure.
 #
@@ -42,7 +42,7 @@ while IFS= read -r suite; do
   SUITES="$SUITES$suite
 "
   found=$((found + 1))
-done < <(find . \( -name '*.test.py' -o -name '*.test.sh' \) \
+done < <(find . \( -name '*.test.py' -o -name '*.test.sh' -o -name '*.test.cjs' \) \
   -not -path '*/__pycache__/*' -not -path './.git/*' | sed 's|^\./||' | sort)
 
 if [ "$found" -eq 0 ]; then
@@ -61,6 +61,7 @@ for suite in $SUITES; do
   esac
   case "$suite" in
     *.py) cmd=(python3 "$suite") ;;
+    *.cjs) cmd=(node "$suite") ;;
     *)    cmd=(bash "$suite") ;;
   esac
 

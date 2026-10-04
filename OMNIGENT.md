@@ -312,10 +312,12 @@ otherwise. See [`rules/api-error-standard.md`](rules/api-error-standard.md).
 
 ## AI Code Quality Gate
 
-Generated or AI-written code passes an eight-stage gate before a human is asked to review it: build,
+Generated or AI-written code passes a nine-stage gate before a human is asked to review it: build,
 unit tests, contract tests, integration tests, SAST, dependency scan, API security, and design↕code
-conformance. Under Omnigent the first six are `sys_os_shell` invocations and the last two are the
-`review-api-security` / `verify-implementation` skills. Stage 2 also runs the coverage verification
+conformance, followed by the pinned Cloudflare security audit as an independent final gate. Under
+Omnigent the first six are `sys_os_shell` invocations, stages 7–8 use the
+`review-api-security` / `verify-implementation` skills, and stage 9 follows
+`rules/independent-security-gate.md` with fresh isolated hunters and verifiers. Stage 2 also runs the coverage verification
 and the mutation run over the touched `domain/` packages; stage 4 runs `integrationTest` (the `TX-`
 scenarios over an in-process ScalarDB), `acceptanceTest` (the Gherkin scenarios) and, on the legacy
 path, `characterizationTest`. Every command runs from a clean build state — a cached task that exits
@@ -330,7 +332,8 @@ that did not run is recorded with its reason (`not-applicable` / `not-configured
 never omitted, because an omitted stage reads as a passed one. A FAIL verdict blocks the handoff to
 human review rather than becoming a note on it. See
 [`rules/ai-code-quality-gate.md`](rules/ai-code-quality-gate.md) and
-[`rules/api-security-checks.md`](rules/api-security-checks.md).
+[`rules/api-security-checks.md`](rules/api-security-checks.md), plus the final-stage adapter at
+[`rules/independent-security-gate.md`](rules/independent-security-gate.md).
 
 ## Output Language
 

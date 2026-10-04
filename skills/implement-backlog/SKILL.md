@@ -300,19 +300,23 @@ only when the item changes no documented surface (e.g. an internal-only refactor
 config, interface, or command change) — say so in the Step 7 comment when skipped.
 
 ### Step 5c — Quality gate (before a human is asked to look)
-Run the eight-stage gate of @rules/ai-code-quality-gate.md over the item's change, via
+Run the nine-stage gate of @rules/ai-code-quality-gate.md over the item's change, via
 `/architect:verify-implementation --gate --scope=changed --source-root=<resolved root>
 --item=<local_id> [--auto]`. It builds, runs the unit / contract / integration suites, runs SAST and
 the dependency scan, delegates the API-security stage to `/architect:review-api-security --mode=code`,
-and checks the change against the design on all four conformance axes.
+checks the change against the design on all four conformance axes, then runs the pinned Cloudflare
+security audit with fresh hunters and verifiers as the independent final stage
+(@rules/independent-security-gate.md).
 
 Two rules make this a gate rather than a report:
 
 1. **Evidence, not judgment.** A stage passes when a command ran and exited zero, or when a skill
    returned findings. "It looks correct" is not a stage result, and a stage that did not run is
-   recorded with its reason (`not-applicable` / `not-configured` / `skipped-by-user`) — never omitted,
+   recorded with its reason (`not-applicable` / `not-configured` / `skipped-by-user`, or stage 9's
+   `blocked-by-prior-stage`) — never omitted,
    because an omitted stage reads as a passed one.
-2. **FAIL blocks the handoff.** On FAIL, route the blocking `VER-`/`ASEC-` findings back to the Step 5
+2. **FAIL blocks the handoff.** On FAIL, route the blocking `VER-`/`ASEC-` findings and independent
+   audit fingerprints back to the Step 5
    implementer sub-agents and re-run the gate. Do not proceed to Step 6 with an unresolved FAIL and do
    not open a PR/MR from a failing item — the whole point is that a human is never asked to review
    code that has not passed. If it will not converge, stop and take it to the user, the same way

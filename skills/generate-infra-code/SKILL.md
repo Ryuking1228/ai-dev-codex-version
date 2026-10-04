@@ -27,7 +27,7 @@ a model is asked to follow is the weakness this pipeline is closing, so emit the
 project has CI.
 
 Generate a workflow for the project's platform (GitHub Actions / GitLab CI — detect it from the repo,
-never assume), running the eight stages as jobs:
+never assume), running the deterministic stages as jobs and preserving the nine-stage gate contract:
 
 | Job | Runs |
 |-----|------|
@@ -51,9 +51,13 @@ Rules the generated workflow must satisfy:
 - **Publish the evidence.** Each job uploads its report so the gate result is inspectable after the
   fact, which is what makes stage evidence meaningful rather than ceremonial.
 
-Stages 7–8 (API security, design↕code conformance) are model-driven and are **not** emitted as CI
-jobs; the workflow records that they are covered in-session by
-`/architect:verify-implementation --gate`, so their absence from CI is visible rather than silent.
+Stages 7–9 (API security, design↕code conformance, independent Cloudflare security audit) are
+model-driven and are **not** emitted as autonomous CI jobs; the workflow records that they are
+covered in-session by `/architect:verify-implementation --gate`, including the stage-9 pinned skill
+ref, audited source ref, and validator exits. Their absence from autonomous CI is visible rather than
+silent. When the platform supports a trusted agent runner, upload the complete stage-9 audit
+artifacts and run `${CLAUDE_PLUGIN_ROOT}/tools/validate-quality-gate.py`; do not emulate independence
+with one CI process.
 
 ## Dependency Versions
 

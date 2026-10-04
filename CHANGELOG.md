@@ -9,6 +9,14 @@ all four plugins (`product`, `architect`, `scalardb`, `infra`) are released toge
 
 ## [Unreleased]
 
+### Added
+- **Independent security audit as quality-gate stage 9.** AI Dev Loop now vendors Cloudflare's
+  `security-audit` skill at a pinned commit and runs it after API-security and design↕code
+  conformance checks. Fresh hunters and verifiers produce a validated coverage ledger and findings
+  set; confirmed critical/high findings, incomplete validation, or broken independence fail the
+  handoff. `tools/validate-quality-gate.py` enforces the nine-stage order, target/source refs,
+  vendored folder hash, artifact presence, finding counts, and both upstream JSON validators.
+
 ### Changed
 - **The project identity is now AI Dev Loop.** The marketplace ID is `ai-dev-loop`; GitHub Copilot
   agents, prompts, and skills use the `ai-dev-loop-*` prefix; the status command is

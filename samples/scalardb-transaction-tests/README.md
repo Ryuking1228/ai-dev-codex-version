@@ -12,9 +12,12 @@ SQLite storage runs in-process, so there is nothing to start and nothing to clea
 
 ## Why this exists
 
-`rules/ai-code-quality-gate.md` defines an eight-stage gate. Stages 1–3 and 8 — build, unit,
+`rules/ai-code-quality-gate.md` defines a nine-stage gate. Stages 1–3 and 8 — build, unit,
 contract, conformance review — all passed on an implementation whose `cancel` operation could not
 commit at all. Four rules in this repository were wrong or missing until these tests ran:
+
+Stage 9 is the separate, independent Cloudflare security audit; it complements this deterministic
+transaction suite and does not substitute for stage 4's real-engine integration evidence.
 
 | Test | What it establishes | Rule it backs |
 |------|--------------------|---------------|

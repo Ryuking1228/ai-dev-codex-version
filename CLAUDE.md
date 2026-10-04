@@ -166,10 +166,11 @@ Within that tier the codegen skills have a fixed follow-on order — **generate 
 test it → document it → verify it**: `generate-api-code` (REST/OpenAPI) or
 `generate-graphql-code` (Spring GraphQL), and `generate-scalardb-code` (`domain/` + `infrastructure/`) emit the
 service between them, `generate-contract-tests` turns the contract into executable tests and `generate-acceptance-tests` the Gherkin scenarios into the ATDD outer loop,
-`generate-infra-code` emits the IaC plus the CI workflow that enforces the eight-stage quality
+`generate-infra-code` emits the IaC plus the CI workflow that enforces the deterministic half of the nine-stage quality
 gate (and `/product:generate-frontend` the frontend), then `generate-docs` documents what was
 emitted and `verify-implementation` checks it against the design — with `--gate`, running that
-same gate in-session. Read `rules/ai-code-quality-gate.md` before gating generated code; like
+same gate in-session and finishing with the pinned Cloudflare audit under independent hunters and
+verifiers. Read `rules/ai-code-quality-gate.md` and `rules/independent-security-gate.md` before gating generated code; like
 every rule in Rules & References it is read on demand, not `@`-imported. On the legacy path,
 `generate-characterization-tests` sits before all of this: it pins the current behaviour of the
 modules a transformation-plan step touches, and the step is gated on that suite before and after. On the backlog-delivery path the same step is automatic: it runs as Step 5b
@@ -263,7 +264,8 @@ do not load ScalarDB rules for non-ScalarDB work.
 | API style selection | rules/api-style-selection.md | Choosing REST / GraphQL / hybrid / gRPC / AsyncAPI per API surface — the per-surface decision unit, the evidence it rests on, and `reports/03_design/api-style-decisions.json` as the canonical machine-readable contract (the `.md` is a generated view; the database product never derives the style) |
 | GraphQL contract fidelity | rules/graphql-contract-fidelity.md | Designing a GraphQL schema, generating resolvers or GraphQL contract tests, or verifying code against the SDL — the `.graphqls` files as the contract, the `<parentType>.<fieldName>` field coordinate as the implementation join key, schema evolution, the error carrier, the contract-map shape, the drift protocol |
 | GraphQL security checks | rules/graphql-security-checks.md | Reviewing a GraphQL design or GraphQL resolver code — read **after** rules/api-security-checks.md: nested-field authorization, tenant isolation, query-depth/complexity denial of service, DataLoader cache partitioning, subscriptions, introspection/tooling, error leakage |
-| AI code quality gate | rules/ai-code-quality-gate.md | Gating generated or AI-written code before human review — the eight stages, their evidence requirements, and the verdict rules |
+| AI code quality gate | rules/ai-code-quality-gate.md | Gating generated or AI-written code before human review — the nine stages, their evidence requirements, and the verdict rules |
+| Independent security gate | rules/independent-security-gate.md | Stage 9 — pinned Cloudflare skill, fresh-agent independence, validated audit artifacts, and gate verdict mapping |
 | TDD workflow | rules/tdd-workflow.md | Writing merge-bound application code (`implement-backlog` Step 5, `review-issue` fixes) or generating a domain layer — the Red → Green → Refactor commit series, the ATDD outer loop and walking skeleton, the Fake-per-port / injected-Clock structure that makes test-first possible, the exemptions, and what the gate records |
 | Dependency version selection | rules/dependency-versions.md | Writing any file that pins a version (build.gradle/pom, package.json, image tags, Helm/Terraform/K8s) — how to look up the current stable release and whether to confirm it with the user |
 | OKF knowledge bundle (Kubernetes/Terraform/GitOps platform docs, vendored) | rules/okf-k8s-tf-bundle.md | Any infrastructure design, implementation or review — resolve the bundle, fix environment and cloud, keep fact / guidance / open question separate, cite what it covers and say when something is outside it |

@@ -114,10 +114,12 @@ Run `/architect:verify-implementation --gate --scope=changed --item=<local_id>` 
 `implement-backlog` already produced a PASS for this exact commit range — the gate is cheap to skip
 and expensive to assume, so re-run it whenever the branch has moved since.
 
-Its result is **input to the review, not a parallel opinion**: every blocking `VER-` and `ASEC-`
-finding enters Step 3 as a `[B]`, and a gate verdict of FAIL means the Issue cannot reach Mergeable
-however clean the prose review looks. This is the check that catches what reading cannot — code that
-is plausible and does not do what the design said (@rules/ai-code-quality-gate.md).
+Its result is **input to the review, not a parallel opinion**: every blocking `VER-`/`ASEC-` finding
+and every confirmed or unresolved Cloudflare audit fingerprint enters Step 3 as a `[B]`, and a gate
+verdict of FAIL means the Issue cannot reach Mergeable however clean the prose review looks. This is
+the check that catches what reading cannot — code that is plausible, diverges from the design, or
+crosses a trust boundary the built-in review did not anticipate (@rules/ai-code-quality-gate.md,
+@rules/independent-security-gate.md).
 
 A CONDITIONAL verdict is carried into the review as `[S]` findings plus the recorded acceptance
 decision, so the human approving the PR/MR sees what was accepted rather than only what passed.
